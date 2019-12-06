@@ -15,7 +15,7 @@ if ($_SESSION["personne"]["admin"]) {
 
 } else {
 
-    header('Location: /pages/connexion.php');
+    header('Location: pages/connexion.php');
 }
 
 

@@ -11,7 +11,6 @@ if (isset($_POST["nom"])) {
     $password = filter_input(INPUT_POST, "password");
 
     userInscription($nom, $prenom, $email, $tel, $password);
-    var_dump($nom, $prenom, $email, $tel ,$password);
 }
 
 ?>
@@ -19,14 +18,15 @@ if (isset($_POST["nom"])) {
 
 <form method="post">
     <p><input type="text" name="nom" id="nom"
-              placeholder="ex : Jean"></p>
+              placeholder="ex : Jean" required></p>
     <p><input type="text" name="prenom" id="prenom"
-              placeholder="ex : Dupont"></p>
+              placeholder="ex : Dupont" required></p>
     <p><input type="email" name="email" id="email"
-              placeholder="ex : michu@madame.fr"></p>
+              placeholder="ex : michu@madame.fr" required
+              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2, 4}$" ></p>
     <p><input type="tel" name="tel" id="tel"
-              placeholder="ex : 00 00 00 00 00"></p>
+              placeholder="ex : 00 00 00 00 00" required></p>
     <p><input type="password" name="password" id="password"
-              placeholder="Votre mot de passe"></p>
+              placeholder="Votre mot de passe" required></p>
     <button type="submit" >Enregistrer</button>
 </form>

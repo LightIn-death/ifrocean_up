@@ -9,9 +9,9 @@ if ($_SESSION["personne"]["admin"]) {
 
     echo "\n tu est admin \n";
 
-    echo "<br><a href='../components/C_etudeListe.php'>Liste des etudes</a>";
+    echo "<br><a href='etudeListe.php'>Liste des etudes</a>";
     echo "<br><a href=''>Creer une nouvelle etude</a>";
-    echo "<br><a href='../components/C_especeListe.php'>Gerer la liste des especes</a>";
+    echo "<br><a href=''>Gerer la liste des especes</a>";
 
 
 //

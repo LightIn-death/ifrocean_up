@@ -43,4 +43,3 @@ function userLogin($email, $password)
 }
 
 
-?>

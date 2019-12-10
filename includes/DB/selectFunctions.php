@@ -42,14 +42,12 @@ function userLogin($email, $password)
 
 }
 
-
 function userInscription($nom, $prenom, $email, $tel, $password)
 {
     global $pdo;
     $query = $pdo->prepare("INSERT INTO `personnes` (`id_personnes`, `nom`, `prenom`, `email`, `tel`, `password`, `admin`) VALUES (NULL, :nom, :prenom, :email, :tel, :password, '0')");
     $query->execute(['nom' => $nom, 'prenom' => $prenom, 'email' => $email, 'tel' => $tel, 'password' => $password]);
 }
-
 
 function getEtudeListe()
 {
@@ -70,9 +68,25 @@ function EtudeAdd($nom, $reference)
 
 }
 
+function getEtude($id)
+{
+    global $pdo;
+    $rq = $pdo->prepare("SELECT * FROM `etudes` where id_etudes=:id ");
+    $rq->execute(['id' => $id]);
+    $data = $rq->fetch();
+    return $data;
+}
 
 
+function clotureEtude($id)
+{
 
+    $date = date('Y/m/d', time());
+    global $pdo;
+    $query = $pdo->prepare("    UPDATE `etudes` SET `dateFin` = :date WHERE `etudes`.`id_etudes` = :id ");
+    $query->execute(['date' => $date, 'id' => $id]);
+
+}
 
 
 

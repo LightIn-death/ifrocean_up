@@ -30,5 +30,5 @@ if (isset($_POST["email"])) {
         <button type="submit" name="action">Submit</button>
 
     </form>
-    <a href="register.php">Register</a>
+    <a href="/pages/inscription.php">s'inscrire</a>
 </div>

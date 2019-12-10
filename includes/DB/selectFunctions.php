@@ -43,3 +43,10 @@ function userLogin($email, $password)
 }
 
 
+
+function userInscription($nom, $prenom, $email, $tel, $password){
+    global $pdo;
+    $query = $pdo->prepare("INSERT INTO `personnes` (`id_personnes`, `nom`, `prenom`, `email`, `tel`, `password`, `admin`) VALUES (NULL, :nom, :prenom, :email, :tel, :password, '0')");
+    $query->execute(['nom' => $nom, 'prenom' => $prenom, 'email' => $email, 'tel' => $tel, 'password' => $password]);
+}
+

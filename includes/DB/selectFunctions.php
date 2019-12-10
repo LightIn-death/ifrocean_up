@@ -42,11 +42,22 @@ function userLogin($email, $password)
 
 }
 
-
-
 function userInscription($nom, $prenom, $email, $tel, $password){
     global $pdo;
     $query = $pdo->prepare("INSERT INTO `personnes` (`id_personnes`, `nom`, `prenom`, `email`, `tel`, `password`, `admin`) VALUES (NULL, :nom, :prenom, :email, :tel, :password, '0')");
     $query->execute(['nom' => $nom, 'prenom' => $prenom, 'email' => $email, 'tel' => $tel, 'password' => $password]);
 }
 
+function addEspece($nom){
+    global $pdo;
+    $query = $pdo->prepare("INSERT INTO `especes` (`nom`) VALUES (:nom)");
+    $query->execute(['nom' => $nom]);
+}
+
+function listeEspece($nom, $id){
+    global $pdo;
+    $query = $pdo->prepare("SELECT id, titre from especes");
+    $query->execute(['nom' => $nom, 'id' => $id]);
+    $row = $query->fetchAll();
+    return $row;
+}

@@ -10,17 +10,18 @@ require_once "../includes/DB/selectFunctions.php";
     <th>ID</th>
 </tr>
 <?php
-if (isset($_POST["email"])) {
 
-    $nom = filter_input(INPUT_POST, "nom");
-    $id = filter_input(INPUT_POST, "id");
 
-    $resultat=listeEspece($nom, $id);
-
+    $resultat=listeEspece();
     foreach ($resultat as $ligne){
-        
+
+        ?>
+        <tr>
+            <td><?php echo $ligne["nom"] ?></td>
+            <td><?php echo $ligne["id_especes"] ?></td>
+        </tr>
+    <?php
     }
-}
 ?>
 
-<a href="/components/C_addEspece.php">addEspece</a>
+<a href="../pages/addEspece.php">addEspece</a>

@@ -54,10 +54,10 @@ function addEspece($nom){
     $query->execute(['nom' => $nom]);
 }
 
-function listeEspece($nom, $id){
+function listeEspece(){
     global $pdo;
-    $query = $pdo->prepare("SELECT id, titre from especes");
-    $query->execute(['nom' => $nom, 'id' => $id]);
+    $query = $pdo->prepare("SELECT * FROM 'especes'");
+    $query->execute();
     $row = $query->fetchAll();
     return $row;
 }

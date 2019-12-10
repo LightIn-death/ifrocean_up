@@ -42,4 +42,5 @@ require_once "$root/includes/DB/selectFunctions.php";
 
 
 <a href="/pages/etudeADD.php">add</a>
+<a href="/pages/home.php">Retour</a>
 

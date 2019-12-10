@@ -56,7 +56,7 @@ function addEspece($nom){
 
 function listeEspece(){
     global $pdo;
-    $query = $pdo->prepare("SELECT * FROM 'especes'");
+    $query = $pdo->prepare("SELECT * FROM `especes`");
     $query->execute();
     $row = $query->fetchAll();
     return $row;

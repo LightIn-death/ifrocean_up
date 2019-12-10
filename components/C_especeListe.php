@@ -7,10 +7,8 @@ require_once "../includes/DB/selectFunctions.php";
 
 <tr>
     <th>Nom</th>
-    <th>ID</th>
 </tr>
 <?php
-
 
     $resultat=listeEspece();
     foreach ($resultat as $ligne){
@@ -18,7 +16,6 @@ require_once "../includes/DB/selectFunctions.php";
         ?>
         <tr>
             <td><?php echo $ligne["nom"] ?></td>
-            <td><?php echo $ligne["id_especes"] ?></td>
         </tr>
     <?php
     }

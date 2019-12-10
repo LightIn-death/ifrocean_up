@@ -60,7 +60,15 @@ function getEtudeListe()
     return $data;
 }
 
+function EtudeAdd($nom, $reference)
+{
+    $date = date('Y/m/d', time());
+    global $pdo;
+    $query = $pdo->prepare("INSERT INTO `etudes` (`nom`, `dateDebut`,  `reference`) VALUES ( :nom, :date , :referen)");
+    $query->execute(['nom' => $nom, 'date' => $date, 'referen' => $reference]);
 
+
+}
 
 
 

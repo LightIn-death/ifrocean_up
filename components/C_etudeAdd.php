@@ -3,12 +3,13 @@ $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 require_once "../includes/DB/selectFunctions.php";
 
 
-if (isset($_POST["email"])) {
+if (isset($_POST["nom"])) {
 
     $nom = filter_input(INPUT_POST, "nom");
     $reference = filter_input(INPUT_POST, "reference");
 
-    userLogin($nom, $reference);
+    EtudeAdd($nom, $reference);
+    var_dump($nom, $reference);
 }
 
 ?>

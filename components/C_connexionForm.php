@@ -1,7 +1,7 @@
 <?php
 $root = realpath($_SERVER["DOCUMENT_ROOT"]);
-require_once "$root/includes/DB/selectFunctions.php";
-
+require_once "../includes/DB/selectFunctions.php";
+ 
 if (isset($_POST["email"])) {
 
     $email = filter_input(INPUT_POST, "email");

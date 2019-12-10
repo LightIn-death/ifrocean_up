@@ -2,6 +2,10 @@
 $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 require_once "../includes/DB/selectFunctions.php";
 
+if (isset($_POST["Supprimer"])) {
+    supprimeEtude($_GET["id"]);
+    header('Location: etudeListe.php');
+}
 
 if (isset($_POST["cloture"])) {
     clotureEtude($_GET["id"]);
@@ -42,6 +46,11 @@ if ($data["dateFin"] == null) {
 
 }
 ?>
+
+
+<form method="post">
+    <button type="submit" name="Supprimer">Supprimer</button>
+</form>
 
 
 <a href="/pages/etudeListe.php">retour</a>

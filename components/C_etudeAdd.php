@@ -9,7 +9,8 @@ if (isset($_POST["nom"])) {
     $reference = filter_input(INPUT_POST, "reference");
 
     EtudeAdd($nom, $reference);
-    var_dump($nom, $reference);
+    header('Location: etudeListe.php');
+
 }
 
 ?>

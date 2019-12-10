@@ -77,7 +77,6 @@ function getEtude($id)
     return $data;
 }
 
-
 function clotureEtude($id)
 {
 
@@ -88,7 +87,11 @@ function clotureEtude($id)
 
 }
 
-
+function supprimeEtude($id){
+    global $pdo;
+    $query = $pdo->prepare("DELETE FROM `etudes` WHERE `etudes`.`id_etudes` = :id");
+    $query->execute(['id' => $id]);
+}
 
 
 

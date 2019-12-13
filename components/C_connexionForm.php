@@ -1,9 +1,12 @@
 <?php
+session_start();
 $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 require_once "../includes/DB/selectFunctions.php";
 
+if (isset($_SESSION["personne"])) {
+    header('Location: /pages/home.php');
+}
 
- 
 if (isset($_POST["email"])) {
 
     $email = filter_input(INPUT_POST, "email");

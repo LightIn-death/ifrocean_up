@@ -122,7 +122,7 @@ function CreatePlageInstance($id, $plage, $km)
     $rq->execute(['plage' => $plage]);
     $plageresult = $rq->fetch();
 
-    $rq = $pdo->prepare("SELECT p.nom , p.commune , p.departement FROM plage p LEFT JOIN instanceplages i on i.FK_id_plages=p.id_plages where  i.FK_id_etudes!=:id or i.FK_id_etudes is null");
+    $rq = $pdo->prepare("INSERT INTO `instanceplages` (`id_instancePlages`, `FK_id_etudes`, `FK_id_plages`, `superficieTotal`, `superficieRecherche`, `densite`, `nombreEstime`) VALUES (NULL, '1', '2', '5', NULL, NULL, NULL)");
     $rq->execute(['id' => $id]);
     $data = $rq->fetchAll();
     return $data;

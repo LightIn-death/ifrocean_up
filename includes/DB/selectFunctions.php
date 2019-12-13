@@ -42,12 +42,14 @@ function userLogin($email, $password)
 
 }
 
-function userInscription($nom, $prenom, $email, $tel, $password)
-{
+
+function userInscription($nom, $prenom, $email, $tel, $password){
+
     global $pdo;
     $query = $pdo->prepare("INSERT INTO `personnes` (`id_personnes`, `nom`, `prenom`, `email`, `tel`, `password`, `admin`) VALUES (NULL, :nom, :prenom, :email, :tel, :password, '0')");
     $query->execute(['nom' => $nom, 'prenom' => $prenom, 'email' => $email, 'tel' => $tel, 'password' => $password]);
 }
+
 
 function getEtudeListe()
 {
@@ -136,3 +138,30 @@ function SupprPlageInstance($id)
 
 
 
+
+function addEspece($nom){
+    global $pdo;
+    $query = $pdo->prepare("INSERT INTO `especes` (`nom`) VALUES (:nom)");
+    $query->execute(['nom' => $nom]);
+}
+
+function listeEspece(){
+    global $pdo;
+    $query = $pdo->prepare("SELECT * FROM `especes`");
+    $query->execute();
+    $row = $query->fetchAll();
+    return $row;
+}
+
+function deleteEspece($id_especes){
+    global $pdo;
+    $query = $pdo->prepare("DELETE FROM `especes` WHERE `id_especes`=:id_especes");
+    $query->execute(['id_especes' => $id_especes]);
+}
+
+function modifyEspeces($id_especes){
+    global $pdo;
+    $query = $pdo->prepare("UPDATE `especes` SET `nom`=:nom WHERE id_especes=:id_especes");
+    $query->execute(['id_especes' => $id_especes]);
+    $result=$query->fetchAll();
+}

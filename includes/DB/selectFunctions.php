@@ -87,15 +87,46 @@ function clotureEtude($id)
 
 }
 
-function supprimeEtude($id){
+function supprimeEtude($id)
+{
     global $pdo;
     $query = $pdo->prepare("DELETE FROM `etudes` WHERE `etudes`.`id_etudes` = :id");
     $query->execute(['id' => $id]);
 }
 
 
+function getPlageInstance($id)
+{
+    global $pdo;
+    $rq = $pdo->prepare("SELECT p.nom , p.commune , p.departement FROM instanceplages i JOIN etudes e on i.FK_id_etudes = e.id_etudes JOIN plage p on i.FK_id_plages = p.id_plages WHERE e.id_etudes=:id ");
+    $rq->execute(['id' => $id]);
+    $data = $rq->fetchAll();
+    return $data;
+}
 
 
+function getPlagesNotInEtude($id)
+{
+    global $pdo;
+    $rq = $pdo->prepare("SELECT * FROM plage p LEFT JOIN instanceplages i on i.FK_id_plages=p.id_plages where  i.FK_id_etudes!=:id or i.FK_id_etudes is null");
+    $rq->execute(['id' => $id]);
+    $data = $rq->fetchAll();
+    return $data;
+}
+
+
+function CreatePlageInstance($id, $plage, $km)
+{
+    global $pdo;
+    $rq = $pdo->prepare("SELECT * FROM `plage` where id_plages=:plage");
+    $rq->execute(['plage' => $plage]);
+    $plageresult = $rq->fetch();
+
+    $rq = $pdo->prepare("SELECT p.nom , p.commune , p.departement FROM plage p LEFT JOIN instanceplages i on i.FK_id_plages=p.id_plages where  i.FK_id_etudes!=:id or i.FK_id_etudes is null");
+    $rq->execute(['id' => $id]);
+    $data = $rq->fetchAll();
+    return $data;
+}
 
 
 

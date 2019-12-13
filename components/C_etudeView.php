@@ -10,7 +10,18 @@ if (isset($_POST["Supprimer"])) {
 if (isset($_POST["cloture"])) {
     clotureEtude($_GET["id"]);
 }
+
+if (isset($_POST["addPlage"])) {
+    $plageToAdd = filter_input(INPUT_POST, "plage");
+    $superficie = filter_input(INPUT_POST, "superficie");
+    $plageToAdd = (explode(";", $plageToAdd))[1];
+    var_dump($plageToAdd);
+    CreatePlageInstance($_GET["id"], $plageToAdd, $superficie);
+}
+
+
 $data = getEtude($_GET["id"]);
+$plagesInstance = getPlageInstance($_GET["id"]);
 
 ?>
 
@@ -20,13 +31,45 @@ $data = getEtude($_GET["id"]);
 <h2>Reference : <?php echo $data["reference"] ?></h2>
 <h3>date de creation (Annee / Mois / Jour) : <?php echo $data["dateDebut"] ?></h3>
 
+<h2>Liste des plages de l'etudes :</h2>
+<ul>
+    <li>Nom / Commune / Departement</li>
+    <?php
+    foreach ($plagesInstance as $plageI) {
+        $plageNom = $plageI["nom"];
+        $plageCommune = $plageI["commune"];
+        $plageDepartement = $plageI["departement"];
+        echo "<li> $plageNom / $plageCommune / $plageDepartement </li>";
+    }
+    ?>
+</ul>
+
+
 <?php
 if ($data["dateFin"] == null) {
+    $plages = getPlagesNotInEtude($_GET["id"]);
     ?>
-    <h3>Nombre de vers estime : Etude en cours... (les resultats aparaiterons a la fin de l'etude)</h3>
-    <h3>Densite Global : Etude en cours... (les resultats aparaiterons a la fin de l'etude)</h3>
+    <form method="post">
+        <label for="plage">Ajouter une plage a l'etude : </label>
+        <input list="plage" name="plage">
+        <datalist id="plage">
+            <?php
+            foreach ($plages as $plage) {
 
-    <h3>Nombre de personne ayant participe : Etude en cours... (les resultats aparaiterons a la fin de l'etude)</h3>
+                $plageNom = $plage["nom"];
+                $plageId = $plage["id_plages"];
+                echo "<option value='$plageNom;$plageId' name='plage' />";
+            }
+            ?>
+        </datalist>
+        <label for="superficie">Superficie de la plage dans la periode de l'etude (km²) </label>
+        <input type="number" name="superficie">
+
+        <button type="submit" name="addPlage"> + Ajouter</button>
+    </form>
+
+
+    <h3>Etude en cours... (les resultats aparaiterons a la fin de l'etude)</h3>
 
     <form method="post">
         <button type="submit" name="cloture">Cloturer</button>

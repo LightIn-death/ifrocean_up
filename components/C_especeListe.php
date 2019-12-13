@@ -36,6 +36,10 @@ require_once "../includes/DB/selectFunctions.php";
         ?>
             <td><?php echo $ligne["nom"]."\n"?></td>
             <td>
+                <a href="C_modifyEspece.php?id_especes=<?php echo $ligne["id_especes"] ?>"
+                   class="btn btn-primary">
+                    <i class="fa fa-edit"></i>
+                </a>
                 <a href="C_deleteEspece.php?id_especes=<?php echo $ligne["id_especes"] ?>"
                    onclick="return confirm('Etes-vous sûr de vouloir supprimer <?php echo $ligne["nom"]?>\nSi oui confirmer !')"
                    class="btn btn-danger">

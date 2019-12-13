@@ -121,11 +121,8 @@ function CreatePlageInstance($id, $plage, $km)
     $rq = $pdo->prepare("SELECT * FROM `plage` where id_plages=:plage");
     $rq->execute(['plage' => $plage]);
     $plageresult = $rq->fetch();
-
-    $rq = $pdo->prepare("INSERT INTO `instanceplages` (`id_instancePlages`, `FK_id_etudes`, `FK_id_plages`, `superficieTotal`, `superficieRecherche`, `densite`, `nombreEstime`) VALUES (NULL, '1', '2', '5', NULL, NULL, NULL)");
-    $rq->execute(['id' => $id]);
-    $data = $rq->fetchAll();
-    return $data;
+    $rq = $pdo->prepare("INSERT INTO `instanceplages` ( `FK_id_etudes`, `FK_id_plages`, `superficieTotal`) VALUES ( :id, :plageid, :km)");
+    $rq->execute(['id' => $id, 'plageid' => $plageresult["id_plages"], 'km' => $km]);
 }
 
 

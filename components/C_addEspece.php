@@ -12,8 +12,8 @@ if (isset($_POST["nom"])) {
 ?>
 <h1>Ajout Espece </h1>
 
-<form method="post">
+<form method="post" >
     <p><input type="text" name="nom" id="nom"
               placeholder="ex : Thon" required></p>
-    <button type="submit" >Enregistrer</button>
+    <button type="submit">Enregistrer</button>
 </form>

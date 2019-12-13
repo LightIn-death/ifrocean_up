@@ -98,7 +98,7 @@ function supprimeEtude($id)
 function getPlageInstance($id)
 {
     global $pdo;
-    $rq = $pdo->prepare("SELECT p.nom , p.commune , p.departement FROM instanceplages i JOIN etudes e on i.FK_id_etudes = e.id_etudes JOIN plage p on i.FK_id_plages = p.id_plages WHERE e.id_etudes=:id ");
+    $rq = $pdo->prepare("SELECT p.nom, p.commune,p.departement,i.id_instancePlages FROM instanceplages i JOIN etudes e on i.FK_id_etudes = e.id_etudes JOIN plage p on i.FK_id_plages = p.id_plages WHERE e.id_etudes=:id");
     $rq->execute(['id' => $id]);
     $data = $rq->fetchAll();
     return $data;
@@ -125,6 +125,13 @@ function CreatePlageInstance($id, $plage, $km)
     $rq->execute(['id' => $id, 'plageid' => $plageresult["id_plages"], 'km' => $km]);
 }
 
+
+function SupprPlageInstance($id)
+{
+    global $pdo;
+    $rq = $pdo->prepare(" DELETE FROM `instanceplages` WHERE `instanceplages`.`id_instancePlages` = :id");
+    $rq->execute(['id' => $id]);
+}
 
 
 

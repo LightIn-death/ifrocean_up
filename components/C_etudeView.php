@@ -19,6 +19,12 @@ if (isset($_POST["addPlage"])) {
     CreatePlageInstance($_GET["id"], $plageToAdd, $superficie);
 }
 
+if (isset($_POST["supprimePlage"])) {
+    $InstanceToSuppr = filter_input(INPUT_POST, "supprPlageId");
+    SupprPlageInstance($InstanceToSuppr);
+
+}
+
 
 $data = getEtude($_GET["id"]);
 $plagesInstance = getPlageInstance($_GET["id"]);
@@ -33,13 +39,16 @@ $plagesInstance = getPlageInstance($_GET["id"]);
 
 <h2>Liste des plages de l'etudes :</h2>
 <ul>
-    <li>Nom / Commune / Departement</li>
+
+    <li>Nom / Commune / Departement || Actions</li>
     <?php
     foreach ($plagesInstance as $plageI) {
+        $InstanceId = $plageI["id_instancePlages"];
         $plageNom = $plageI["nom"];
         $plageCommune = $plageI["commune"];
         $plageDepartement = $plageI["departement"];
-        echo "<li> $plageNom / $plageCommune / $plageDepartement </li>";
+        echo "<li> $plageNom / $plageCommune / $plageDepartement ||<form method='post' style='display: inline;'>
+        <input type='submit' name='supprimePlage' value='supprimer'><input type='hidden' name='supprPlageId' value='$InstanceId'></form></li>";
     }
     ?>
 </ul>

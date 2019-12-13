@@ -11,7 +11,7 @@ if ($_SESSION["personne"]["admin"]) {
 
     echo "<br><a href='../components/C_etudeListe.php'>Liste des etudes</a>";
     echo "<br><a href=''>Creer une nouvelle etude</a>";
-    echo "<br><a href='../components/C_especeListe.php'>Gerer la liste des especes</a>";
+    echo "<br><a href='especeListe.php'>Gerer la liste des especes</a>";
 
 
 //
@@ -20,7 +20,7 @@ if ($_SESSION["personne"]["admin"]) {
 //
 //
 //
-//
+//²
 //
 //
 //

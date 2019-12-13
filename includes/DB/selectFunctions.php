@@ -108,7 +108,7 @@ function getPlageInstance($id)
 function getPlagesNotInEtude($id)
 {
     global $pdo;
-    $rq = $pdo->prepare("SELECT * FROM plage p LEFT JOIN instanceplages i on i.FK_id_plages=p.id_plages where  i.FK_id_etudes!=:id or i.FK_id_etudes is null");
+    $rq = $pdo->prepare("SELECT * FROM plage");
     $rq->execute(['id' => $id]);
     $data = $rq->fetchAll();
     return $data;

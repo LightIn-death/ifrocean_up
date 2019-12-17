@@ -38,7 +38,7 @@ require_once "../includes/DB/selectFunctions.php";
         <td><?php echo $ligne["commune"]?></td>
         <td><?php echo $ligne["departement"]."\n"?></td>
         <td>
-            <a href="C_modifyEspece.php?id_plages=<?php echo $ligne["id_plages"] ?>"
+            <a href="../pages/modifyPlage.php?id_plages=<?php echo $ligne["id_plages"] ?>"
                class="btn btn-primary">
                 <i class="fa fa-edit"></i>
             </a>

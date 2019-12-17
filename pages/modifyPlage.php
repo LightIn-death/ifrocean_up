@@ -36,8 +36,6 @@ if (isset($_POST["updatePlage"])) {
         </div>
         <button type="submit" name="updatePlage">Register</button>
     </form>
-
-    <a href="C_especeListe.php">retour</a>
 <?php
 var_dump($id_plages, $nom, $commune, $departement);
 

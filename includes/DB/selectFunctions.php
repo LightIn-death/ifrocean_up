@@ -101,10 +101,16 @@ function deletePlage($id_plages){
     $query->execute(['id_especes' => $id_plages]);
 }
 
-function modifyPlage($id_plages, $nom, $commune, $departement)
-{
+function modifyPlage($id_plages, $nom, $commune, $departement){
     global $pdo;
-    $query = $pdo->prepare("UPDATE `plage` SET `nom`=:nom, `commune`=:commune `departement`=:departement WHERE id_plages=:id_plages");
+    $query = $pdo->prepare("UPDATE `plage` SET `nom`=:nom, `commune`=:commune, `departement`=:departement WHERE id_plages=:id_plages");
     $query->execute(['id_plages' => $id_plages, 'nom' => $nom, 'commune' => $commune, 'departement' => $departement]);
-    $result = $query->fetchAll();
+}
+
+function selectModifyPlage($id_plages){
+    global $pdo;
+    $query = $pdo->prepare("SELECT `id_plages`, `nom`, `commune`, `departement` FROM `plage` WHERE id_plages=:id_plages");
+    $query->execute([ 'id_plages' => $id_plages]);
+    $onePlage = $query ->fetchAll();
+    return $onePlage;
 }

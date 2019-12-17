@@ -200,6 +200,20 @@ function getInstEspece($id)
     return $data;
 }
 
+function deleteInstEspece($id_espece, $id_zone)
+{
+    global $pdo;
+    $rq = $pdo->prepare("DELETE FROM instanceespeces WHERE FK_id_especes = :espece AND FK_zone = :zone");
+    $rq->execute(['espece' => $id_espece, 'zone' => $id_zone]);
+}
+
+
+function addInstEspece($id_espece, $id_zone, $nombre)
+{
+    global $pdo;
+    $rq = $pdo->prepare("INSERT INTO `instanceespeces` (`FK_id_especes`, `FK_zone`, `nombre`) VALUES (:espece, :zone, :nombre)");
+    $rq->execute(['espece' => $id_espece, 'zone' => $id_zone, 'nombre' => $nombre]);
+}
 
 
 

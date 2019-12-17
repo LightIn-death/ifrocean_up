@@ -7,7 +7,6 @@ $id_zone = filter_input(INPUT_GET, "z");
 $number = filter_input(INPUT_GET, "n");
 $data = getZonedetails($id_zone);
 var_dump($data);
-
 $plageName = getPlageInstance($data["FK_instance_plages"])[0]["nom"];
 
 ?>
@@ -21,8 +20,6 @@ $plageName = getPlageInstance($data["FK_instance_plages"])[0]["nom"];
     <tr>
         <th>Point</th>
         <th>Coordonnes</th>
-
-
     </tr>
     <tr>
         <td>point 1</td>
@@ -50,6 +47,19 @@ $plageName = getPlageInstance($data["FK_instance_plages"])[0]["nom"];
 <a href='/pages/beneEtudes.php'>Modifier</a>
 
 <?php
+
+
+if (isset($_POST["supprimerEspece"])) {
+    $id_espece = filter_input(INPUT_POST, "id_espece");
+    deleteInstEspece($id_espece, $id_zone);
+}
+if (isset($_POST["AjouterEspece"])) {
+    $id_espece = explode(";", filter_input(INPUT_POST, "espece"))[1];
+    $nombre = filter_input(INPUT_POST, "nombre");
+    addInstEspece($id_espece, $id_zone, $nombre);
+}
+
+
 $data = getInstEspece($id_zone);
 var_dump($data);
 
@@ -68,7 +78,13 @@ var_dump($data);
         <tr>
             <td><?php echo $d["nom"]; ?></td>
             <td><?php echo $d["nombre"]; ?></td>
-            <td><?php echo $d["nombre"]; ?></td>
+            <td>
+
+                <form method="post">
+                    <input type="hidden" name="id_espece" value="<?php echo $d['FK_id_especes']; ?>">
+                    <button type="submit" name="supprimerEspece">Supprimer</button>
+                </form>
+            </td>
 
         </tr>
         <?php
@@ -78,6 +94,27 @@ var_dump($data);
 
 </table>
 
+<form method="post">
+
+    <input list="espece" name="espece">
+    <datalist id="espece">
+        <?php
+        $especes = listeEspece();
+        foreach ($especes as $e) {
+            $especeNom = $e["nom"];
+            $especeId = $e["id_especes"];
+            echo "<option value='$especeNom;$especeId' name='espece' />";
+        }
+        ?>
+    </datalist>
+    <label>Nombre
+        <input type="number" name="nombre">
+    </label>
+    <button type="submit" name="AjouterEspece">Ajouter au comptage</button>
+</form>
+<?php
+var_dump($especes);
+?>
 <a href='/pages/beneEtudes.php'>Ajouter au contage</a>
 
 

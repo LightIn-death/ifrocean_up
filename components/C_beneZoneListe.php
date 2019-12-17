@@ -3,8 +3,9 @@ $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 require_once "../includes/DB/selectFunctions.php";
 
 
-$id_etude = filter_input(INPUT_GET, "id");
-$data = getPlageInstance($id_etude);
+$id_etude = filter_input(INPUT_GET, "e");
+$id_plage = filter_input(INPUT_GET, "p");
+$data = getZone($id_plage);
 
 ?>
 
@@ -21,12 +22,12 @@ $data = getPlageInstance($id_etude);
 
 
         <?php
-
+        $i = 0;
         foreach ($data as $d) {
-            $plageName = $d['nom'];
-            $plageId = $d['id_instancePlages'];
-            echo "<td>$plageName</td>";
-            echo "<td><td><a href='/pages/beneZoneListe.php?e=$id_etude&p=$plageId'>Selectioner</a></td></td></tr>";
+            $i++;
+            $zoneId = $d['id_zones'];
+            echo "<td>Zone n°$i</td>";
+            echo "<td><td><a href='/pages/beneZoneListe.php?z=$zoneId'>Selectioner</a></td></td></tr>";
 
         }
         ?>

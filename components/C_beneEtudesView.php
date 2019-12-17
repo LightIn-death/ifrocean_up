@@ -2,11 +2,13 @@
 $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 require_once "../includes/DB/selectFunctions.php";
 
-$data = getOpenEtudes();
+
+$id_especes = filter_input(INPUT_GET, "id_especes");
+$data = getPlageInstance($id_especes);
 
 ?>
 
-<h1>veuillez selectionner une etude : </h1>
+<h1>veuillez selectionner une Plage : </h1>
 
 
 <table>
@@ -19,7 +21,7 @@ $data = getOpenEtudes();
 
 
         <?php
-
+        var_dump($data);
         foreach ($data as $d) {
             $etudeName = $d['nom'];
             $etudeId = $d['id_etudes'];
@@ -30,6 +32,6 @@ $data = getOpenEtudes();
 
 </table>
 
-<a href='/pages/home.php'>Retour</a>
+<a href='/pages/beneEtudes.php'>Retour</a>
 
 

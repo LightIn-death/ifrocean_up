@@ -164,7 +164,7 @@ function getOpenEtudes()
     global $pdo;
     $rq = $pdo->prepare("SELECT * FROM `etudes` where dateFin is null ");
     $rq->execute();
-    $data = $rq->fetch();
+    $data = $rq->fetchAll();
     return $data;
 
 }

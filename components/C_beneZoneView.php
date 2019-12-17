@@ -3,13 +3,13 @@ $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 require_once "../includes/DB/selectFunctions.php";
 
 
-$id_etude = filter_input(INPUT_GET, "e");
-$id_plage = filter_input(INPUT_GET, "p");
-$data = getZones($id_plage);
+$id_zone = filter_input(INPUT_GET, "z");
+$number = filter_input(INPUT_GET, "n");
+$data = getZonedetails($id_zone);
 
 ?>
 
-<h1>veuillez selectionner une Plage : </h1>
+<h1>Details de la zone n° <?php echo $number; ?> </h1>
 
 
 <table>
@@ -27,7 +27,7 @@ $data = getZones($id_plage);
             $i++;
             $zoneId = $d['id_zones'];
             echo "<td>Zone n°$i</td>";
-            echo "<td><td><a href='/pages/beneZoneView.php?z=$zoneId&n=$i'>Selectioner</a></td></td></tr>";
+            echo "<td><td><a href='/pages/beneZoneView.php?z=$zoneId'>Selectioner</a></td></td></tr>";
 
         }
         ?>

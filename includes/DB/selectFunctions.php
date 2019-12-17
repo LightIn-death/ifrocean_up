@@ -170,7 +170,17 @@ function getOpenEtudes()
 }
 
 
-function getZone($id)
+function getZones($id)
+{
+    global $pdo;
+    $rq = $pdo->prepare("SELECT * FROM `zones` WHERE `FK_instance_plages` = :id");
+    $rq->execute(["id" => $id]);
+    $data = $rq->fetchAll();
+    return $data;
+
+}
+
+function getZonedetails($id)
 {
     global $pdo;
     $rq = $pdo->prepare("SELECT * FROM `zones` WHERE `FK_instance_plages` = :id");

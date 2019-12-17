@@ -6,7 +6,7 @@ require_once "../includes/DB/selectFunctions.php";
 $id_zone = filter_input(INPUT_GET, "z");
 $number = filter_input(INPUT_GET, "n");
 $data = getZonedetails($id_zone);
-var_dump($data);
+//var_dump($data);
 $plageName = getPlageInstance($data["FK_instance_plages"])[0]["nom"];
 
 ?>
@@ -44,7 +44,7 @@ $plageName = getPlageInstance($data["FK_instance_plages"])[0]["nom"];
 </table>
 
 <h3>Nombre de personne participants dans la zone : <?php echo $data["nombrePersonne"]; ?></h3>
-<a href='/pages/beneEtudes.php'>Modifier</a>
+<a href='/pages/beneZoneUpdate.php?z=<?php echo $id_zone; ?>&n=<?php echo $number; ?>'>Modifier</a>
 
 <?php
 
@@ -61,7 +61,7 @@ if (isset($_POST["AjouterEspece"])) {
 
 
 $data = getInstEspece($id_zone);
-var_dump($data);
+//var_dump($data);
 
 ?>
 
@@ -113,7 +113,7 @@ var_dump($data);
     <button type="submit" name="AjouterEspece">Ajouter au comptage</button>
 </form>
 <?php
-var_dump($especes);
+//var_dump($especes);
 ?>
 <a href='/pages/beneEtudes.php'>Ajouter au contage</a>
 

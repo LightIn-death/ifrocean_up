@@ -17,7 +17,6 @@ if ($_SESSION["personne"]["admin"]) {
     echo "<br><a href=''>Gerer la liste des Plages</a>";
 
 
-
 //
 //
 //
@@ -37,6 +36,9 @@ if ($_SESSION["personne"]["admin"]) {
 } else if (!$_SESSION["personne"]["admin"]) {
 
     echo "\ntu est un benevole \n";
+    echo "<br>";
+
+    echo "    <a href='/pages/beneEtudes.php'>Liste des Etudes Ouvertes</a>";
 
 //
 //

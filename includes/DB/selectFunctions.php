@@ -6,7 +6,6 @@ $pdo = new PDO(DB_INFOS::servername, DB_INFOS::username, DB_INFOS::password, [
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
 ]);
 
-
 function userLogin($email, $password)
 {
     global $pdo;
@@ -42,14 +41,13 @@ function userLogin($email, $password)
 
 }
 
-
-function userInscription($nom, $prenom, $email, $tel, $password){
+function userInscription($nom, $prenom, $email, $tel, $password)
+{
 
     global $pdo;
     $query = $pdo->prepare("INSERT INTO `personnes` (`id_personnes`, `nom`, `prenom`, `email`, `tel`, `password`, `admin`) VALUES (NULL, :nom, :prenom, :email, :tel, :password, '0')");
     $query->execute(['nom' => $nom, 'prenom' => $prenom, 'email' => $email, 'tel' => $tel, 'password' => $password]);
 }
-
 
 function getEtudeListe()
 {
@@ -96,7 +94,6 @@ function supprimeEtude($id)
     $query->execute(['id' => $id]);
 }
 
-
 function getPlageInstance($id)
 {
     global $pdo;
@@ -106,7 +103,6 @@ function getPlageInstance($id)
     return $data;
 }
 
-
 function getPlagesNotInEtude($id)
 {
     global $pdo;
@@ -115,7 +111,6 @@ function getPlagesNotInEtude($id)
     $data = $rq->fetchAll();
     return $data;
 }
-
 
 function CreatePlageInstance($id, $plage, $km)
 {
@@ -127,7 +122,6 @@ function CreatePlageInstance($id, $plage, $km)
     $rq->execute(['id' => $id, 'plageid' => $plageresult["id_plages"], 'km' => $km]);
 }
 
-
 function SupprPlageInstance($id)
 {
     global $pdo;
@@ -135,17 +129,15 @@ function SupprPlageInstance($id)
     $rq->execute(['id' => $id]);
 }
 
-
-
-
-
-function addEspece($nom){
+function addEspece($nom)
+{
     global $pdo;
     $query = $pdo->prepare("INSERT INTO `especes` (`nom`) VALUES (:nom)");
     $query->execute(['nom' => $nom]);
 }
 
-function listeEspece(){
+function listeEspece()
+{
     global $pdo;
     $query = $pdo->prepare("SELECT * FROM `especes`");
     $query->execute();
@@ -153,15 +145,27 @@ function listeEspece(){
     return $row;
 }
 
-function deleteEspece($id_especes){
+function deleteEspece($id_especes)
+{
     global $pdo;
     $query = $pdo->prepare("DELETE FROM `especes` WHERE `id_especes`=:id_especes");
     $query->execute(['id_especes' => $id_especes]);
 }
 
-function modifyEspeces($id_especes){
+function modifyEspeces($id_especes)
+{
     global $pdo;
     $query = $pdo->prepare("UPDATE `especes` SET `nom`=:nom WHERE id_especes=:id_especes");
     $query->execute(['id_especes' => $id_especes]);
-    $result=$query->fetchAll();
 }
+
+function getOpenEtudes()
+{
+    global $pdo;
+    $rq = $pdo->prepare("SELECT * FROM `etudes` where dateFin is null ");
+    $rq->execute();
+    $data = $rq->fetch();
+    return $data;
+
+}
+

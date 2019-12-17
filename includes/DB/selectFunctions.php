@@ -58,8 +58,15 @@ function listeEspece(){
     global $pdo;
     $query = $pdo->prepare("SELECT * FROM `especes`");
     $query->execute();
-    $row = $query->fetchAll();
-    return $row;
+    $liste = $query->fetchAll();
+    return $liste;
+}
+
+function modifyOneEspece(){
+    global $pdo;
+    $query = $pdo->prepare("SELECT `id_especes`, `nom` FROM `especes` WHERE id_especes=:id_especes");
+    $onEspece = $query ->fetchAll();
+    return $onEspece;
 }
 
 function deleteEspece($id_especes){
@@ -68,17 +75,16 @@ function deleteEspece($id_especes){
     $query->execute(['id_especes' => $id_especes]);
 }
 
-function modifyEspeces($id_especes){
+function modifyEspeces($id_especes, $nom){
     global $pdo;
     $query = $pdo->prepare("UPDATE `especes` SET `nom`=:nom WHERE id_especes=:id_especes");
-    $query->execute(['id_especes' => $id_especes]);
-    $result=$query->fetchAll();
+    $query->execute(['id_especes' => $id_especes, 'nom' => $nom]);
 }
 
-function addPlage($nom){
+function addPlage($nom, $commune, $departement){
     global $pdo;
-    $query = $pdo->prepare("INSERT INTO `plage`(`nom`, `commune`, `departement`) VALUES (:nom, :commune, :département)");
-    $query->execute(['nom' => $nom]);
+    $query = $pdo->prepare("INSERT INTO `plage`(`nom`, `commune`, `departement`) VALUES (:nom, :commune, :departement)");
+    $query->execute(['nom' => $nom, 'commune' => $commune, 'departement' => $departement]);
 }
 
 function listePlage(){
@@ -95,10 +101,10 @@ function deletePlage($id_plages){
     $query->execute(['id_especes' => $id_plages]);
 }
 
-function modifyPlage($id_plages)
+function modifyPlage($id_plages, $nom, $commune, $departement)
 {
     global $pdo;
-    $query = $pdo->prepare("UPDATE `plage` SET `nom`=:nom, `commune`=:commune `département`=:département WHERE id_plages=:id_plages");
-    $query->execute(['id_especes' => $id_plages]);
+    $query = $pdo->prepare("UPDATE `plage` SET `nom`=:nom, `commune`=:commune `departement`=:departement WHERE id_plages=:id_plages");
+    $query->execute(['id_plages' => $id_plages, 'nom' => $nom, 'commune' => $commune, 'departement' => $departement]);
     $result = $query->fetchAll();
 }

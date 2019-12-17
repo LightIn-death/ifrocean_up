@@ -36,9 +36,9 @@ require_once "../includes/DB/selectFunctions.php";
         ?>
         <td><?php echo $ligne["nom"]?></td>
         <td><?php echo $ligne["commune"]?></td>
-        <td><?php echo $ligne["département"]."\n"?></td>
+        <td><?php echo $ligne["departement"]."\n"?></td>
         <td>
-            <a href="C_modifyPlage.php?id_plages=<?php echo $ligne["id_plages"] ?>"
+            <a href="C_modifyEspece.php?id_plages=<?php echo $ligne["id_plages"] ?>"
                class="btn btn-primary">
                 <i class="fa fa-edit"></i>
             </a>
@@ -53,7 +53,7 @@ require_once "../includes/DB/selectFunctions.php";
     }
     ?>
 </table>
-<a href="../pages/addEspece.php">addPlage</a>
+<a href="../components/C_addPlage.php">addPlage</a>
 <a href="../pages/home.php">Retour</a>
 
 </body>

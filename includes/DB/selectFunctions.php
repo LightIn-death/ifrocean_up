@@ -183,9 +183,9 @@ function getZones($id)
 function getZonedetails($id)
 {
     global $pdo;
-    $rq = $pdo->prepare("SELECT * FROM `zones` WHERE `FK_instance_plages` = :id");
+    $rq = $pdo->prepare("SELECT * FROM `zones` WHERE `id_zones`= :id");
     $rq->execute(["id" => $id]);
-    $data = $rq->fetchAll();
+    $data = $rq->fetch();
     return $data;
 
 }

@@ -31,10 +31,11 @@ require_once "../includes/DB/selectFunctions.php";
     </tr>
 <?php
 
-    $resultat=listeEspece();
-    foreach ($resultat as $ligne){
+        $resultat=listeEspece();
+
+    foreach($resultat as $ligne){
         ?>
-            <td><?php echo $ligne["nom"]."\n"?></td>
+            <td><?php echo $ligne["nom"]?></td>
             <td>
             <a href="C_modifyEspece.php?id_especes=<?php echo $ligne["id_especes"] ?>"
                 class="btn btn-primary">

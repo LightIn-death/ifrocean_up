@@ -191,6 +191,15 @@ function getZonedetails($id)
 }
 
 
+function getInstEspece($id)
+{
+    global $pdo;
+    $rq = $pdo->prepare("SELECT * FROM `instanceespeces` i JOIN especes e ON e.id_especes=i.FK_id_especes WHERE `FK_zone`=:id");
+    $rq->execute(['id' => $id]);
+    $data = $rq->fetchAll();
+    return $data;
+}
+
 
 
 

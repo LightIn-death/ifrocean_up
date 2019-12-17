@@ -17,3 +17,5 @@ if (isset($_POST["nom"])) {
               placeholder="ex : Thon" required></p>
     <button type="submit">Enregistrer</button>
 </form>
+
+<a href="../pages/especeListe.php">Espece</a>

@@ -62,13 +62,6 @@ function listeEspece(){
     return $liste;
 }
 
-function modifyOneEspece(){
-    global $pdo;
-    $query = $pdo->prepare("SELECT `id_especes`, `nom` FROM `especes` WHERE id_especes=:id_especes");
-    $onEspece = $query ->fetchAll();
-    return $onEspece;
-}
-
 function deleteEspece($id_especes){
     global $pdo;
     $query = $pdo->prepare("DELETE FROM `especes` WHERE `id_especes`=:id_especes");
@@ -113,4 +106,12 @@ function selectModifyPlage($id_plages){
     $query->execute([ 'id_plages' => $id_plages]);
     $onePlage = $query ->fetchAll();
     return $onePlage;
+}
+
+function selectModifyEspeces($id_especes){
+    global $pdo;
+    $query = $pdo->prepare("SELECT `id_especes`, `nom` FROM `especes` WHERE id_especes=:id_especes");
+    $query->execute([ 'id_especes' => $id_especes]);
+    $oneEspeces = $query ->fetchAll();
+    return $oneEspeces;
 }

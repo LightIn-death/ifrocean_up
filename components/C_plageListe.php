@@ -24,35 +24,36 @@ require_once "../includes/DB/selectFunctions.php";
 <body>
 
 
-<h3>LISTE ESPCE</h3>
+<h3>LISTE plage</h3>
 <table>
     <tr>
         <th>Nom</th>
-    </tr>
-<?php
 
-    $resultat=listeEspece();
-    foreach ($resultat as $ligne){
+        <?php
+
+        $resultat=listePlage();
+        foreach ($resultat as $ligne){
         ?>
-            <td><?php echo $ligne["nom"]."\n"?></td>
-            <td>
-            <a href="C_modifyEspece.php?id_especes=<?php echo $ligne["id_especes"] ?>"
-                class="btn btn-primary">
+        <td><?php echo $ligne["nom"]?></td>
+        <td><?php echo $ligne["commune"]?></td>
+        <td><?php echo $ligne["département"]."\n"?></td>
+        <td>
+            <a href="C_modifyPlage.php?id_plages=<?php echo $ligne["id_plages"] ?>"
+               class="btn btn-primary">
                 <i class="fa fa-edit"></i>
             </a>
-                <a href="C_deleteEspece.php?id_especes=<?php echo $ligne["id_especes"] ?>"
-                    onclick="return confirm('Etes-vous sûr de vouloir supprimer <?php echo $ligne["nom"]?>\nSi oui confirmer !')"
-                    class="btn btn-danger">
-                    <i class="fa fa-trash"></i>
-                </a>
-            </td>
-        </tr>
+            <a href="C_deletePlage.php?id_plages=<?php echo $ligne["id_plages"] ?>"
+               onclick="return confirm('Etes-vous sûr de vouloir supprimer <?php echo $ligne["nom"]?>\nSi oui confirmer !')"
+               class="btn btn-danger">
+                <i class="fa fa-trash"></i>
+            </a>
+        </td>
+    </tr>
     <?php
     }
-?>
-
+    ?>
 </table>
-<a href="../pages/addEspece.php">addEspece</a>
+<a href="../pages/addEspece.php">addPlage</a>
 <a href="../pages/home.php">Retour</a>
 
 </body>

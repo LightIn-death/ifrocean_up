@@ -74,3 +74,31 @@ function modifyEspeces($id_especes){
     $query->execute(['id_especes' => $id_especes]);
     $result=$query->fetchAll();
 }
+
+function addPlage($nom){
+    global $pdo;
+    $query = $pdo->prepare("INSERT INTO `plage`(`nom`, `commune`, `departement`) VALUES (:nom, :commune, :département)");
+    $query->execute(['nom' => $nom]);
+}
+
+function listePlage(){
+    global $pdo;
+    $query = $pdo->prepare("SELECT * FROM `plage`");
+    $query->execute();
+    $row = $query->fetchAll();
+    return $row;
+}
+
+function deletePlage($id_plages){
+    global $pdo;
+    $query = $pdo->prepare("DELETE FROM `plage` WHERE `id_plages`=:id_plages");
+    $query->execute(['id_especes' => $id_plages]);
+}
+
+function modifyPlage($id_plages)
+{
+    global $pdo;
+    $query = $pdo->prepare("UPDATE `plage` SET `nom`=:nom, `commune`=:commune `département`=:département WHERE id_plages=:id_plages");
+    $query->execute(['id_especes' => $id_plages]);
+    $result = $query->fetchAll();
+}

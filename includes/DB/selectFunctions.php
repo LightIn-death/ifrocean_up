@@ -216,6 +216,14 @@ function addInstEspece($id_espece, $id_zone, $nombre)
 }
 
 
+function updateZone($number, $Point1, $Point2, $Point3, $Point4, $id)
+{
+    global $pdo;
+    $rq = $pdo->prepare("UPDATE `zones` SET  	nombrePersonne=:numbe ,point1=:point1,point2=:point2,point3=:point3,point4=:point4 WHERE id_zones=:id");
+    $rq->execute(['numbe' => $number, 'point1' => $Point1, 'point2' => $Point2, 'point3' => $Point3, 'point4' => $Point4, 'id' => $id]);
+}
+
+
 
 
 

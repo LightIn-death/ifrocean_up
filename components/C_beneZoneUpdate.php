@@ -3,13 +3,25 @@ $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 require_once "../includes/DB/selectFunctions.php";
 
 $id_zone = filter_input(INPUT_GET, "z");
-$number = filter_input(INPUT_GET, "n");
+$n = filter_input(INPUT_GET, "n");
 $data = getZonedetails($id_zone);
 $plageName = getPlageInstance($data["FK_instance_plages"])[0]["nom"];
 
 var_dump($data);
+
+if (isset($_POST["save"])) {
+    $number = filter_input(INPUT_POST, "Nombre");
+    $Point1 = filter_input(INPUT_POST, "point1");
+    $Point2 = filter_input(INPUT_POST, "point2");
+    $Point3 = filter_input(INPUT_POST, "point3");
+    $Point4 = filter_input(INPUT_POST, "point4");
+
+    updateZone($number, $Point1, $Point2, $Point3, $Point4, $id_zone);
+}
+
+
 ?>
-<h1>Details de la zone n° <?php echo $number; ?> </h1>
+<h1>Details de la zone n° <?php echo $n; ?> </h1>
 <h2>plage associer : <b><?php echo $plageName; ?></b></h2>
 
 
@@ -39,8 +51,8 @@ var_dump($data);
     </label>
 
 
-    <a href="index.php">
-        Retour
-    </a>
-    <button type="submit">Enregistrer</button>
+    <button type="submit" name="save">Enregistrer</button>
 </form>
+
+
+<a href="/pages/beneEtudes.php">Retour</a>

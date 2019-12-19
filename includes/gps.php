@@ -1,0 +1,63 @@
+<?php
+
+function GPS($p1, $p2, $p3, $p4)
+{
+    if (is_null($p1) or is_null($p2) or is_null($p3) or is_null($p4)) {
+        return false;
+    }
+    $p1 = explode(";", $p1);
+    $p2 = explode(";", $p2);
+    $p3 = explode(";", $p3);
+    $p4 = explode(";", $p4);
+    var_dump($p1, $p2, $p3, $p4);
+    //--------------------------------TEST-----------------
+    if ((Edge(floatval($p2[0]), floatval($p2[1]), floatval($p4[0]), floatval($p4[1])) < Edge(floatval($p1[0]), floatval($p1[1]), floatval($p2[0]), floatval($p2[1]))) OR (Edge(floatval($p2[0]), floatval($p2[1]), floatval($p4[0]), floatval($p4[1])) < Edge(floatval($p1[0]), floatval($p1[1]), floatval($p4[0]), floatval($p4[1])))) {
+        return false;
+    }
+    //--------------------------------TEST-----------------
+
+    $c12 = Edge(floatval($p1[0]), floatval($p1[1]), floatval($p2[0]), floatval($p2[1]));
+    $c14 = Edge(floatval($p1[0]), floatval($p1[1]), floatval($p4[0]), floatval($p4[1]));
+
+    $diag = Edge(floatval($p2[0]), floatval($p2[1]), floatval($p4[0]), floatval($p4[1]));
+
+    var_dump($c12, $c14, $diag);
+
+
+    $c32 = Edge(floatval($p3[0]), floatval($p3[1]), floatval($p2[0]), floatval($p2[1]));
+    $c34 = Edge(floatval($p3[0]), floatval($p3[1]), floatval($p4[0]), floatval($p4[1]));
+
+    $tr1 = tri($c12, $c14, $diag);
+    $tr2 = tri($c32, $c34, $diag);
+
+    $area = $tr1 + $tr2;
+    $pem = $c12 + $c32 + $c34 + $c14;
+    return $area;
+
+
+    //
+}
+
+function Edge($lat1, $lon1, $lat2, $lon2)
+{  // generally used geo measurement function
+    $R = 6378.137; // Radius of earth in KM
+    $dLat = $lat2 * pi() / 180 - $lat1 * pi() / 180;
+    $dLon = $lon2 * pi() / 180 - $lon1 * pi() / 180;
+    $a = sin($dLat / 2) * sin($dLat / 2) + cos($lat1 * pi() / 180) * cos($lat2 * pi() / 180) * sin($dLon / 2) * sin($dLon / 2);
+    $c = 2 * atan2(sqrt($a), sqrt(1 - $a));
+    $d = $R * $c;
+    return $d * 1000; // meters
+
+}
+
+function tri($a, $b, $c)
+{
+    var_dump($a, $b, $c);
+    $tr1 = (sqrt(($a + $b + $c) * (-$a + $b + $c) * ($a - $b + $c) * ($a + $b - $c))) / 4;
+    return $tr1;
+}
+
+
+$a = GPS("46.8605947;-1.7999905", "46.8145678;-1.5584549", "46.6762319;-1.9117655", "46.5890211;-1.6212722");
+var_dump($a);
+

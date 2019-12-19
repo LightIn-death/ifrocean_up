@@ -1,6 +1,7 @@
 <?php
-
+$root = realpath($_SERVER["DOCUMENT_ROOT"]);
 require_once "DB_infos.php";
+require_once "$root/includes/gps.php";
 
 $pdo = new PDO(DB_INFOS::servername, DB_INFOS::username, DB_INFOS::password, [
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
@@ -223,7 +224,27 @@ function updateZone($number, $Point1, $Point2, $Point3, $Point4, $id)
     $rq->execute(['numbe' => $number, 'point1' => $Point1, 'point2' => $Point2, 'point3' => $Point3, 'point4' => $Point4, 'id' => $id]);
 }
 
+function updatePlageZoneReshe($plageInstance)
+{
+    global $pdo;
+    $zones = getZones($plageInstance);
+    $zoneRecherche = 0;
+    foreach ($zones as $zone) {
+        $p1 = $zone["point1"];
+        $p2 = $zone["point2"];
+        $p3 = $zone["point3"];
+        $p4 = $zone["point4"];
+        if (GPScheck($p1, $p2, $p3, $p4)) {
+            echo "ZONE";
+            $zoneRecherche += GPScalculate($p1, $p2, $p3, $p4);
+        }
+    }
+    var_dump($zoneRecherche);
+    $rq = $pdo->prepare(" UPDATE `instanceplages` SET `superficieRecherche` = :superficie WHERE `instanceplages` . `id_instancePlages` = :id ");
+    $rq->execute(['superficie' => $zoneRecherche, 'id' => $plageInstance]);
 
+
+}
 
 
 

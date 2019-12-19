@@ -5,9 +5,7 @@ require_once "../includes/DB/selectFunctions.php";
 $id_zone = filter_input(INPUT_GET, "z");
 $n = filter_input(INPUT_GET, "n");
 $data = getZonedetails($id_zone);
-$plageName = getPlageInstance($data["FK_instance_plages"])[0]["nom"];
-
-var_dump($data);
+$p = getPlageInstance($data["FK_instance_plages"])[0]["id_instancePlages"];
 
 if (isset($_POST["save"])) {
     $number = filter_input(INPUT_POST, "Nombre");
@@ -15,9 +13,29 @@ if (isset($_POST["save"])) {
     $Point2 = filter_input(INPUT_POST, "point2");
     $Point3 = filter_input(INPUT_POST, "point3");
     $Point4 = filter_input(INPUT_POST, "point4");
-
+    if ($Point1 == "") {
+        $Point1 = null;
+    }
+    if ($Point2 == "") {
+        $Point2 = null;
+    }
+    if ($Point3 == "") {
+        $Point3 = null;
+    }
+    if ($Point4 == "") {
+        $Point4 = null;
+    }
     updateZone($number, $Point1, $Point2, $Point3, $Point4, $id_zone);
+    $data = getZonedetails($id_zone);
+    updatePlageZoneReshe($p);
+
+
 }
+
+
+$data = getZonedetails($id_zone);
+$plageName = getPlageInstance($data["FK_instance_plages"])[0]["nom"];
+
 
 
 ?>
@@ -38,16 +56,16 @@ if (isset($_POST["save"])) {
         <input type="text" name="point1" value="<?php echo $data["point1"] ?>">
     </label>
 
-    <label for="point1">Point2
+    <label for="point2">Point2
         <input type="text" name="point2" value="<?php echo $data["point2"] ?>">
     </label>
 
-    <label for="point1">Point3
-        <input type="text" name="Point3" value="<?php echo $data["point3"] ?>">
+    <label for="point3">Point3
+        <input type="text" name="point3" value="<?php echo $data["point3"] ?>">
     </label>
 
-    <label for="point1">Point4
-        <input type="text" name="Point4" value="<?php echo $data["point4"] ?>">
+    <label for="point4">Point4
+        <input type="text" name="point4" value="<?php echo $data["point4"] ?>">
     </label>
 
 

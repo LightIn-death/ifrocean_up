@@ -220,14 +220,6 @@ function selectModifyEspeces($id_especes){
 }
 
 
-function modifyEspeces($id_especes)
-{
-    global $pdo;
-    $query = $pdo->prepare("UPDATE `especes` SET `nom`=:nom WHERE id_especes=:id_especes");
-    $query->execute(['id_especes' => $id_especes]);
-}
-
-
 function getOpenEtudes()
 {
     global $pdo;
@@ -239,8 +231,7 @@ function getOpenEtudes()
 }
 
 
-function getZones($id)
-{
+function getZones($id){
     global $pdo;
     $rq = $pdo->prepare("SELECT * FROM `zones` WHERE `FK_instance_plages` = :id");
     $rq->execute(["id" => $id]);
@@ -270,6 +261,7 @@ function getInstEspece($id)
     return $data;
 }
 
+
 function deleteInstEspece($id_espece, $id_zone)
 {
     global $pdo;
@@ -283,5 +275,12 @@ function addInstEspece($id_espece, $id_zone, $nombre)
     global $pdo;
     $rq = $pdo->prepare("INSERT INTO `instanceespeces` (`FK_id_especes`, `FK_zone`, `nombre`) VALUES (:espece, :zone, :nombre)");
     $rq->execute(['espece' => $id_espece, 'zone' => $id_zone, 'nombre' => $nombre]);
+}
+
+
+function createNewZone($id_plage,$nombrePersonne){
+    global $pdo;
+    $rq = $pdo->prepare("INSERT INTO zones(FK_instance_plages,nombrePersonne) VALUES (:FK_instance_plages,:nombrePersonne)");
+    $rq->execute(['FK_instance_plages' => $id_plage, 'nombrePersonne' => $nombrePersonne,]);
 }
 

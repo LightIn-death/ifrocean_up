@@ -261,6 +261,7 @@ function getInstEspece($id)
     return $data;
 }
 
+
 function deleteInstEspece($id_espece, $id_zone)
 {
     global $pdo;
@@ -277,10 +278,9 @@ function addInstEspece($id_espece, $id_zone, $nombre)
 }
 
 
-function createNewZone(){
+function createNewZone($id_plage,$nombrePersonne){
     global $pdo;
-    $rq = $pdo->prepare("INSERT INTO `instanceplages`(`id_instancePlages`, `FK_id_etudes`, `FK_id_plages`, `superficieTotal`)"
-                                    ." VALUES (:id_instancePlages, :FK_id_etudes, :FK_id_plages, :superficieTotal)");
-    $rq->execute();
+    $rq = $pdo->prepare("INSERT INTO zones(FK_instance_plages,nombrePersonne) VALUES (:FK_instance_plages,:nombrePersonne)");
+    $rq->execute(['FK_instance_plages' => $id_plage, 'nombrePersonne' => $nombrePersonne,]);
 }
 

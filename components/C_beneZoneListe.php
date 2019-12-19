@@ -7,6 +7,11 @@ $id_etude = filter_input(INPUT_GET, "e");
 $id_plage = filter_input(INPUT_GET, "p");
 $data = getZones($id_plage);
 
+if(isset($_GET["createZone"])){
+    $FK_IP = filter_input(INPUT_GET, "plageId");
+
+}
+
 ?>
 
 <h1>veuillez selectionner une Plage : </h1>
@@ -31,9 +36,10 @@ $data = getZones($id_plage);
 
         }
         ?>
-
+    </tr>
 </table>
+<form method="post">
+    <button type="submit" name="createZone" onclick="return confirm('Etes-vous sûr, de couloir créer une nouvel zone ??')">Ajouter une zone</button>
+</form>
 
 <a href='/pages/beneEtudes.php'>Retour</a>
-
-

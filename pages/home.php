@@ -5,13 +5,16 @@ include_once "../components/HeaderFooter.php";
 include_once "../includes/sessionFonctions.php";
 pageHeader("Home");
 var_dump($_SESSION);
+echo "<img src='/ressources/images/ifroceanLogo.png' alt='logo'>";
 if ($_SESSION["personne"]["admin"]) {
 
     echo "\n tu est admin \n";
 
-    echo "<br><a href='../components/C_etudeListe.php'>Liste des etudes</a>";
-    echo "<br><a href=''>Creer une nouvelle etude</a>";
-    echo "<br><a href='../components/C_especeListe.php'>Gerer la liste des especes</a>";
+
+    echo "<br><a href='etudeListe.php'>Liste des etudes</a>";
+    echo "<br><a href='etudeADD.php'>Creer une nouvelle etude</a>";
+    echo "<br><a href='especeListe.php'>Gerer la liste des especes</a>";
+    echo "<br><a href=''>Gerer la liste des Plages</a>";
 
 
 //
@@ -20,7 +23,7 @@ if ($_SESSION["personne"]["admin"]) {
 //
 //
 //
-//
+//²
 //
 //
 //
@@ -33,6 +36,9 @@ if ($_SESSION["personne"]["admin"]) {
 } else if (!$_SESSION["personne"]["admin"]) {
 
     echo "\ntu est un benevole \n";
+    echo "<br>";
+
+    echo "    <a href='/pages/beneEtudes.php'>Liste des Etudes Ouvertes</a>";
 
 //
 //

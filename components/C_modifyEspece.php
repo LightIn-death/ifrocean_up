@@ -2,27 +2,30 @@
 $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 require_once "../includes/DB/selectFunctions.php";
 
-modifyEspeces($id_especes);
-
 $id_especes = filter_input(INPUT_GET, "id_especes");
+$nom = filter_input(INPUT_GET, "nom");
 
-    if(count($id_especes)!=1){
-        http_response_code(404);
-        die();
-    }
+$result = selectModifyEspeces($id_especes, $nom);
+
+if (isset($_POST["updateEspeces"])){
+
+    $nom = filter_input(INPUT_POST, "nom");
+
+    modifyEspeces($id_especes ,$nom);
+}
+
 ?>
 
-<form method="post" action="../includes/DB/selectFunctions.php" >
-    <input type="hidden" name="id_especes" value="<?php echo $id_especes?>">
-    <div class="form-group">
-        <label for="titre">Titre</label>
-        <input type="text" class="form-control" id="titre" maxlength="50"
-               name="titre" value="<?php echo $result["0"]["titre"] ?>"
-               placeholder="titre..." required>
-    </div>
-</form>
+    <form method="post">
+        <input type="hidden" name="id_especes" >
+        <div class="form-group">
+            <input type="text" class="form-control" id="nom" maxlength="50"
+                   name="nom" value="<?php echo $result[0]["nom"] ?>">
+        </div>
+        <button type="submit" name="updateEspeces">Register</button>
+    </form>
 
+
+    <a href="C_especeListe.php">retour</a>
 <?php
 
-header('location: ../pages/especeListe');
-?>

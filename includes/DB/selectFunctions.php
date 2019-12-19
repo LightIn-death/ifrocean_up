@@ -7,6 +7,7 @@ $pdo = new PDO(DB_INFOS::servername, DB_INFOS::username, DB_INFOS::password, [
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
 ]);
 
+
 function userLogin($email, $password)
 {
     global $pdo;
@@ -42,6 +43,7 @@ function userLogin($email, $password)
 
 }
 
+
 function userInscription($nom, $prenom, $email, $tel, $password)
 {
 
@@ -49,6 +51,7 @@ function userInscription($nom, $prenom, $email, $tel, $password)
     $query = $pdo->prepare("INSERT INTO `personnes` (`id_personnes`, `nom`, `prenom`, `email`, `tel`, `password`, `admin`) VALUES (NULL, :nom, :prenom, :email, :tel, :password, '0')");
     $query->execute(['nom' => $nom, 'prenom' => $prenom, 'email' => $email, 'tel' => $tel, 'password' => $password]);
 }
+
 
 function getEtudeListe()
 {
@@ -59,15 +62,15 @@ function getEtudeListe()
     return $data;
 }
 
+
 function EtudeAdd($nom, $reference)
 {
     $date = date('Y/m/d', time());
     global $pdo;
     $query = $pdo->prepare("INSERT INTO `etudes` (`nom`, `dateDebut`,  `reference`) VALUES ( :nom, :date , :referen)");
     $query->execute(['nom' => $nom, 'date' => $date, 'referen' => $reference]);
-
-
 }
+
 
 function getEtude($id)
 {
@@ -77,6 +80,7 @@ function getEtude($id)
     $data = $rq->fetch();
     return $data;
 }
+
 
 function clotureEtude($id)
 {
@@ -88,12 +92,14 @@ function clotureEtude($id)
 
 }
 
+
 function supprimeEtude($id)
 {
     global $pdo;
     $query = $pdo->prepare("DELETE FROM `etudes` WHERE `etudes`.`id_etudes` = :id");
     $query->execute(['id' => $id]);
 }
+
 
 function getPlageInstance($id)
 {
@@ -104,6 +110,7 @@ function getPlageInstance($id)
     return $data;
 }
 
+
 function getPlagesNotInEtude($id)
 {
     global $pdo;
@@ -112,6 +119,7 @@ function getPlagesNotInEtude($id)
     $data = $rq->fetchAll();
     return $data;
 }
+
 
 function CreatePlageInstance($id, $plage, $km)
 {
@@ -123,12 +131,14 @@ function CreatePlageInstance($id, $plage, $km)
     $rq->execute(['id' => $id, 'plageid' => $plageresult["id_plages"], 'km' => $km]);
 }
 
+
 function SupprPlageInstance($id)
 {
     global $pdo;
     $rq = $pdo->prepare(" DELETE FROM `instanceplages` WHERE `instanceplages`.`id_instancePlages` = :id");
     $rq->execute(['id' => $id]);
 }
+
 
 function addEspece($nom)
 {
@@ -137,14 +147,16 @@ function addEspece($nom)
     $query->execute(['nom' => $nom]);
 }
 
+
 function listeEspece()
 {
     global $pdo;
     $query = $pdo->prepare("SELECT * FROM `especes`");
     $query->execute();
-    $row = $query->fetchAll();
-    return $row;
+    $liste = $query->fetchAll();
+    return $liste;
 }
+
 
 function deleteEspece($id_especes)
 {
@@ -153,12 +165,61 @@ function deleteEspece($id_especes)
     $query->execute(['id_especes' => $id_especes]);
 }
 
-function modifyEspeces($id_especes)
-{
+
+function modifyEspeces($id_especes, $nom){
     global $pdo;
     $query = $pdo->prepare("UPDATE `especes` SET `nom`=:nom WHERE id_especes=:id_especes");
-    $query->execute(['id_especes' => $id_especes]);
+    $query->execute(['id_especes' => $id_especes, 'nom' => $nom]);
 }
+
+
+function addPlage($nom, $commune, $departement){
+    global $pdo;
+    $query = $pdo->prepare("INSERT INTO `plage`(`nom`, `commune`, `departement`) VALUES (:nom, :commune, :departement)");
+    $query->execute(['nom' => $nom, 'commune' => $commune, 'departement' => $departement]);
+}
+
+
+function listePlage(){
+    global $pdo;
+    $query = $pdo->prepare("SELECT * FROM `plage`");
+    $query->execute();
+    $row = $query->fetchAll();
+    return $row;
+}
+
+
+function deletePlage($id_plages){
+    global $pdo;
+    $query = $pdo->prepare("DELETE FROM `plage` WHERE `id_plages`=:id_plages");
+    $query->execute(['id_especes' => $id_plages]);
+}
+
+
+function modifyPlage($id_plages, $nom, $commune, $departement){
+    global $pdo;
+    $query = $pdo->prepare("UPDATE `plage` SET `nom`=:nom, `commune`=:commune, `departement`=:departement WHERE id_plages=:id_plages");
+    $query->execute(['id_plages' => $id_plages, 'nom' => $nom, 'commune' => $commune, 'departement' => $departement]);
+}
+
+
+function selectModifyPlage($id_plages){
+    global $pdo;
+    $query = $pdo->prepare("SELECT `id_plages`, `nom`, `commune`, `departement` FROM `plage` WHERE id_plages=:id_plages");
+    $query->execute([ 'id_plages' => $id_plages]);
+    $onePlage = $query ->fetchAll();
+    return $onePlage;
+}
+
+
+function selectModifyEspeces($id_especes){
+    global $pdo;
+    $query = $pdo->prepare("SELECT `id_especes`, `nom` FROM `especes` WHERE id_especes=:id_especes");
+    $query->execute([ 'id_especes' => $id_especes]);
+    $oneEspeces = $query ->fetchAll();
+    return $oneEspeces;
+}
+
 
 function getOpenEtudes()
 {
@@ -171,8 +232,7 @@ function getOpenEtudes()
 }
 
 
-function getZones($id)
-{
+function getZones($id){
     global $pdo;
     $rq = $pdo->prepare("SELECT * FROM `zones` WHERE `FK_instance_plages` = :id");
     $rq->execute(["id" => $id]);
@@ -180,6 +240,7 @@ function getZones($id)
     return $data;
 
 }
+
 
 function getZonedetails($id)
 {
@@ -201,6 +262,7 @@ function getInstEspece($id)
     return $data;
 }
 
+
 function deleteInstEspece($id_espece, $id_zone)
 {
     global $pdo;
@@ -215,6 +277,7 @@ function addInstEspece($id_espece, $id_zone, $nombre)
     $rq = $pdo->prepare("INSERT INTO `instanceespeces` (`FK_id_especes`, `FK_zone`, `nombre`) VALUES (:espece, :zone, :nombre)");
     $rq->execute(['espece' => $id_espece, 'zone' => $id_zone, 'nombre' => $nombre]);
 }
+
 
 
 function updateZone($number, $Point1, $Point2, $Point3, $Point4, $id)
@@ -246,5 +309,11 @@ function updatePlageZoneReshe($plageInstance)
 
 }
 
+
+function createNewZone($id_plage,$nombrePersonne){
+    global $pdo;
+    $rq = $pdo->prepare("INSERT INTO zones(FK_instance_plages,nombrePersonne) VALUES (:FK_instance_plages,:nombrePersonne)");
+    $rq->execute(['FK_instance_plages' => $id_plage, 'nombrePersonne' => $nombrePersonne,]);
+}
 
 

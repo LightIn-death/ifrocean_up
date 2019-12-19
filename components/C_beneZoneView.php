@@ -112,8 +112,7 @@ $data = getInstEspece($id_zone);
     </label>
     <button type="submit" name="AjouterEspece">Ajouter au comptage</button>
 </form>
-<?php
-//var_dump($especes);
+
 ?>
 <a href='/pages/beneEtudes.php'>Ajouter au contage</a>
 

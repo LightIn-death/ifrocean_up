@@ -86,7 +86,7 @@ if ($data["dateFin"] == null) {
             }
             ?>
         </datalist>
-        <label for="superficie">Superficie de la plage dans la periode de l'etude (km²) </label>
+        <label for="superficie">Superficie de la plage dans la periode de l'etude (M²) </label>
         <input type="number" name="superficie">
 
         <button type="submit" name="addPlage"> + Ajouter</button>

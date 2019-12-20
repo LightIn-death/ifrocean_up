@@ -325,13 +325,21 @@ function getTotalWorms($plageId)
     $rq = $pdo->prepare("SELECT SUM(nombre) FROM `instanceespeces` JOIN zones on FK_zone=zones.id_zones WHERE zones.FK_instance_plages=:id");
     $rq->execute(['id' => $plageId]);
     $data = $rq->fetch();
+
     return intval($data["SUM(nombre)"]);
+
 }
 
 
 function getDensite($plageId)
 {
-    $dens = getSumZoneReshe($plageId) / getTotalWorms($plageId);
+    if (getSumZoneReshe($plageId) == 0) {
+        $tempSumZoneRe = 1;
+    } else {
+        $tempSumZoneRe = getSumZoneReshe($plageId);
+    }
+
+    $dens = getTotalWorms($plageId) / $tempSumZoneRe;
     return $dens;
 }
 
@@ -366,7 +374,7 @@ function getIdPlageInEtude($etudeId)
 function getGlobalDensite($etudeId)
 {
     $recheZone = 1;
-    $WormsZone = 2;
+    $WormsZone = 0;
     foreach (getIdPlageInEtude($etudeId) as $id) {
         $TEMPrecheZone = getSumZoneReshe($id);
         $TEMPWormsZone = getTotalWorms($id);

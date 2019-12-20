@@ -26,7 +26,8 @@ if (isset($_POST["supprimePlage"])) {
 
 if (isset($_POST["VoirPlage"])) {
     $InstancePlageId = filter_input(INPUT_POST, "PlageId");
-    header("Location: /pages/InstancePlageView.php?id=$InstancePlageId");
+    $etude = $_GET["id"];
+    header("Location: /pages/InstancePlageView.php?id=$InstancePlageId&b=$etude");
 
 
 }

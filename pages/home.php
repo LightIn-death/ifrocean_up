@@ -16,7 +16,7 @@ if ($_SESSION["personne"]["admin"]) {
     echo "<br><a href='etudeListe.php'>Liste des etudes</a>";
     echo "<br><a href='etudeADD.php'>Creer une nouvelle etude</a>";
     echo "<br><a href='especeListe.php'>Gerer la liste des especes</a>";
-    echo "<br><a href=''>Gerer la liste des Plages</a>";
+    echo "<br><a href='pageListe.php'>Gerer la liste des Plages</a>";
 
 
 //

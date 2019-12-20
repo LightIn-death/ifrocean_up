@@ -192,7 +192,7 @@ function listePlage(){
 function deletePlage($id_plages){
     global $pdo;
     $query = $pdo->prepare("DELETE FROM `plage` WHERE `id_plages`=:id_plages");
-    $query->execute(['id_especes' => $id_plages]);
+    $query->execute(['id_plages' => $id_plages]);
 }
 
 

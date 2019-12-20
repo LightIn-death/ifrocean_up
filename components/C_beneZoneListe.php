@@ -63,7 +63,6 @@ if(isset($_POST["nombrePersonne"])){
     $zoneId = createNewZone($id_plage,$nombrePersonne);
     header("Location: ../pages/beneZoneView.php?z=$zoneId&n=$i");
 }
-
 ?>
 
-<a href='/pages/beneEtudes.php'>Retour</a>
+<a href="/pages/beneEtudeView.php?id=<?php echo $id_etude?>">Retour</a>

@@ -22,6 +22,13 @@ if (isset($_POST["addPlage"])) {
 if (isset($_POST["supprimePlage"])) {
     $InstanceToSuppr = filter_input(INPUT_POST, "supprPlageId");
     SupprPlageInstance($InstanceToSuppr);
+}
+
+if (isset($_POST["VoirPlage"])) {
+    $InstancePlageId = filter_input(INPUT_POST, "PlageId");
+    $etude = $_GET["id"];
+    header("Location: /pages/InstancePlageView.php?id=$InstancePlageId&b=$etude");
+
 
 }
 
@@ -47,9 +54,15 @@ $plagesInstance = getPlageInstance($_GET["id"]);
         $plageNom = $plageI["nom"];
         $plageCommune = $plageI["commune"];
         $plageDepartement = $plageI["departement"];
-        echo "<li> $plageNom / $plageCommune / $plageDepartement ||<form method='post' style='display: inline;'>
+        if ($data["dateFin"] == null) {
+            echo "<li> $plageNom / $plageCommune / $plageDepartement ||<form method='post' style='display: inline;'>
         <input type='submit' name='supprimePlage' value='supprimer'><input type='hidden' name='supprPlageId' value='$InstanceId'></form></li>";
+        } else
+            echo "<li> $plageNom / $plageCommune / $plageDepartement ||<form method='post' style='display: inline;'>
+        <input type='submit' name='VoirPlage' value='Voir'><input type='hidden' name='PlageId' value='$InstanceId'></form></li>";
     }
+
+
     ?>
 </ul>
 
@@ -57,6 +70,7 @@ $plagesInstance = getPlageInstance($_GET["id"]);
 <?php
 if ($data["dateFin"] == null) {
     $plages = getPlagesNotInEtude($_GET["id"]);
+
     ?>
     <form method="post">
         <label for="plage">Ajouter une plage a l'etude : </label>
@@ -68,10 +82,11 @@ if ($data["dateFin"] == null) {
                 $plageNom = $plage["nom"];
                 $plageId = $plage["id_plages"];
                 echo "<option value='$plageNom;$plageId' name='plage' />";
+
             }
             ?>
         </datalist>
-        <label for="superficie">Superficie de la plage dans la periode de l'etude (km²) </label>
+        <label for="superficie">Superficie de la plage dans la periode de l'etude (M²) </label>
         <input type="number" name="superficie">
 
         <button type="submit" name="addPlage"> + Ajouter</button>
@@ -86,16 +101,21 @@ if ($data["dateFin"] == null) {
     <?php
 
 } else {
+
+
+    $densiteGlobal = getGlobalDensite($_GET["id"]);
+    $estimGlobal = getGlobalEstim($_GET["id"]);
+    $nombrePartitip = getNombrePartitip($_GET["id"]);
+
     ?>
 
     <h3>Date de fin (Annee / Mois / Jour) : <?php echo $data["dateFin"] ?></h3>
-    <h3>Nombre de vers estime : <?php echo $data["nombreEstime"] ?></h3>
-    <h3>Densite Global : <?php echo $data["nombreEstime"] ?></h3>
+    <h3>Densite Global : <?php echo $densiteGlobal ?> Vers / M²</h3>
+    <h3>Nombre de vers estime : <?php echo $estimGlobal ?> vers sur l'ensemble des plages de l'etude</h3>
 
-    <h3>Nombre de personne ayant participe : <?php echo $data["nombrePersonne"] ?></h3>
+    <h3>Nombre de participation sur l'etude complete : <?php echo $nombrePartitip ?></h3>
 
     <?php
-
 }
 ?>
 

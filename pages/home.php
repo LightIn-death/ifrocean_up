@@ -4,6 +4,8 @@ session_start();
 include_once "../components/HeaderFooter.php";
 include_once "../includes/sessionFonctions.php";
 pageHeader("Home");
+echo "<div id='layout'>";
+echo "<div id='main'>";
 var_dump($_SESSION);
 echo "<img src='/ressources/images/ifroceanLogo.png' alt='logo'>";
 if ($_SESSION["personne"]["admin"]) {
@@ -68,5 +70,6 @@ if ($_SESSION["personne"]["admin"]) {
     <br><a href="../includes/LogOut.php">deconexion</a>
 <?php
 
-
+echo "</div>";
+echo "</div>";
 pageFooter();

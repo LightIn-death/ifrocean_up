@@ -364,6 +364,7 @@ function getEstim($plageId)
 function getIdPlageInEtude($etudeId)
 {
     global $pdo;
+
     $rq = $pdo->prepare("SELECT id_instancePlages FROM `instanceplages` WHERE FK_id_etudes=:id");
     $rq->execute(['id' => $etudeId]);
     $data = $rq->fetch();
@@ -383,6 +384,7 @@ function getGlobalDensite($etudeId)
     }
     $totalDens = $WormsZone / $recheZone;
     return $totalDens;
+
 }
 
 function getGlobalEstim($etudeId)

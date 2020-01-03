@@ -120,12 +120,30 @@ input {
 table {
     height: 50vh;
     width: 70vw;
+    border: 2px solid #0009ff;
+    border-collapse: collapse;
+    border-radius: 8px;
 }
 
+table {
 
+}
 
+th {
+    background-color: rgba(84, 152, 222, 0.46);
+}
 
+th, td {
+    border: solid 1px #0009ff;
+}
 
+tr:nth-child(even) {
+    background-color: rgba(147, 201, 222, 0.46);
+}
+
+th, td {
+    text-align: center;
+}
 
 
 

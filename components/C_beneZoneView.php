@@ -90,35 +90,38 @@ $data = getInstEspece($id_zone);
     }
     ?>
 
+    <tr>
+        <form method="post">
+
+            <td>
+                <select name="espece">
+
+                    <?php
+                    $especes = listeEspeceNotUse($id_zone);
+                    foreach ($especes as $e) {
+                        $especeNom = $e["nom"];
+                        $especeId = $e["id_especes"];
+                        echo "<option value='$especeId' name='espece'>$especeNom</option>";
+                    }
+                    ?>
+
+
+                </select>
+            </td>
+
+            <td>
+                <input type="number" name="nombre">
+            </td>
+            <td>
+                <button id="short_input" type="submit" name="AjouterEspece">Ajouter au comptage</button>
+            </td>
+        </form>
+
+
+    </tr>
+
 
 </table>
-
-<form method="post">
-
-    <label> Choisir Une Espece à ajouter
-        <select name="espece">
-
-            <?php
-            $especes = listeEspeceNotUse($id_zone);
-            foreach ($especes as $e) {
-                $especeNom = $e["nom"];
-                $especeId = $e["id_especes"];
-                echo "<option value='$especeId' name='espece'>$especeNom</option>";
-            }
-            ?>
-
-
-        </select>
-    </label>
-
-    <label>Nombre
-        <input type="number" name="nombre">
-    </label>
-    <button type="submit" name="AjouterEspece">Ajouter au comptage</button>
-</form>
-
-?>
-<a href='/pages/beneEtudes.php'>Ajouter au contage</a>
 
 
 <a href='/pages/beneEtudes.php'>Retour</a>

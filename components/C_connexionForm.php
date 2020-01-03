@@ -21,20 +21,19 @@ if (isset($_POST["email"])) {
 <h3>Se connecter ici !</h3>
 
 
-<div>
-    <form method="post">
+<form method="post">
 
-        <label for="email">E-mail :</label>
-        <input placeholder="ex : aranea@aranea.me" id="email" type="email" name="email"
-               pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2, 4}$" required>
-
-
-        <label for="password">Password :</label>
-        <input id="password" type="password" name="password">
+    <label for="email">E-mail :</label>
+    <input placeholder="ex : aranea@aranea.me" id="email" type="email" name="email"
+           pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2, 4}$" required>
 
 
-        <button type="submit" name="action">Submit</button>
+    <label for="password">Password :</label>
+    <input id="password" type="password" name="password">
 
-    </form>
-    <a href="/pages/inscription.php">s'inscrire</a>
-</div>
+
+    <button type="submit" name="action">Submit</button>
+
+</form>
+<a href="/pages/inscription.php">s'inscrire</a>
+

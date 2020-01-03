@@ -24,7 +24,7 @@ $data = getOpenEtudes();
             $etudeName = $d['nom'];
             $etudeId = $d['id_etudes'];
             echo "<td>$etudeName</td>";
-            echo "<td><td><a href='/pages/beneEtudeView.php?id=$etudeId'>Selectioner</a></td></td></tr>";
+            echo "<td><a href='/pages/beneEtudeView.php?id=$etudeId'>Selectioner</a></td></tr>";
         }
         ?>
 

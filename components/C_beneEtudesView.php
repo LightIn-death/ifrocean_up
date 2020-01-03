@@ -15,6 +15,7 @@ $data = getPlageInstance($id_etude);
     <tr>
         <th>Titre</th>
         <th>Selection</th>
+        <th>Action</th>
 
     </tr>
     <tr>

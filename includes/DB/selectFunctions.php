@@ -111,6 +111,16 @@ function getPlageInstance($id)
 }
 
 
+function getPlageInfo($id)
+{
+    global $pdo;
+    $rq = $pdo->prepare("SELECT * FROM plage join  instanceplages i on plage.id_plages = i.FK_id_plages join zones z on i.id_instancePlages = z.FK_instance_plages WHERE z.FK_instance_plages =:id");
+    $rq->execute(['id' => $id]);
+    $data = $rq->fetch();
+    return $data;
+}
+
+
 function getPlagesNotInEtude($id)
 {
     global $pdo;
@@ -153,6 +163,15 @@ function listeEspece()
     global $pdo;
     $query = $pdo->prepare("SELECT * FROM `especes`");
     $query->execute();
+    $liste = $query->fetchAll();
+    return $liste;
+}
+
+function listeEspeceNotUse($id)
+{
+    global $pdo;
+    $query = $pdo->prepare("SELECT * FROM `especes` WHERE NOT id_especes IN (SELECT id_especes FROM `especes` join instanceespeces on FK_id_especes=id_especes join zones on FK_zone=id_zones WHERE id_zones = :id ) ");
+    $query->execute(['id' => $id]);
     $liste = $query->fetchAll();
     return $liste;
 }

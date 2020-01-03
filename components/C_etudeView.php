@@ -98,7 +98,7 @@ if ($data["dateFin"] == null) {
     <h3>Etude en cours... (les resultats aparaiterons a la fin de l'etude)</h3>
 
     <form method="post">
-        <button type="submit" name="cloture">Cloturer</button>
+        <button class="del" type="submit" name="cloture">Cloturer</button>
     </form>
     <?php
 

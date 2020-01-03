@@ -6,7 +6,7 @@ require_once "../includes/DB/selectFunctions.php";
 $id_zone = filter_input(INPUT_GET, "z");
 $number = filter_input(INPUT_GET, "n");
 $data = getZonedetails($id_zone);
-//var_dump($data);
+var_dump($data);
 $plageName = getPlageInstance($data["FK_instance_plages"])[0]["nom"];
 
 ?>

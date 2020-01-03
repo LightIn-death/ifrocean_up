@@ -5,7 +5,7 @@ class DB_INFOS
 {
 
 
-    const servername = 'mysql:host=localhost:3307;dbname=ifrocean';
+    const servername = 'mysql:host=localhost;dbname=ifrocean';
 
     const username = "root";
     const password = "";

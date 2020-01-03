@@ -61,7 +61,7 @@ if(isset($_POST["createZone"])){
 $i++;
 if(isset($_POST["nombrePersonne"])){
     $zoneId = createNewZone($id_plage,$nombrePersonne);
-    header("Location: ../pages/beneZoneView.php?z=$zoneId&n=$i");
+    header("Location: /pages/beneZoneView.php?z=$zoneId&n=$i");
 }
 ?>
 

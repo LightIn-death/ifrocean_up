@@ -300,6 +300,11 @@ function createNewZone($id_plage, $nombrePersonne)
     global $pdo;
     $rq = $pdo->prepare("INSERT INTO zones(FK_instance_plages,nombrePersonne) VALUES (:FK_instance_plages,:nombrePersonne)");
     $rq->execute(['FK_instance_plages' => $id_plage, 'nombrePersonne' => $nombrePersonne,]);
+    $rq = $pdo->prepare("SELECT id_zones FROM `zones` ORDER BY id_zones DESC LIMIT 1 ");
+    $rq->execute();
+    $data = $rq->fetch();
+    return intval($data["id_zones"]);
+
 }
 
 
@@ -325,7 +330,6 @@ function getTotalWorms($plageId)
     $rq = $pdo->prepare("SELECT SUM(nombre) FROM `instanceespeces` JOIN zones on FK_zone=zones.id_zones WHERE zones.FK_instance_plages=:id");
     $rq->execute(['id' => $plageId]);
     $data = $rq->fetch();
-
     return intval($data["SUM(nombre)"]);
 
 }

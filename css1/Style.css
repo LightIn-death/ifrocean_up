@@ -88,6 +88,16 @@ form {
     align-items: center;
 }
 
+button {
+    display: block;
+    margin: 1vw;
+    height: 5vh;
+    width: 10vw;
+    padding: 12px 20px;
+    border-radius: 4px;
+    border: 2px solid #5498DE;
+}
+
 input {
     display: block;
     margin: 1vw;
@@ -96,6 +106,14 @@ input {
     padding: 12px 20px;
     border-radius: 4px;
     border: 2px solid #5498DE;
+}
+
+select {
+    width: 100%;
+    padding: 16px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #f1f1f1;
 }
 
 .submit {
@@ -109,6 +127,17 @@ input {
     width: 45vw;
 }
 
+.del {
+
+    text-decoration: none;
+    background-color: #de8587;
+    border: #de1300 solid 1px;
+    border-radius: 4px;
+    color: rgb(255, 255, 255);
+
+
+}
+
 
 .form_button {
     margin-top: 20px;
@@ -116,26 +145,26 @@ input {
     flex-wrap: nowrap;
 }
 
+/*-----------------------------------------------TABLEAUX-------------------------------------------------------------*/
 
 table {
-    height: 50vh;
     width: 70vw;
     border: 2px solid #0009ff;
     border-collapse: collapse;
     border-radius: 8px;
 }
 
-table {
 
+th, td {
+    height: 80px;
+    border: solid 1px #0009ff;
 }
 
 th {
+    height: 40px;
     background-color: rgba(84, 152, 222, 0.46);
 }
 
-th, td {
-    border: solid 1px #0009ff;
-}
 
 tr:nth-child(even) {
     background-color: rgba(147, 201, 222, 0.46);
@@ -145,11 +174,41 @@ th, td {
     text-align: center;
 }
 
+/*-------------------------------------------------LISTES-------------------------------------------------------------*/
 
+ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    width: 70vw;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
 
+ul > li {
+    display: flex;
+    margin: 10px;
+}
 
+ul > li > form {
 
+    display: flex;
+    flex-wrap: nowrap;
 
+}
+
+ul > li > form > input {
+    width: 100px;
+    height: 25px;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    margin-left: 10px;
+}
+
+/*-------------------------------------------------LISTES-------------------------------------------------------------*/
 
 
 

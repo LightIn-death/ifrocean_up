@@ -42,7 +42,7 @@ if ($_SESSION["personne"]["admin"]) {
 
     echo "\ntu est un benevole \n";
 
-    echo " < a href = '/pages/beneEtudes.php' > Liste des Etudes Ouvertes </a > ";
+    echo " <a href ='/pages/beneEtudes.php'> Liste des Etudes Ouvertes </a>";
 
 //
 //

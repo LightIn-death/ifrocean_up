@@ -29,7 +29,10 @@ if (isset($_POST["delPlage"])) {
 <table>
     <tr>
         <th>Nom</th>
-
+        <th>Ville</th>
+        <th>Departement</th>
+    </tr>
+    <tr>
         <?php
 
         $resultat=listePlage();

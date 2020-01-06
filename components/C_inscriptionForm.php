@@ -25,7 +25,7 @@ if (isset($_POST["nom"])) {
                                             placeholder="ex : michu@madame.fr"
                                             onkeyup="this.value=this.value.toLowerCase()"
                                             pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2, 4}$" required></label></div>
-    <div><label for="tel">Telephone : <input type="tel" name="tel" id="tel"
+    <div><label for="tel">Telephone : <input type="tel" name="tel" id="tel" maxlength="20"
                                              placeholder="ex : 00 00 00 00 00" required></label></div>
     <div><label for="password">Mot De Passe : <input type="password" name="password" id="password"
                                                      placeholder="Votre mot de passe" required></label></div>

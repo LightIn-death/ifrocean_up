@@ -25,6 +25,7 @@ if (isset($_POST["email"])) {
 
         <label for="email">E-mail :</label>
         <input placeholder="ex : aranea@aranea.me" id="email" type="email" name="email"
+               onkeyup="this.value=this.value.toLowerCase()"
                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2, 4}$" required>
 
 

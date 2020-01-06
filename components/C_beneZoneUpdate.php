@@ -5,7 +5,7 @@ require_once "../includes/DB/selectFunctions.php";
 $id_zone = filter_input(INPUT_GET, "z");
 $n = filter_input(INPUT_GET, "n");
 $data = getZonedetails($id_zone);
-$p = getPlageInstance($data["FK_instance_plages"])[0]["id_instancePlages"];
+$plageName = getPlageInfo(intval($data["FK_instance_plages"]))["nom"];
 
 if (isset($_POST["save"])) {
     $number = filter_input(INPUT_POST, "Nombre");
@@ -27,15 +27,14 @@ if (isset($_POST["save"])) {
     }
     updateZone($number, $Point1, $Point2, $Point3, $Point4, $id_zone);
     $data = getZonedetails($id_zone);
-    updatePlageZoneReshe($p);
+    updatePlageZoneReshe($plageName);
 
 
 }
 
 
 $data = getZonedetails($id_zone);
-$plageName = getPlageInstance($data["FK_instance_plages"])[0]["nom"];
-
+$plageName = getPlageInfo(intval($data["FK_instance_plages"]))["nom"];
 
 
 ?>

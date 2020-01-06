@@ -72,28 +72,29 @@ if ($data["dateFin"] == null) {
     $plages = getPlagesNotInEtude($_GET["id"]);
 
     ?>
-    <form method="post">
-        <label>Ajouter une plage a l'etude :
-            <select name="plage">
-                <?php
-                foreach ($plages as $plage) {
+    <div class="zone">
+        <form method="post">
+            <label>Ajouter une plage a l'etude :
+                <select name="plage">
+                    <?php
+                    foreach ($plages as $plage) {
 
-                    $plageNom = $plage["nom"];
-                    $plageId = $plage["id_plages"];
-                    echo "<option value='$plageId' name='plage'/>$plageNom</option>";
-                }
-                ?>
+                        $plageNom = $plage["nom"];
+                        $plageId = $plage["id_plages"];
+                        echo "<option value='$plageId' name='plage'/>$plageNom</option>";
+                    }
+                    ?>
 
-            </select>
-        </label>
+                </select>
+            </label>
 
 
-        <label for="superficie">Superficie de la plage dans la periode de l'etude (M²) </label>
-        <input type="number" name="superficie">
+            <label for="superficie">Superficie de la plage dans la periode de l'etude (M²) </label>
+            <input type="number" name="superficie">
 
-        <button type="submit" name="addPlage"> + Ajouter</button>
-    </form>
-
+            <button type="submit" name="addPlage"> + Ajouter</button>
+        </form>
+    </div>
 
     <h3>Etude en cours... (les resultats aparaiterons a la fin de l'etude)</h3>
 

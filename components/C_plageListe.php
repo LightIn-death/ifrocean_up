@@ -7,7 +7,7 @@ $id_plages = filter_input(INPUT_POST, "id_plages");
 
 if (isset($_POST["delPlage"])) {
     deletePlage($_POST["id_plages"]);
-    header('Location: plageListe.php');
+    header('Location: pageListe.php');
 }
 
 
@@ -33,16 +33,18 @@ if (isset($_POST["delPlage"])) {
         <td><?php echo $ligne["commune"] ?></td>
         <td><?php echo $ligne["departement"] . "\n" ?></td>
         <td>
-            <a href="../pages/modifyPlage.php?id_plages=<?php echo $ligne["id_plages"] ?>">Edit</a>
+            <div class="fix_action">
+                <a href="../pages/modifyPlage.php?id_plages=<?php echo $ligne["id_plages"] ?>">Edit</a>
 
-            <form method="post">
-                <input type="hidden" value="<?php echo $ligne['id_plages'] ?>" name="id_plages">
-                <button class="del" name="delPlage" id="id_plages" type="submit"
-                        onclick="return confirm('Etes-vous sûr de vouloir supprimer la plage <?php
-                        echo $ligne["nom"]; ?>\nSi oui confirmer !')">
-                    supprimer
-                </button>
-            </form>
+                <form method="post">
+                    <input type="hidden" value="<?php echo $ligne['id_plages'] ?>" name="id_plages">
+                    <button class="del" name="delPlage" id="id_plages" type="submit"
+                            onclick="return confirm('Etes-vous sûr de vouloir supprimer la plage <?php
+                            echo $ligne["nom"]; ?>\nSi oui confirmer !')">
+                        supprimer
+                    </button>
+                </form>
+            </div>
         </td>
     </tr>
     <?php
@@ -50,7 +52,7 @@ if (isset($_POST["delPlage"])) {
 
     ?>
 </table>
-<a href="../components/C_addPlage.php">addPlage</a>
+<a href="/pages/plageAdd.php">addPlage</a>
 <a href="../pages/home.php">Retour</a>
 
 </body>

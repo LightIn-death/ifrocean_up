@@ -19,9 +19,8 @@ if (isset($_POST["email"])) {
 ?>
 
 <h3>Se connecter ici !</h3>
+<div class="zone">
 
-
-<div>
     <form method="post">
 
         <label for="email">E-mail :</label>
@@ -37,5 +36,6 @@ if (isset($_POST["email"])) {
         <button type="submit" name="action">Submit</button>
 
     </form>
-    <a href="/pages/inscription.php">s'inscrire</a>
 </div>
+<a href="/pages/inscription.php">s'inscrire</a>
+

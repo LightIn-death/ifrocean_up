@@ -14,7 +14,6 @@ if (isset($_POST["cloture"])) {
 if (isset($_POST["addPlage"])) {
     $plageToAdd = filter_input(INPUT_POST, "plage");
     $superficie = filter_input(INPUT_POST, "superficie");
-    $plageToAdd = (explode(";", $plageToAdd))[1];
     var_dump($plageToAdd);
     CreatePlageInstance($_GET["id"], $plageToAdd, $superficie);
 }
@@ -47,6 +46,7 @@ $plagesInstance = getPlageInstance($_GET["id"]);
 <h2>Liste des plages de l'etudes :</h2>
 <ul>
 
+
     <li>Nom / Commune / Departement || Actions</li>
     <?php
     foreach ($plagesInstance as $plageI) {
@@ -56,7 +56,7 @@ $plagesInstance = getPlageInstance($_GET["id"]);
         $plageDepartement = $plageI["departement"];
         if ($data["dateFin"] == null) {
             echo "<li> $plageNom / $plageCommune / $plageDepartement ||<form method='post' style='display: inline;'>
-        <input type='submit' name='supprimePlage' value='supprimer'><input type='hidden' name='supprPlageId' value='$InstanceId'></form></li>";
+        <input class='del' type='submit' name='supprimePlage' value='supprimer'><input type='hidden' name='supprPlageId' value='$InstanceId'></form></li>";
         } else
             echo "<li> $plageNom / $plageCommune / $plageDepartement ||<form method='post' style='display: inline;'>
         <input type='submit' name='VoirPlage' value='Voir'><input type='hidden' name='PlageId' value='$InstanceId'></form></li>";
@@ -72,31 +72,34 @@ if ($data["dateFin"] == null) {
     $plages = getPlagesNotInEtude($_GET["id"]);
 
     ?>
-    <form method="post">
-        <label for="plage">Ajouter une plage a l'etude : </label>
-        <input list="plage" name="plage">
-        <datalist id="plage">
-            <?php
-            foreach ($plages as $plage) {
+    <div class="zone">
+        <form method="post">
+            <label>Ajouter une plage a l'etude :
+                <select name="plage">
+                    <?php
+                    foreach ($plages as $plage) {
 
-                $plageNom = $plage["nom"];
-                $plageId = $plage["id_plages"];
-                echo "<option value='$plageNom;$plageId' name='plage' />";
+                        $plageNom = $plage["nom"];
+                        $plageId = $plage["id_plages"];
+                        echo "<option value='$plageId' name='plage'/>$plageNom</option>";
+                    }
+                    ?>
 
-            }
-            ?>
-        </datalist>
-        <label for="superficie">Superficie de la plage dans la periode de l'etude (M²) </label>
-        <input type="number" name="superficie">
+                </select>
+            </label>
 
-        <button type="submit" name="addPlage"> + Ajouter</button>
-    </form>
 
+            <label for="superficie">Superficie de la plage dans la periode de l'etude (M²) </label>
+            <input type="number" name="superficie">
+
+            <button type="submit" name="addPlage"> + Ajouter</button>
+        </form>
+    </div>
 
     <h3>Etude en cours... (les resultats aparaiterons a la fin de l'etude)</h3>
 
     <form method="post">
-        <button type="submit" name="cloture">Cloturer</button>
+        <button class="del" type="submit" name="cloture">Cloturer</button>
     </form>
     <?php
 
@@ -121,7 +124,7 @@ if ($data["dateFin"] == null) {
 
 
 <form method="post">
-    <button type="submit" name="Supprimer">Supprimer</button>
+    <button class="del" type="submit" name="Supprimer">Supprimer</button>
 </form>
 
 

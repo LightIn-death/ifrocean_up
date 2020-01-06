@@ -111,10 +111,20 @@ function getPlageInstance($id)
 }
 
 
+function getPlageInfo($id)
+{
+    global $pdo;
+    $rq = $pdo->prepare("SELECT * FROM plage join  instanceplages i on plage.id_plages = i.FK_id_plages join zones z on i.id_instancePlages = z.FK_instance_plages WHERE z.FK_instance_plages =:id");
+    $rq->execute(['id' => $id]);
+    $data = $rq->fetch();
+    return $data;
+}
+
+
 function getPlagesNotInEtude($id)
 {
     global $pdo;
-    $rq = $pdo->prepare("SELECT * FROM plage");
+    $rq = $pdo->prepare("SELECT * FROM plage WHERE NOT id_plages IN (SELECT id_plages from plage JOIN instanceplages on instanceplages.FK_id_plages = plage.id_plages WHERE FK_id_etudes = :id ) ");
     $rq->execute(['id' => $id]);
     $data = $rq->fetchAll();
     return $data;
@@ -153,6 +163,15 @@ function listeEspece()
     global $pdo;
     $query = $pdo->prepare("SELECT * FROM `especes`");
     $query->execute();
+    $liste = $query->fetchAll();
+    return $liste;
+}
+
+function listeEspeceNotUse($id)
+{
+    global $pdo;
+    $query = $pdo->prepare("SELECT * FROM `especes` WHERE NOT id_especes IN (SELECT id_especes FROM `especes` join instanceespeces on FK_id_especes=id_especes join zones on FK_zone=id_zones WHERE id_zones = :id ) ");
+    $query->execute(['id' => $id]);
     $liste = $query->fetchAll();
     return $liste;
 }
@@ -300,6 +319,11 @@ function createNewZone($id_plage, $nombrePersonne)
     global $pdo;
     $rq = $pdo->prepare("INSERT INTO zones(FK_instance_plages,nombrePersonne) VALUES (:FK_instance_plages,:nombrePersonne)");
     $rq->execute(['FK_instance_plages' => $id_plage, 'nombrePersonne' => $nombrePersonne,]);
+    $rq = $pdo->prepare("SELECT id_zones FROM `zones` ORDER BY id_zones DESC LIMIT 1 ");
+    $rq->execute();
+    $data = $rq->fetch();
+    return intval($data["id_zones"]);
+
 }
 
 
@@ -325,7 +349,6 @@ function getTotalWorms($plageId)
     $rq = $pdo->prepare("SELECT SUM(nombre) FROM `instanceespeces` JOIN zones on FK_zone=zones.id_zones WHERE zones.FK_instance_plages=:id");
     $rq->execute(['id' => $plageId]);
     $data = $rq->fetch();
-
     return intval($data["SUM(nombre)"]);
 
 }

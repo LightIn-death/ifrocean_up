@@ -4,19 +4,22 @@ session_start();
 include_once "../components/HeaderFooter.php";
 include_once "../includes/sessionFonctions.php";
 pageHeader("Home");
-echo "<div id='layout'>";
-echo "<div id='main'>";
-var_dump($_SESSION);
-echo "<img src='/ressources/images/ifroceanLogo.png' alt='logo'>";
+
+//var_dump($_SESSION);
+echo "<div class='nav'>";
+echo "<img id='logo' src='/ressources/images/ifroceanLogo.png' alt='logo'>";
+echo "<h1>Ifrocean</h1>";
+echo "<br><a href='../includes/LogOut.php'>deconexion</a>";
+echo " </div > ";
 if ($_SESSION["personne"]["admin"]) {
 
     echo "\n tu est admin \n";
 
 
-    echo "<br><a href='etudeListe.php'>Liste des etudes</a>";
-    echo "<br><a href='etudeADD.php'>Creer une nouvelle etude</a>";
-    echo "<br><a href='especeListe.php'>Gerer la liste des especes</a>";
-    echo "<br><a href='pageListe.php'>Gerer la liste des Plages</a>";
+    echo "<a href = 'etudeListe.php' > Liste des etudes </a > ";
+    echo "<br ><a href = 'etudeADD.php' > Creer une nouvelle etude </a > ";
+    echo "<br ><a href = 'especeListe.php' > Gerer la liste des especes </a > ";
+    echo "<br ><a href = 'pageListe.php' > Gerer la liste des Plages </a > ";
 
 
 //
@@ -38,9 +41,8 @@ if ($_SESSION["personne"]["admin"]) {
 } else if (!$_SESSION["personne"]["admin"]) {
 
     echo "\ntu est un benevole \n";
-    echo "<br>";
 
-    echo "    <a href='/pages/beneEtudes.php'>Liste des Etudes Ouvertes</a>";
+    echo " <a href ='/pages/beneEtudes.php'> Liste des Etudes Ouvertes </a>";
 
 //
 //
@@ -67,9 +69,7 @@ if ($_SESSION["personne"]["admin"]) {
 ?>
 
 
-    <br><a href="../includes/LogOut.php">deconexion</a>
 <?php
 
-echo "</div>";
-echo "</div>";
+
 pageFooter();

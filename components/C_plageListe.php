@@ -7,51 +7,40 @@ $id_plages = filter_input(INPUT_POST, "id_plages");
 
 if (isset($_POST["delPlage"])) {
     deletePlage($_POST["id_plages"]);
-    header('Location: C_plageListe.php');
+    header('Location: pageListe.php');
 }
 
 
-
-
 ?>
-<!doctype html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-</head>
-<body>
 
-
-<h3>LISTE plage</h3>
+<h1>Liste Plages</h1>
 <table>
     <tr>
         <th>Nom</th>
-    </tr>
+
         <?php
 
-        $resultat=listePlage();
-        foreach ($resultat as $ligne){
-        ?>
-        <td><?php echo $ligne["nom"]?></td>
-        <td><?php echo $ligne["commune"]?></td>
-        <td><?php echo $ligne["departement"]."\n"?></td>
-        <td>
-            <a href="../pages/modifyPlage.php?id_plages=<?php echo $ligne["id_plages"] ?>"
-               class="btn btn-primary">
-                <i class="fa fa-edit"></i>
-            </a>
+        $resultat = listePlage();
+        foreach ($resultat
 
-            <form method="post">
-                <input type="hidden" value="<?php echo $ligne['id_plages']?>" name="id_plages">
-                <button name="delPlage" id="id_plages" type="submit"
-                        onclick="return confirm('Etes-vous sûr de vouloir supprimer la plage <?php
-                        echo $ligne["nom"]; ?>\nSi oui confirmer !')">
-                    supprimer
-                </button>
-            </form>
+        as $ligne){
+        ?>
+        <td><?php echo $ligne["nom"] ?></td>
+        <td><?php echo $ligne["commune"] ?></td>
+        <td><?php echo $ligne["departement"] . "\n" ?></td>
+        <td>
+            <div class="fix_action">
+                <a href="../pages/modifyPlage.php?id_plages=<?php echo $ligne["id_plages"] ?>">Edit</a>
+
+                <form method="post">
+                    <input type="hidden" value="<?php echo $ligne['id_plages'] ?>" name="id_plages">
+                    <button class="del" name="delPlage" id="id_plages" type="submit"
+                            onclick="return confirm('Etes-vous sûr de vouloir supprimer la plage <?php
+                            echo $ligne["nom"]; ?>\nSi oui confirmer !')">
+                        supprimer
+                    </button>
+                </form>
+            </div>
         </td>
     </tr>
     <?php
@@ -59,7 +48,7 @@ if (isset($_POST["delPlage"])) {
 
     ?>
 </table>
-<a href="../components/C_addPlage.php">addPlage</a>
+<a href="/pages/plageAdd.php">addPlage</a>
 <a href="../pages/home.php">Retour</a>
 
 </body>

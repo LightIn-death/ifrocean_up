@@ -15,24 +15,24 @@ if (isset($_POST["nom"])) {
 
 ?>
 
-
-<form method="post">
-
-
-    <label for="Nom">Nom</label>
-    <input type="text" id="titre" maxlength="50"
-           name="nom"
-           placeholder="Nom de L'etude ..." required>
+<div class="zone">
+    <form method="post">
 
 
-    <label for="reference">reference de l'etude</label>
-    <input id="reference"
-           name="reference"
-           placeholder="reference de l'etude...">
+        <label for="Nom">Nom</label>
+        <input type="text" id="titre" maxlength="50"
+               name="nom"
+               placeholder="Nom de L'etude ..." required>
 
-    <button type="submit">Enregistrer</button>
-</form>
 
+        <label for="reference">reference de l'etude</label>
+        <input id="reference"
+               name="reference"
+               placeholder="reference de l'etude...">
+
+        <button type="submit">Enregistrer</button>
+    </form>
+</div>
 <a href="/pages/etudeListe.php">
     Retour
 </a>

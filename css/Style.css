@@ -226,8 +226,14 @@ ul > li > form > input {
 }
 
 
+.fix_action {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: nowrap;
 
 
+}
 
 
 

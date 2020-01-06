@@ -7,7 +7,7 @@ $id_plages = filter_input(INPUT_POST, "id_plages");
 
 if (isset($_POST["delPlage"])) {
     deletePlage($_POST["id_plages"]);
-    header('Location: plageListe.php');
+    header('Location: C_plageListe.php');
 }
 
 

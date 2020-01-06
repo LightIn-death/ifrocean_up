@@ -18,4 +18,5 @@ if (isset($_POST["nom"])) {
     <button type="submit">Enregistrer</button>
 </form>
 
-<a href="../pages/especeListe.php">Espece</a>
+<a href="/components/C_especeListe.php">Espece</a>
+

@@ -111,10 +111,20 @@ function getPlageInstance($id)
 }
 
 
+function getPlageInfo($id)
+{
+    global $pdo;
+    $rq = $pdo->prepare("SELECT * FROM plage join  instanceplages i on plage.id_plages = i.FK_id_plages join zones z on i.id_instancePlages = z.FK_instance_plages WHERE z.FK_instance_plages =:id");
+    $rq->execute(['id' => $id]);
+    $data = $rq->fetch();
+    return $data;
+}
+
+
 function getPlagesNotInEtude($id)
 {
     global $pdo;
-    $rq = $pdo->prepare("SELECT * FROM plage");
+    $rq = $pdo->prepare("SELECT * FROM plage WHERE NOT id_plages IN (SELECT id_plages from plage JOIN instanceplages on instanceplages.FK_id_plages = plage.id_plages WHERE FK_id_etudes = :id ) ");
     $rq->execute(['id' => $id]);
     $data = $rq->fetchAll();
     return $data;
@@ -157,6 +167,15 @@ function listeEspece()
     return $liste;
 }
 
+function listeEspeceNotUse($id)
+{
+    global $pdo;
+    $query = $pdo->prepare("SELECT * FROM `especes` WHERE NOT id_especes IN (SELECT id_especes FROM `especes` join instanceespeces on FK_id_especes=id_especes join zones on FK_zone=id_zones WHERE id_zones = :id ) ");
+    $query->execute(['id' => $id]);
+    $liste = $query->fetchAll();
+    return $liste;
+}
+
 
 function deleteEspece($id_especes)
 {
@@ -166,21 +185,24 @@ function deleteEspece($id_especes)
 }
 
 
-function modifyEspeces($id_especes, $nom){
+function modifyEspeces($id_especes, $nom)
+{
     global $pdo;
     $query = $pdo->prepare("UPDATE `especes` SET `nom`=:nom WHERE id_especes=:id_especes");
     $query->execute(['id_especes' => $id_especes, 'nom' => $nom]);
 }
 
 
-function addPlage($nom, $commune, $departement){
+function addPlage($nom, $commune, $departement)
+{
     global $pdo;
     $query = $pdo->prepare("INSERT INTO `plage`(`nom`, `commune`, `departement`) VALUES (:nom, :commune, :departement)");
     $query->execute(['nom' => $nom, 'commune' => $commune, 'departement' => $departement]);
 }
 
 
-function listePlage(){
+function listePlage()
+{
     global $pdo;
     $query = $pdo->prepare("SELECT * FROM `plage`");
     $query->execute();
@@ -189,34 +211,38 @@ function listePlage(){
 }
 
 
-function deletePlage($id_plages){
+function deletePlage($id_plages)
+{
     global $pdo;
     $query = $pdo->prepare("DELETE FROM `plage` WHERE `id_plages`=:id_plages");
-    $query->execute(['id_especes' => $id_plages]);
+    $query->execute(['id_plages' => $id_plages]);
 }
 
 
-function modifyPlage($id_plages, $nom, $commune, $departement){
+function modifyPlage($id_plages, $nom, $commune, $departement)
+{
     global $pdo;
     $query = $pdo->prepare("UPDATE `plage` SET `nom`=:nom, `commune`=:commune, `departement`=:departement WHERE id_plages=:id_plages");
     $query->execute(['id_plages' => $id_plages, 'nom' => $nom, 'commune' => $commune, 'departement' => $departement]);
 }
 
 
-function selectModifyPlage($id_plages){
+function selectModifyPlage($id_plages)
+{
     global $pdo;
     $query = $pdo->prepare("SELECT `id_plages`, `nom`, `commune`, `departement` FROM `plage` WHERE id_plages=:id_plages");
-    $query->execute([ 'id_plages' => $id_plages]);
-    $onePlage = $query ->fetchAll();
+    $query->execute(['id_plages' => $id_plages]);
+    $onePlage = $query->fetchAll();
     return $onePlage;
 }
 
 
-function selectModifyEspeces($id_especes){
+function selectModifyEspeces($id_especes)
+{
     global $pdo;
     $query = $pdo->prepare("SELECT `id_especes`, `nom` FROM `especes` WHERE id_especes=:id_especes");
-    $query->execute([ 'id_especes' => $id_especes]);
-    $oneEspeces = $query ->fetchAll();
+    $query->execute(['id_especes' => $id_especes]);
+    $oneEspeces = $query->fetchAll();
     return $oneEspeces;
 }
 
@@ -232,7 +258,8 @@ function getOpenEtudes()
 }
 
 
-function getZones($id){
+function getZones($id)
+{
     global $pdo;
     $rq = $pdo->prepare("SELECT * FROM `zones` WHERE `FK_instance_plages` = :id");
     $rq->execute(["id" => $id]);
@@ -279,7 +306,6 @@ function addInstEspece($id_espece, $id_zone, $nombre)
 }
 
 
-
 function updateZone($number, $Point1, $Point2, $Point3, $Point4, $id)
 {
     global $pdo;
@@ -287,9 +313,22 @@ function updateZone($number, $Point1, $Point2, $Point3, $Point4, $id)
     $rq->execute(['numbe' => $number, 'point1' => $Point1, 'point2' => $Point2, 'point3' => $Point3, 'point4' => $Point4, 'id' => $id]);
 }
 
-function updatePlageZoneReshe($plageInstance)
+
+function createNewZone($id_plage, $nombrePersonne)
 {
     global $pdo;
+    $rq = $pdo->prepare("INSERT INTO zones(FK_instance_plages,nombrePersonne) VALUES (:FK_instance_plages,:nombrePersonne)");
+    $rq->execute(['FK_instance_plages' => $id_plage, 'nombrePersonne' => $nombrePersonne,]);
+    $rq = $pdo->prepare("SELECT id_zones FROM `zones` ORDER BY id_zones DESC LIMIT 1 ");
+    $rq->execute();
+    $data = $rq->fetch();
+    return intval($data["id_zones"]);
+
+}
+
+
+function getSumZoneReshe($plageInstance)
+{
     $zones = getZones($plageInstance);
     $zoneRecherche = 0;
     foreach ($zones as $zone) {
@@ -298,22 +337,124 @@ function updatePlageZoneReshe($plageInstance)
         $p3 = $zone["point3"];
         $p4 = $zone["point4"];
         if (GPScheck($p1, $p2, $p3, $p4)) {
-            echo "ZONE";
             $zoneRecherche += GPScalculate($p1, $p2, $p3, $p4);
         }
     }
-    var_dump($zoneRecherche);
-    $rq = $pdo->prepare(" UPDATE `instanceplages` SET `superficieRecherche` = :superficie WHERE `instanceplages` . `id_instancePlages` = :id ");
-    $rq->execute(['superficie' => $zoneRecherche, 'id' => $plageInstance]);
-
-
+    return $zoneRecherche;
 }
 
-
-function createNewZone($id_plage,$nombrePersonne){
+function getTotalWorms($plageId)
+{
     global $pdo;
-    $rq = $pdo->prepare("INSERT INTO zones(FK_instance_plages,nombrePersonne) VALUES (:FK_instance_plages,:nombrePersonne)");
-    $rq->execute(['FK_instance_plages' => $id_plage, 'nombrePersonne' => $nombrePersonne,]);
+    $rq = $pdo->prepare("SELECT SUM(nombre) FROM `instanceespeces` JOIN zones on FK_zone=zones.id_zones WHERE zones.FK_instance_plages=:id");
+    $rq->execute(['id' => $plageId]);
+    $data = $rq->fetch();
+    return intval($data["SUM(nombre)"]);
+
 }
+
+
+function getDensite($plageId)
+{
+    if (getSumZoneReshe($plageId) == 0) {
+        $tempSumZoneRe = 1;
+    } else {
+        $tempSumZoneRe = getSumZoneReshe($plageId);
+    }
+
+    $dens = getTotalWorms($plageId) / $tempSumZoneRe;
+    return $dens;
+}
+
+
+function getPlageSurface($plageId)
+{
+    global $pdo;
+    $rq = $pdo->prepare("SELECT superficieTotal FROM `instanceplages` WHERE id_instancePlages=:id");
+    $rq->execute(['id' => $plageId]);
+    $data = $rq->fetch();
+    return intval($data["superficieTotal"]);
+}
+
+
+function getEstim($plageId)
+{
+    $estim = getDensite($plageId) * getPlageSurface($plageId);
+    return $estim;
+}
+
+
+function getIdPlageInEtude($etudeId)
+{
+    global $pdo;
+
+    $rq = $pdo->prepare("SELECT id_instancePlages FROM `instanceplages` WHERE FK_id_etudes=:id");
+    $rq->execute(['id' => $etudeId]);
+    $data = $rq->fetch();
+    return $data;
+}
+
+
+function getGlobalDensite($etudeId)
+{
+    $recheZone = 1;
+    $WormsZone = 0;
+    foreach (getIdPlageInEtude($etudeId) as $id) {
+        $TEMPrecheZone = getSumZoneReshe($id);
+        $TEMPWormsZone = getTotalWorms($id);
+        $recheZone += $TEMPrecheZone;
+        $WormsZone += $TEMPWormsZone;
+    }
+    $totalDens = $WormsZone / $recheZone;
+    return $totalDens;
+
+}
+
+function getGlobalEstim($etudeId)
+{
+    $surf = 0;
+    foreach (getIdPlageInEtude($etudeId) as $id) {
+        $surf += getPlageSurface($id);
+    }
+    $Tdens = getGlobalDensite($etudeId);
+    $totalEstim = $Tdens * $surf;
+    return $totalEstim;
+}
+
+
+function getNombrePartitip($etudeId)
+{
+    global $pdo;
+    $rq = $pdo->prepare("SELECT SUM(nombrePersonne) FROM etudes e JOIN instanceplages i on i.FK_id_etudes=e.id_etudes JOIN `zones` z on i.id_instancePlages=z.FK_instance_plages WHERE e.id_etudes=:id");
+    $rq->execute(['id' => $etudeId]);
+    $data = $rq->fetch();
+    return intval($data["SUM(nombrePersonne)"]);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

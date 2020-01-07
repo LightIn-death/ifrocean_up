@@ -1,13 +1,12 @@
 <?php
 $root = realpath($_SERVER["DOCUMENT_ROOT"]);
-require_once "../includes/DB/selectFunctions.php";
+require_once "../includes/DB/Functions.php";
 
 
 $id_zone = filter_input(INPUT_GET, "z");
 $number = filter_input(INPUT_GET, "n");
 $data = getZonedetails($id_zone);
-//var_dump($data);
-$plageName = getPlageInstance($data["FK_instance_plages"])[0]["nom"];
+$plageName = getPlageInfo(intval($data["FK_instance_plages"]))["nom"];
 
 ?>
 
@@ -44,7 +43,7 @@ $plageName = getPlageInstance($data["FK_instance_plages"])[0]["nom"];
 </table>
 
 <h3>Nombre de personne participants dans la zone : <?php echo $data["nombrePersonne"]; ?></h3>
-<a href='/pages/beneZoneUpdate.php?z=<?php echo $id_zone; ?>&n=<?php echo $number; ?>'>Modifier</a>
+<a href='/pages/beneZoneUp.php?z=<?php echo $id_zone; ?>&n=<?php echo $number; ?>'>Modifier</a>
 
 <?php
 
@@ -54,7 +53,7 @@ if (isset($_POST["supprimerEspece"])) {
     deleteInstEspece($id_espece, $id_zone);
 }
 if (isset($_POST["AjouterEspece"])) {
-    $id_espece = explode(";", filter_input(INPUT_POST, "espece"))[1];
+    $id_espece = filter_input(INPUT_POST, "espece");
     $nombre = filter_input(INPUT_POST, "nombre");
     addInstEspece($id_espece, $id_zone, $nombre);
 }
@@ -82,7 +81,7 @@ $data = getInstEspece($id_zone);
 
                 <form method="post">
                     <input type="hidden" name="id_espece" value="<?php echo $d['FK_id_especes']; ?>">
-                    <button type="submit" name="supprimerEspece">Supprimer</button>
+                    <button class="del" type="submit" name="supprimerEspece">Supprimer</button>
                 </form>
             </td>
 
@@ -91,30 +90,38 @@ $data = getInstEspece($id_zone);
     }
     ?>
 
+    <tr>
+        <form method="post">
+
+            <td>
+                <select name="espece">
+
+                    <?php
+                    $especes = listeEspeceNotUse($id_zone);
+                    foreach ($especes as $e) {
+                        $especeNom = $e["nom"];
+                        $especeId = $e["id_especes"];
+                        echo "<option value='$especeId' name='espece'>$especeNom</option>";
+                    }
+                    ?>
+
+
+                </select>
+            </td>
+
+            <td>
+                <input type="number" name="nombre">
+            </td>
+            <td>
+                <button id="short_input" type="submit" name="AjouterEspece">Ajouter au comptage</button>
+            </td>
+        </form>
+
+
+    </tr>
+
 
 </table>
-
-<form method="post">
-
-    <input list="espece" name="espece">
-    <datalist id="espece">
-        <?php
-        $especes = listeEspece();
-        foreach ($especes as $e) {
-            $especeNom = $e["nom"];
-            $especeId = $e["id_especes"];
-            echo "<option value='$especeNom;$especeId' name='espece' />";
-        }
-        ?>
-    </datalist>
-    <label>Nombre
-        <input type="number" name="nombre">
-    </label>
-    <button type="submit" name="AjouterEspece">Ajouter au comptage</button>
-</form>
-
-?>
-<a href='/pages/beneEtudes.php'>Ajouter au contage</a>
 
 
 <a href='/pages/beneEtudes.php'>Retour</a>

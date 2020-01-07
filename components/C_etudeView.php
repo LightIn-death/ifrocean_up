@@ -1,6 +1,6 @@
 <?php
 $root = realpath($_SERVER["DOCUMENT_ROOT"]);
-require_once "../includes/DB/selectFunctions.php";
+require_once "../includes/DB/Functions.php";
 
 if (isset($_POST["Supprimer"])) {
     supprimeEtude($_GET["id"]);
@@ -14,7 +14,6 @@ if (isset($_POST["cloture"])) {
 if (isset($_POST["addPlage"])) {
     $plageToAdd = filter_input(INPUT_POST, "plage");
     $superficie = filter_input(INPUT_POST, "superficie");
-    $plageToAdd = (explode(";", $plageToAdd))[1];
     var_dump($plageToAdd);
     CreatePlageInstance($_GET["id"], $plageToAdd, $superficie);
 }
@@ -22,6 +21,13 @@ if (isset($_POST["addPlage"])) {
 if (isset($_POST["supprimePlage"])) {
     $InstanceToSuppr = filter_input(INPUT_POST, "supprPlageId");
     SupprPlageInstance($InstanceToSuppr);
+}
+
+if (isset($_POST["VoirPlage"])) {
+    $InstancePlageId = filter_input(INPUT_POST, "PlageId");
+    $etude = $_GET["id"];
+    header("Location: /pages/InstancePlageView.php?id=$InstancePlageId&b=$etude");
+
 
 }
 
@@ -40,6 +46,7 @@ $plagesInstance = getPlageInstance($_GET["id"]);
 <h2>Liste des plages de l'etudes :</h2>
 <ul>
 
+
     <li>Nom / Commune / Departement || Actions</li>
     <?php
     foreach ($plagesInstance as $plageI) {
@@ -47,9 +54,15 @@ $plagesInstance = getPlageInstance($_GET["id"]);
         $plageNom = $plageI["nom"];
         $plageCommune = $plageI["commune"];
         $plageDepartement = $plageI["departement"];
-        echo "<li> $plageNom / $plageCommune / $plageDepartement ||<form method='post' style='display: inline;'>
-        <input type='submit' name='supprimePlage' value='supprimer'><input type='hidden' name='supprPlageId' value='$InstanceId'></form></li>";
+        if ($data["dateFin"] == null) {
+            echo "<li> $plageNom / $plageCommune / $plageDepartement ||<form method='post' style='display: inline;'>
+        <input class='del' type='submit' name='supprimePlage' value='supprimer'><input type='hidden' name='supprPlageId' value='$InstanceId'></form></li>";
+        } else
+            echo "<li> $plageNom / $plageCommune / $plageDepartement ||<form method='post' style='display: inline;'>
+        <input type='submit' name='VoirPlage' value='Voir'><input type='hidden' name='PlageId' value='$InstanceId'></form></li>";
     }
+
+
     ?>
 </ul>
 
@@ -57,51 +70,61 @@ $plagesInstance = getPlageInstance($_GET["id"]);
 <?php
 if ($data["dateFin"] == null) {
     $plages = getPlagesNotInEtude($_GET["id"]);
+
     ?>
-    <form method="post">
-        <label for="plage">Ajouter une plage a l'etude : </label>
-        <input list="plage" name="plage">
-        <datalist id="plage">
-            <?php
-            foreach ($plages as $plage) {
+    <div class="zone">
+        <form method="post">
+            <label>Ajouter une plage a l'etude :
+                <select name="plage">
+                    <?php
+                    foreach ($plages as $plage) {
 
-                $plageNom = $plage["nom"];
-                $plageId = $plage["id_plages"];
-                echo "<option value='$plageNom;$plageId' name='plage' />";
-            }
-            ?>
-        </datalist>
-        <label for="superficie">Superficie de la plage dans la periode de l'etude (km²) </label>
-        <input type="number" name="superficie">
+                        $plageNom = $plage["nom"];
+                        $plageId = $plage["id_plages"];
+                        echo "<option value='$plageId' name='plage'/>$plageNom</option>";
+                    }
+                    ?>
 
-        <button type="submit" name="addPlage"> + Ajouter</button>
-    </form>
+                </select>
+            </label>
 
+
+            <label for="superficie">Superficie de la plage dans la periode de l'etude (M²) </label>
+            <input type="number" name="superficie">
+
+            <button type="submit" name="addPlage"> + Ajouter</button>
+        </form>
+    </div>
 
     <h3>Etude en cours... (les resultats aparaiterons a la fin de l'etude)</h3>
 
     <form method="post">
-        <button type="submit" name="cloture">Cloturer</button>
+        <button class="del" type="submit" name="cloture">Cloturer</button>
     </form>
     <?php
 
 } else {
+
+
+    $densiteGlobal = getGlobalDensite($_GET["id"]);
+    $estimGlobal = getGlobalEstim($_GET["id"]);
+    $nombrePartitip = getNombrePartitip($_GET["id"]);
+
     ?>
 
     <h3>Date de fin (Annee / Mois / Jour) : <?php echo $data["dateFin"] ?></h3>
-    <h3>Nombre de vers estime : <?php echo $data["nombreEstime"] ?></h3>
-    <h3>Densite Global : <?php echo $data["nombreEstime"] ?></h3>
+    <h3>Densite Global : <?php echo $densiteGlobal ?> Vers / M²</h3>
+    <h3>Nombre de vers estime : <?php echo $estimGlobal ?> vers sur l'ensemble des plages de l'etude</h3>
 
-    <h3>Nombre de personne ayant participe : <?php echo $data["nombrePersonne"] ?></h3>
+    <h3>Nombre de participation sur l'etude complete : <?php echo $nombrePartitip ?></h3>
 
     <?php
-
 }
 ?>
 
 
 <form method="post">
-    <button type="submit" name="Supprimer">Supprimer</button>
+    <button class="del" type="submit" name="Supprimer">Supprimer</button>
 </form>
 
 

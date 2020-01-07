@@ -1,59 +1,55 @@
 <?php
 $root = realpath($_SERVER["DOCUMENT_ROOT"]);
-require_once "../includes/DB/selectFunctions.php";
+require_once "../includes/DB/Functions.php";
+
+$nom = filter_input(INPUT_POST, "nom");
+$id_plages = filter_input(INPUT_POST, "id_plages");
+
+if (isset($_POST["delPlage"])) {
+    deletePlage($_POST["id_plages"]);
+    header('Location: plageListe.php');
+}
 
 
 ?>
-<!doctype html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <!--BootStrap-->
-    <!-- Mettre les deux lignes ci-dessous en premier (sinon ça marche pas)-->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <!--Font Awesome-->
-    <script src="https://kit.fontawesome.com/edc8d5fc95.js" crossorigin="anonymous"></script>
-</head>
-<body>
-
-
-<h3>LISTE plage</h3>
+<h1>Liste Plages</h1>
 <table>
     <tr>
         <th>Nom</th>
+    </tr>
 
         <?php
 
-        $resultat=listePlage();
-        foreach ($resultat as $ligne){
+        $resultat = listePlage();
+        foreach ($resultat
+
+        as $ligne){
         ?>
-        <td><?php echo $ligne["nom"]?></td>
-        <td><?php echo $ligne["commune"]?></td>
-        <td><?php echo $ligne["departement"]."\n"?></td>
+        <td><?php echo $ligne["nom"] ?></td>
+        <td><?php echo $ligne["commune"] ?></td>
+        <td><?php echo $ligne["departement"] . "\n" ?></td>
         <td>
-            <a href="../pages/modifyPlage.php?id_plages=<?php echo $ligne["id_plages"] ?>"
-               class="btn btn-primary">
-                <i class="fa fa-edit"></i>
-            </a>
-            <a href="C_deletePlage.php?id_plages=<?php echo $ligne["id_plages"] ?>"
-               onclick="return confirm('Etes-vous sûr de vouloir supprimer <?php echo $ligne["nom"]?>\nSi oui confirmer !')"
-               class="btn btn-danger">
-                <i class="fa fa-trash"></i>
-            </a>
+            <div class="fix_action">
+                <a href="../pages/plageUp.php?id_plages=<?php echo $ligne[">Edit</a>
+
+                <form method="post">
+                    <input type="hidden" value="<?php echo $ligne['id_plages'] ?>" name="id_plages">
+                    <button class="del" name="delPlage" id="id_plages" type="submit"
+                            onclick="return confirm('Etes-vous sûr de vouloir supprimer la plage <?php
+                            echo $ligne["nom"]; ?>\nSi oui confirmer !')">
+                        supprimer
+                    </button>
+                </form>
+            </div>
         </td>
     </tr>
     <?php
     }
+
     ?>
 </table>
-<a href="../components/C_addPlage.php">addPlage</a>
+<a href="/pages/plageAdd.php">addPlage</a>
 <a href="../pages/home.php">Retour</a>
 
 </body>

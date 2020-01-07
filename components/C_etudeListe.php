@@ -1,19 +1,20 @@
 <?php
 $root = realpath($_SERVER["DOCUMENT_ROOT"]);
-require_once "$root/includes/DB/selectFunctions.php";
+require_once "$root/includes/DB/Functions.php";
 
 
 ?>
 
 <h1>Voici la liste !</h1>
-<table>
+<table class="pure-table pure-table-bordered">
 
     <tr>
-        <th scope="col">Nom de L'etude</th>
-        <th scope="col">Date de creation</th>
-        <th scope="col">Date de cloture</th>
-        <th scope="col">Reference</th>
-        <th scope="col">actions</th>
+
+        <th>Nom de L'etude</th>
+        <th>Date de creation</th>
+        <th>Date de cloture</th>
+        <th>Reference</th>
+        <th>actions</th>
 
     </tr>
 
@@ -23,7 +24,7 @@ require_once "$root/includes/DB/selectFunctions.php";
 
     foreach ($data as $d) {
         ?>
-        <tr>
+        <tr class="pure-table-odd">
             <td><?php echo $d["nom"] ?></td>
             <td><?php echo $d["dateDebut"] ?></td>
             <td><?php echo $d["dateFin"] ?></td>
@@ -41,6 +42,6 @@ require_once "$root/includes/DB/selectFunctions.php";
 </table>
 
 
-<a href="/pages/etudeADD.php">add</a>
+<a href="/pages/etudeAdd.php">add</a>
 <a href="/pages/home.php">Retour</a>
 

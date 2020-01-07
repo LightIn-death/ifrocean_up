@@ -1,11 +1,12 @@
 <?php
 session_start();
 $root = realpath($_SERVER["DOCUMENT_ROOT"]);
-require_once "../includes/DB/selectFunctions.php";
+require_once "../includes/DB/Functions.php";
 
 if (isset($_SESSION["personne"])) {
     header('Location: /pages/home.php');
 }
+
 
 if (isset($_POST["email"])) {
 
@@ -18,13 +19,13 @@ if (isset($_POST["email"])) {
 ?>
 
 <h3>Se connecter ici !</h3>
+<div class="zone">
 
-
-<div>
     <form method="post">
 
         <label for="email">E-mail :</label>
         <input placeholder="ex : aranea@aranea.me" id="email" type="email" name="email"
+               onkeyup="this.value=this.value.toLowerCase()"
                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2, 4}$" required>
 
 
@@ -35,5 +36,6 @@ if (isset($_POST["email"])) {
         <button type="submit" name="action">Submit</button>
 
     </form>
-    <a href="/pages/inscription.php">s'inscrire</a>
 </div>
+<a href="/pages/formInscription.php">s'inscrire</a>
+

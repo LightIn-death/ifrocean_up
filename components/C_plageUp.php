@@ -1,13 +1,9 @@
 <?php
 $root = realpath($_SERVER["DOCUMENT_ROOT"]);
-require_once "../includes/DB/selectFunctions.php";
+require_once "../includes/DB/Functions.php";
 
 $id_plages = filter_input(INPUT_GET, "id_plages");
-$nom = filter_input(INPUT_GET, "nom");
-$commune = filter_input(INPUT_GET, "commune");
-$departement = filter_input(INPUT_GET, "departement");
 
-$result = selectModifyPlage($id_plages, $nom, $commune, $departement);
 
 if (isset($_POST["updatePlage"])) {
 
@@ -15,13 +11,15 @@ if (isset($_POST["updatePlage"])) {
     $commune = filter_input(INPUT_POST, "commune");
     $departement = filter_input(INPUT_POST, "departement");
 
-    modifyPlage($id_plages ,$nom, $commune, $departement);
+    modifyPlage($id_plages, $nom, $commune, $departement);
+//    header('Location: pages/plageListe.php');
 }
+$result = selectModifyPlage($id_plages);
 
 ?>
 
     <form method="post">
-        <input type="hidden" name="id_plages" >
+        <input type="hidden" name="id_plages">
         <div class="form-group">
             <input type="text" class="form-control" id="nom" maxlength="50"
                    name="nom" value="<?php echo $result[0]["nom"] ?>">
@@ -37,7 +35,7 @@ if (isset($_POST["updatePlage"])) {
         <button type="submit" name="updatePlage">Register</button>
     </form>
 
-    <a href="C_plageListe.php">retour</a>
+    <a href="/pages/plageListe.php">retour</a>
 <?php
-var_dump($id_plages, $nom, $commune, $departement);
+//var_dump($id_plages, $nom, $commune, $departement);
 

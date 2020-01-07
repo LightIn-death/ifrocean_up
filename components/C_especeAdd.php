@@ -1,6 +1,6 @@
 <?php
 $root = realpath($_SERVER["DOCUMENT_ROOT"]);
-require_once "../includes/DB/selectFunctions.php";
+require_once "../includes/DB/Functions.php";
 
 if (isset($_POST["nom"])) {
 
@@ -18,4 +18,5 @@ if (isset($_POST["nom"])) {
     <button type="submit">Enregistrer</button>
 </form>
 
-<a href="../pages/especeListe.php">Espece</a>
+<a href="/pages/especeListe.php">Espece</a>
+

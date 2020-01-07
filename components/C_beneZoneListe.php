@@ -1,6 +1,6 @@
 <?php
 $root = realpath($_SERVER["DOCUMENT_ROOT"]);
-require_once "../includes/DB/selectFunctions.php";
+require_once "../includes/DB/Functions.php";
 
 
 $nombrePersonne = filter_input(INPUT_POST, "nombrePersonne");
@@ -10,19 +10,6 @@ $id_plage = filter_input(INPUT_GET, "p");
 
 $data = getZones($id_plage);
 
-if(isset($_POST["createZone"])){
-     ?>
-         <form method="post">
-             <input type="text" id="nombrePersonne" name="nombrePersonne">
-             <button name="CreateZone" >Create Zone</button>
-         </form>
-
-        <?php
-}
-if(isset($_POST["nombrePersonne"])){
-    createNewZone($id_plage,$nombrePersonne);
-    header('Location: ../pages/beneZoneView.php');
-}
 
 ?>
 
@@ -43,13 +30,35 @@ if(isset($_POST["nombrePersonne"])){
             $i++;
             $zoneId = $d['id_zones'];
             echo "<td>Zone n°$i</td>";
-            echo "<td><td><a href='/pages/beneZoneView.php?z=$zoneId&n=$i'>Selectioner</a></td></td></tr>";
+            echo "<td><a href='/pages/beneZoneView.php?z=$zoneId&n=$i'>Selectioner</a></td></tr>";
         }
+
+
         ?>
     </tr>
 </table>
-<form method="post">
-    <button type="submit" name="createZone" >Ajouter une zone</button>
-</form>
+<?php if (!isset($_POST["createZone"])) {
+    ?>
+    <form method="post">
+        <button type="submit" name="createZone">Ajouter une zone</button>
+    </form>
+<?php } ?>
+<?php
+if (isset($_POST["createZone"])) {
+    ?>
+    <form method="post">
+        <p2>Nombre de bénévole dans cette zone :</p2>
+        <input type="text" id="nombrePersonne" name="nombrePersonne">
+        <button name="CreateZone">Create Zone</button>
+    </form>
 
-<a href='/pages/beneEtudes.php'>Retour</a>
+    <?php
+}
+$i++;
+if (isset($_POST["nombrePersonne"])) {
+    $zoneId = createNewZone($id_plage, $nombrePersonne);
+    header("Location: /pages/beneZoneView.php?z=$zoneId&n=$i");
+}
+?>
+
+<a href="/pages/beneEtudeView.php?id=<?php echo $id_etude ?>">Retour</a>

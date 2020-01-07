@@ -1,6 +1,6 @@
 <?php
 $root = realpath($_SERVER["DOCUMENT_ROOT"]);
-require_once "$root/includes/DB/selectFunctions.php";
+require_once "$root/includes/DB/Functions.php";
 
 
 ?>
@@ -42,6 +42,6 @@ require_once "$root/includes/DB/selectFunctions.php";
 </table>
 
 
-<a href="/pages/etudeADD.php">add</a>
+<a href="/pages/etudeAdd.php">add</a>
 <a href="/pages/home.php">Retour</a>
 

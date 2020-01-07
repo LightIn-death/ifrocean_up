@@ -1,7 +1,7 @@
 <?php
 
 $root = realpath($_SERVER["DOCUMENT_ROOT"]);
-require_once "../includes/DB/selectFunctions.php";
+require_once "../includes/DB/Functions.php";
 
 $nom = filter_input(INPUT_POST, "nom");
 $id_especes = filter_input(INPUT_POST, "id_especes");
@@ -52,7 +52,7 @@ if (isset($_POST["delEspece"])) {
         ?>
             <td><?php echo $ligne["nom"]?></td>
             <td>
-            <a href="C_modifyEspece.php?id_especes=<?php echo $ligne["id_especes"] ?>">
+            <a href="C_especeUp.php?id_especes=<?php echo $ligne[">
             </a>
                 <form method="post">
                     <input type="hidden" value="<?php echo $ligne['id_especes']?>" name="id_especes">
@@ -69,7 +69,7 @@ if (isset($_POST["delEspece"])) {
     ?>
 
 </table>
-<a href="../pages/addEspece.php">addEspece</a>
+<a href="../pages/especeAdd.php">addEspece</a>
 <a href="../pages/home.php">Retour</a>
 
 </body>

@@ -1,6 +1,6 @@
 <?php
 $root = realpath($_SERVER["DOCUMENT_ROOT"]);
-require_once "../includes/DB/selectFunctions.php";
+require_once "../includes/DB/Functions.php";
 
 if (isset($_POST["submit"])) {
 
@@ -28,4 +28,4 @@ if (isset($_POST["submit"])) {
 //var_dump($nom, $commune, $departement);
 ?>
 
-<a href="../pages/pageListe.php">Plages</a>
+<a href="../pages/plageListe.php">Plages</a>

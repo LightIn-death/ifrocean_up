@@ -1,6 +1,6 @@
 <?php
 $root = realpath($_SERVER["DOCUMENT_ROOT"]);
-require_once "../includes/DB/selectFunctions.php";
+require_once "../includes/DB/Functions.php";
 
 $id_plages = filter_input(INPUT_GET, "id_plages");
 
@@ -35,7 +35,7 @@ $result = selectModifyPlage($id_plages);
         <button type="submit" name="updatePlage">Register</button>
     </form>
 
-    <a href="/pages/pageListe.php">retour</a>
+    <a href="/pages/plageListe.php">retour</a>
 <?php
 //var_dump($id_plages, $nom, $commune, $departement);
 

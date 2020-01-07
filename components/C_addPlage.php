@@ -28,4 +28,4 @@ if (isset($_POST["submit"])) {
 //var_dump($nom, $commune, $departement);
 ?>
 
-<a href="../pages/pageListe.php">Pages</a>
+<a href="../pages/pageListe.php">Plages</a>

@@ -1,7 +1,7 @@
 <?php
 session_start();
 $root = realpath($_SERVER["DOCUMENT_ROOT"]);
-require_once "../includes/DB/selectFunctions.php";
+require_once "../includes/DB/Functions.php";
 
 if (isset($_SESSION["personne"])) {
     header('Location: /pages/home.php');
@@ -37,5 +37,5 @@ if (isset($_POST["email"])) {
 
     </form>
 </div>
-<a href="/pages/inscription.php">s'inscrire</a>
+<a href="/pages/formInscription.php">s'inscrire</a>
 

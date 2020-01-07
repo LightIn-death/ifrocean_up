@@ -1,6 +1,6 @@
 <?php
 $root = realpath($_SERVER["DOCUMENT_ROOT"]);
-require_once "../includes/DB/selectFunctions.php";
+require_once "../includes/DB/Functions.php";
 
 
 $id_zone = filter_input(INPUT_GET, "z");
@@ -43,7 +43,7 @@ $plageName = getPlageInfo(intval($data["FK_instance_plages"]))["nom"];
 </table>
 
 <h3>Nombre de personne participants dans la zone : <?php echo $data["nombrePersonne"]; ?></h3>
-<a href='/pages/beneZoneUpdate.php?z=<?php echo $id_zone; ?>&n=<?php echo $number; ?>'>Modifier</a>
+<a href='/pages/beneZoneUp.php?z=<?php echo $id_zone; ?>&n=<?php echo $number; ?>'>Modifier</a>
 
 <?php
 

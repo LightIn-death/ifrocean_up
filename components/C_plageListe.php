@@ -1,13 +1,13 @@
 <?php
 $root = realpath($_SERVER["DOCUMENT_ROOT"]);
-require_once "../includes/DB/selectFunctions.php";
+require_once "../includes/DB/Functions.php";
 
 $nom = filter_input(INPUT_POST, "nom");
 $id_plages = filter_input(INPUT_POST, "id_plages");
 
 if (isset($_POST["delPlage"])) {
     deletePlage($_POST["id_plages"]);
-    header('Location: pageListe.php');
+    header('Location: plageListe.php');
 }
 
 
@@ -31,7 +31,7 @@ if (isset($_POST["delPlage"])) {
         <td><?php echo $ligne["departement"] . "\n" ?></td>
         <td>
             <div class="fix_action">
-                <a href="../pages/modifyPlage.php?id_plages=<?php echo $ligne["id_plages"] ?>">Edit</a>
+                <a href="../pages/plageUp.php?id_plages=<?php echo $ligne[">Edit</a>
 
                 <form method="post">
                     <input type="hidden" value="<?php echo $ligne['id_plages'] ?>" name="id_plages">

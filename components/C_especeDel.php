@@ -6,5 +6,5 @@ $id_especes = filter_input(INPUT_GET, "id_especes");
 
 deleteEspece($id_especes);
 
-header('location: ../components/C_especeDel.php');
+header('location: /pages/especeListe.php');
 

@@ -17,6 +17,9 @@ if (isset($_POST["delPlage"])) {
 <table>
     <tr>
         <th>Nom</th>
+        <th>Ville</th>
+        <th>Departement</th>
+        <th>Actions</th>
     </tr>
 
         <?php
@@ -31,7 +34,7 @@ if (isset($_POST["delPlage"])) {
         <td><?php echo $ligne["departement"] . "\n" ?></td>
         <td>
             <div class="fix_action">
-                <a href="../pages/plageUp.php?id_plages=<?php echo $ligne[">Edit</a>
+                <a href="../pages/plageUp.php?id_plages=<?php echo $ligne['id_plages']?>">Edit</a>
 
                 <form method="post">
                     <input type="hidden" value="<?php echo $ligne['id_plages'] ?>" name="id_plages">

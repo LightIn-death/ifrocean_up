@@ -8,7 +8,7 @@ $id_especes = filter_input(INPUT_POST, "id_especes");
 
 if (isset($_POST["delEspece"])) {
     deleteEspece($_POST["id_especes"]);
-    header('Location: C_especeListe.php');
+    header('Location: /components/C_especeDel.php');
 }
 
 
@@ -51,16 +51,14 @@ if (isset($_POST["delEspece"])) {
     foreach ($resultat as $ligne) {
         ?>
             <td><?php echo $ligne["nom"]?></td>
-            <td>
-            <a href="C_especeUp.php?id_especes=<?php echo $ligne[">
+            <td class="fix_action">
+            <a  href="/pages/especeUp.php?id_especes=<?php echo $ligne['id_especes']?>">Modifier
             </a>
                 <form method="post">
                     <input type="hidden" value="<?php echo $ligne['id_especes']?>" name="id_especes">
-                    <button name="delEspece" id="id_especes" type="submit"
+                    <button class="del" name="delEspece" id="id_especes" type="submit"
                             onclick="return confirm('Etes-vous sûr de vouloir supprimer la plage <?php
-                            echo $ligne["nom"]; ?>\nSi oui confirmer !')">
-                        supprimer
-                    </button>
+                            echo $ligne["nom"]; ?>\nSi oui confirmer !')">supprimer</button>
                 </form>
             </td>
         </tr>

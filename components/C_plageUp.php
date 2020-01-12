@@ -13,6 +13,7 @@ if (isset($_POST["updatePlage"])) {
 
     modifyPlage($id_plages, $nom, $commune, $departement);
 //    header('Location: pages/plageListe.php');
+    alert("La plage a bien ete modifier");
 }
 $result = selectModifyPlage($id_plages);
 

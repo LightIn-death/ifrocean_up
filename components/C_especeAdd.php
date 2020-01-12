@@ -13,8 +13,8 @@ if (isset($_POST["nom"])) {
 <h1>Ajout Espece </h1>
 
 <form method="post" >
-    <p><input type="text" name="nom" id="nom"
-              placeholder="ex : Thon" required></p>
+    <input type="text" name="nom" id="nom"
+              placeholder="ex : Thon" required>
     <button type="submit">Enregistrer</button>
 </form>
 

@@ -14,7 +14,7 @@ if (isset($_POST["nom"])) {
 }
 
 ?>
-
+<h1>Creer une etude</h1>
 <div class="zone">
     <form method="post">
 

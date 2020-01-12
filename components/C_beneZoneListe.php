@@ -48,7 +48,7 @@ if (isset($_POST["createZone"])) {
     ?>
     <form method="post">
         <p2>Nombre de bénévole dans cette zone :</p2>
-        <input type="text" id="nombrePersonne" name="nombrePersonne">
+        <input type="text" id="nombrePersonne" name="nombrePersonne" pattern="[1-9]\d*">
         <button name="CreateZone">Create Zone</button>
     </form>
 

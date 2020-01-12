@@ -30,9 +30,9 @@ if (isset($_POST["nom"])) {
                                                 onkeyup="this.value=this.value.toLowerCase()"
                                                 pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2, 4}$" required></label>
         </div>
-        <div><label for="tel">Telephone : <input type="tel" name="tel" id="tel" maxlength="20"
-                                                 placeholder="ex : 00 00 00 00 00" required></label></div>
-        <div><label for="password">Mot De Passe : <input type="password" name="password" id="password"
+        <div><label for="tel">Telephone : <input type="tel" name="tel" id="tel" maxlength="14" pattern="^0[1-9]([-. ]?[0-9]{2}){4}$"
+                                                 placeholder="ex : 07 83 53 07 65" required></label></div>
+        <div><label for="password">Mot De Passe : <input type="password" name="password" id="password" pattern=".{8}"
                                                          placeholder="Votre mot de passe" required></label></div>
         <div>
             <button type="submit">Enregistrer</button>

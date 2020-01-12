@@ -4,6 +4,8 @@ require_once "../includes/DB/Functions.php";
 
 $id_zone = filter_input(INPUT_GET, "z");
 $n = filter_input(INPUT_GET, "n");
+$e = filter_input(INPUT_GET, "e");
+$p = filter_input(INPUT_GET, "p");
 $data = getZonedetails($id_zone);
 $plageName = getPlageInfo(intval($data["FK_instance_plages"]))["nom"];
 
@@ -27,8 +29,8 @@ if (isset($_POST["save"])) {
     }
     updateZone($number, $Point1, $Point2, $Point3, $Point4, $id_zone);
     $data = getZonedetails($id_zone);
-    updatePlageZoneReshe($plageName);
-
+//    updatePlageZoneReshe($plageName);
+    alert("Zone mise a jour");
 
 }
 
@@ -41,35 +43,38 @@ $plageName = getPlageInfo(intval($data["FK_instance_plages"]))["nom"];
 <h1>Details de la zone n° <?php echo $n; ?> </h1>
 <h2>plage associer : <b><?php echo $plageName; ?></b></h2>
 
+<div class="zone">
+    <form method="post">
 
-<form method="post">
+        <label for="Nombre">Nombre de personnes
+            <input type="number" name="Nombre"
+                   value="<?php echo $data["nombrePersonne"] ?>" required>
+        </label>
+        <p>Format : longitude;latitude</p>
+
+        <label for="point1">Point1
+            <input type="text" name="point1" value="<?php echo $data["point1"] ? $data["point1"] : "0;0" ?>"
+                   pattern="^\d+([.,]\d+)?;\d+([.,]\d+)?$">
+        </label>
+
+        <label for="point2">Point2
+            <input type="text" name="point2" value="<?php echo $data["point2"] ? $data["point2"] : "0;0" ?>"
+                   pattern="^\d+([.,]\d+)?;\d+([.,]\d+)?$">
+        </label>
+
+        <label for="point3">Point3
+            <input type="text" name="point3" value="<?php echo $data["point3"] ? $data["point3"] : "0;0" ?>"
+                   pattern="^\d+([.,]\d+)?;\d+([.,]\d+)?$">
+        </label>
+
+        <label for="point4">Point4
+            <input type="text" name="point4" value="<?php echo $data["point4"] ? $data["point4"] : "0;0" ?>"
+                   pattern="^\d+([.,]\d+)?;\d+([.,]\d+)?$">
+        </label>
 
 
-    <label for="Nombre">Nombre de personnes
-        <input type="number" name="Nombre"
-               value="<?php echo $data["nombrePersonne"] ?>" required>
-    </label>
+        <button type="submit" name="save">Enregistrer</button>
+    </form>
+</div>
 
-
-    <label for="point1">Point1
-        <input type="text" name="point1" value="<?php echo $data["point1"] ?>">
-    </label>
-
-    <label for="point2">Point2
-        <input type="text" name="point2" value="<?php echo $data["point2"] ?>">
-    </label>
-
-    <label for="point3">Point3
-        <input type="text" name="point3" value="<?php echo $data["point3"] ?>">
-    </label>
-
-    <label for="point4">Point4
-        <input type="text" name="point4" value="<?php echo $data["point4"] ?>">
-    </label>
-
-
-    <button type="submit" name="save">Enregistrer</button>
-</form>
-
-
-<a href="/pages/beneEtudes.php">Retour</a>
+<a href="/pages/beneZoneView.php?z=<?php echo $id_zone?>&n=<?php echo $n?>&e=<?php echo $e?>&p=<?php echo $p?>">Retour</a>

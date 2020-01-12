@@ -30,7 +30,7 @@ $data = getZones($id_plage);
             $i++;
             $zoneId = $d['id_zones'];
             echo "<td>Zone n°$i</td>";
-            echo "<td><a href='/pages/beneZoneView.php?z=$zoneId&n=$i'>Selectioner</a></td></tr>";
+            echo "<td><a href='/pages/beneZoneView.php?z=$zoneId&n=$i&e=$id_etude&p=$id_plage'>Selectioner</a></td></tr>";
         }
 
 
@@ -57,7 +57,7 @@ if (isset($_POST["createZone"])) {
 $i++;
 if (isset($_POST["nombrePersonne"])) {
     $zoneId = createNewZone($id_plage, $nombrePersonne);
-    header("Location: /pages/beneZoneView.php?z=$zoneId&n=$i");
+    header("Location: /pages/beneZoneView.php?z=$zoneId&n=$i&e=$id_etude&p=$id_plage");
 }
 ?>
 

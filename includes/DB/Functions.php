@@ -314,6 +314,10 @@ function updateZone($number, $Point1, $Point2, $Point3, $Point4, $id)
 }
 
 
+
+
+
+
 function createNewZone($id_plage, $nombrePersonne)
 {
     global $pdo;

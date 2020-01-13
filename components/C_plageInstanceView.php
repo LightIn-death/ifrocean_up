@@ -4,7 +4,7 @@ require_once "../includes/DB/Functions.php";
 
 session_start();
 include_once "../includes/sessionFonctions.php";
-Security("B");
+Security("A");
 
 $id_plages = filter_input(INPUT_GET, "id");
 $etude = filter_input(INPUT_GET, "b");

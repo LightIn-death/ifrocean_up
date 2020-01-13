@@ -76,9 +76,10 @@ $plageName = getPlageInfo(intval($data["FK_instance_plages"]))["nom"];
                    pattern="^\d+([.,]\d+)?;\d+([.,]\d+)?$">
         </label>
 
+        <img src="/ressources/images/Shema.png" alt="shema">
 
         <button type="submit" name="save">Enregistrer</button>
     </form>
 </div>
 
-<a href="/pages/beneZoneView.php?z=<?php echo $id_zone?>&n=<?php echo $n?>&e=<?php echo $e?>&p=<?php echo $p?>">Retour</a>
+<a href="/pages/beneZoneView.php?z=<?php echo $id_zone ?>&n=<?php echo $n ?>&e=<?php echo $e ?>&p=<?php echo $p ?>">Retour</a>

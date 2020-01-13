@@ -24,13 +24,13 @@ if (isset($_POST["email"])) {
     <form method="post">
 
         <label for="email">E-mail :</label>
-        <input placeholder="ex : aranea@aranea.me" id="email" type="email" name="email"
+        <input placeholder="ex : moi@ifrocean.fr" id="email" type="email" name="email"
                onkeyup="this.value=this.value.toLowerCase()"
                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2, 4}$" required>
 
 
         <label for="password">Password :</label>
-        <input id="password" type="password" name="password">
+        <input id="password" type="password" name="password" pattern=".{8,}">
 
 
         <button type="submit" name="action">Submit</button>

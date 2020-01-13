@@ -2,6 +2,9 @@
 $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 require_once "../includes/DB/Functions.php";
 
+
+
+
 if (isset($_POST["nom"])) {
 
     $nom = filter_input(INPUT_POST, "nom");

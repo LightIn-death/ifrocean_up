@@ -2,6 +2,10 @@
 $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 require_once "../includes/DB/Functions.php";
 
+session_start();
+include_once "../includes/sessionFonctions.php";
+Security("A");
+
 
 if (isset($_POST["nom"])) {
 

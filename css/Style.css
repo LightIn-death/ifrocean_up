@@ -61,12 +61,17 @@ body {
 
 @media screen and (min-width: 900px) {
     .nav {
-        justify-content: space-between;
+        justify-content: space-evenly;
         flex-wrap: nowrap;
     }
 
     #logo {
         display: block;
+    }
+
+    body {
+        width: 90vw;
+        height: 90vh;
     }
 
 }
@@ -79,6 +84,7 @@ body {
 
 p {
     width: 80vw;
+    max-width: 800px;
     text-align: center;
 }
 
@@ -130,7 +136,7 @@ input {
     height: 5vh;
     width: 25vw;
     max-width: 700px;
-    padding: 12px 20px;
+    padding: 10px 22px;
     border-radius: 4px;
     border: 2px solid #5498DE;
     vertical-align: top;

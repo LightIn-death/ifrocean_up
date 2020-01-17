@@ -103,7 +103,7 @@ if ($data["dateFin"] == null) {
     <h3>Etude en cours... (les resultats aparaiterons a la fin de l'etude)</h3>
 
     <form method="post">
-        <button class="del" type="submit" name="cloture">Cloturer</button>
+        <button class="del" type="submit" name="cloture" onclick="return confirm('Etes-vous sûr de vouloir cloturé l\'étude ?')">Cloturer</button>
     </form>
     <?php
 

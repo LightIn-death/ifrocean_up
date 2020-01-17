@@ -2,6 +2,10 @@
 $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 require_once "../includes/DB/Functions.php";
 
+session_start();
+include_once "../includes/sessionFonctions.php";
+Security("B");
+
 
 $nombrePersonne = filter_input(INPUT_POST, "nombrePersonne");
 
@@ -30,7 +34,7 @@ $data = getZones($id_plage);
             $i++;
             $zoneId = $d['id_zones'];
             echo "<td>Zone n°$i</td>";
-            echo "<td><a href='/pages/beneZoneView.php?z=$zoneId&n=$i'>Selectioner</a></td></tr>";
+            echo "<td><a href='/pages/beneZoneView.php?z=$zoneId&n=$i&e=$id_etude&p=$id_plage'>Selectioner</a></td></tr>";
         }
 
 
@@ -48,7 +52,7 @@ if (isset($_POST["createZone"])) {
     ?>
     <form method="post">
         <p2>Nombre de bénévole dans cette zone :</p2>
-        <input type="text" id="nombrePersonne" name="nombrePersonne">
+        <input type="text" id="nombrePersonne" name="nombrePersonne" pattern="[1-9]\d*">
         <button name="CreateZone">Create Zone</button>
     </form>
 
@@ -57,7 +61,7 @@ if (isset($_POST["createZone"])) {
 $i++;
 if (isset($_POST["nombrePersonne"])) {
     $zoneId = createNewZone($id_plage, $nombrePersonne);
-    header("Location: /pages/beneZoneView.php?z=$zoneId&n=$i");
+    header("Location: /pages/beneZoneView.php?z=$zoneId&n=$i&e=$id_etude&p=$id_plage");
 }
 ?>
 

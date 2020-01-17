@@ -2,6 +2,10 @@
 $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 require_once "../includes/DB/Functions.php";
 
+session_start();
+include_once "../includes/sessionFonctions.php";
+Security("A");
+
 $id_plages = filter_input(INPUT_GET, "id_plages");
 
 
@@ -13,6 +17,7 @@ if (isset($_POST["updatePlage"])) {
 
     modifyPlage($id_plages, $nom, $commune, $departement);
 //    header('Location: pages/plageListe.php');
+    alert("La plage a bien ete modifier");
 }
 $result = selectModifyPlage($id_plages);
 

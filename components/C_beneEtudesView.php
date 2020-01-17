@@ -2,6 +2,10 @@
 $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 require_once "../includes/DB/Functions.php";
 
+session_start();
+include_once "../includes/sessionFonctions.php";
+Security("B");
+
 
 $id_etude = filter_input(INPUT_GET, "id");
 $data = getPlageInstance($id_etude);
@@ -15,7 +19,7 @@ $data = getPlageInstance($id_etude);
     <tr>
         <th>Titre</th>
         <th>Selection</th>
-        <th>Action</th>
+
 
     </tr>
     <tr>
@@ -27,7 +31,7 @@ $data = getPlageInstance($id_etude);
             $plageName = $d['nom'];
             $plageId = $d['id_instancePlages'];
             echo "<td>$plageName</td>";
-            echo "<td><td><a href='/pages/beneZoneListe.php?e=$id_etude&p=$plageId'>Selectioner</a></td></td></tr>";
+            echo "<td><a href='/pages/beneZoneListe.php?e=$id_etude&p=$plageId'>Selectioner</a></td></tr>";
 
         }
         ?>

@@ -47,10 +47,16 @@ function tri($a, $b, $c)
 function GPScheck($p1, $p2, $p3, $p4)
 {
     if (is_null($p1) or is_null($p2) or is_null($p3) or is_null($p4)) {
+//        echo "NULLL";
+        return false;
+    } else if ($p1 == "0;0" or $p2 == "0;0" or $p3 == "0;0" or $p4 == "0;0") {
+//        echo "0 0";
         return false;
     } else if ((Edge(floatval($p2[0]), floatval($p2[1]), floatval($p4[0]), floatval($p4[1])) < Edge(floatval($p1[0]), floatval($p1[1]), floatval($p2[0]), floatval($p2[1]))) OR (Edge(floatval($p2[0]), floatval($p2[1]), floatval($p4[0]), floatval($p4[1])) < Edge(floatval($p1[0]), floatval($p1[1]), floatval($p4[0]), floatval($p4[1])))) {
+//        echo "DIAGGG";
         return false;
     } else {
+//        echo "TRUE";
         return true;
     }
 }

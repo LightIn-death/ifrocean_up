@@ -11,6 +11,7 @@ echo "<img id='logo' src='/ressources/images/ifroceanLogo.png' alt='logo'>";
 echo "<h1>Ifrocean</h1>";
 echo "<br><a href='../includes/LogOut.php'>deconexion</a>";
 echo " </div > ";
+//var_dump($_SESSION);
 if ($_SESSION["personne"]["admin"]) {
 
     echo "\n tu est admin \n";
@@ -20,6 +21,7 @@ if ($_SESSION["personne"]["admin"]) {
     echo "<br ><a href = 'etudeAdd.php' > Creer une nouvelle etude </a > ";
     echo "<br ><a href = 'especeListe.php' > Gerer la liste des especes </a > ";
     echo "<br ><a href = 'plageListe.php' > Gerer la liste des Plages </a > ";
+    echo "<br ><a href = 'userList.php' > Gerer la liste des utilisateurs </a > ";
 
 
 //
@@ -28,7 +30,7 @@ if ($_SESSION["personne"]["admin"]) {
 //
 //
 //
-//²
+//
 //
 //
 //

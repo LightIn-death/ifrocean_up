@@ -21,6 +21,7 @@ if ($_SESSION["personne"]["admin"]) {
     echo "<br ><a href = 'etudeAdd.php' > Creer une nouvelle etude </a > ";
     echo "<br ><a href = 'especeListe.php' > Gerer la liste des especes </a > ";
     echo "<br ><a href = 'plageListe.php' > Gerer la liste des Plages </a > ";
+    echo "<br ><a href = 'userList.php' > Gerer la liste des utilisateurs </a > ";
 
 
 //

@@ -2,6 +2,11 @@
 $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 require_once "../includes/DB/Functions.php";
 
+session_start();
+include_once "../includes/sessionFonctions.php";
+Security("A");
+
+
 if (isset($_POST["nom"])) {
 
     $nom = filter_input(INPUT_POST, "nom");
@@ -13,8 +18,8 @@ if (isset($_POST["nom"])) {
 <h1>Ajout Espece </h1>
 
 <form method="post" >
-    <p><input type="text" name="nom" id="nom"
-              placeholder="ex : Thon" required></p>
+    <input type="text" name="nom" id="nom"
+              placeholder="ex : Thon" required>
     <button type="submit">Enregistrer</button>
 </form>
 

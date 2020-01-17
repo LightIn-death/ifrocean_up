@@ -34,5 +34,17 @@ function pageHeader($pageTitle){
 <?php
 }
 
-?>
+
+
+function alert($msg)
+{ ?>
+    <script type="text/javascript">
+        var msg = "<?php echo $msg ?>";
+        alert(msg);
+    </script>
+    <?php
+}
+
+
+
 

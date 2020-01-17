@@ -2,6 +2,10 @@
 $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 require_once "$root/includes/DB/Functions.php";
 
+session_start();
+include_once "../includes/sessionFonctions.php";
+Security("A");
+
 
 ?>
 
@@ -17,7 +21,6 @@ require_once "$root/includes/DB/Functions.php";
         <th>actions</th>
 
     </tr>
-
 
     <?php
     $data = getEtudeListe();

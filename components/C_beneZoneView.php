@@ -2,9 +2,15 @@
 $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 require_once "../includes/DB/Functions.php";
 
+session_start();
+include_once "../includes/sessionFonctions.php";
+Security("B");
+
 
 $id_zone = filter_input(INPUT_GET, "z");
 $number = filter_input(INPUT_GET, "n");
+$etude = filter_input(INPUT_GET, "e");
+$plage = filter_input(INPUT_GET, "p");
 $data = getZonedetails($id_zone);
 $plageName = getPlageInfo(intval($data["FK_instance_plages"]))["nom"];
 
@@ -43,7 +49,7 @@ $plageName = getPlageInfo(intval($data["FK_instance_plages"]))["nom"];
 </table>
 
 <h3>Nombre de personne participants dans la zone : <?php echo $data["nombrePersonne"]; ?></h3>
-<a href='/pages/beneZoneUp.php?z=<?php echo $id_zone; ?>&n=<?php echo $number; ?>'>Modifier</a>
+<a href='/pages/beneZoneUp.php?z=<?php echo $id_zone?>&n=<?php echo $number?>&e=<?php echo $etude?>&p=<?php echo $plage?>'>Modifier</a>
 
 <?php
 
@@ -124,6 +130,8 @@ $data = getInstEspece($id_zone);
 </table>
 
 
-<a href='/pages/beneEtudes.php'>Retour</a>
+<a href='/pages/beneZoneListe.php?e=<?php echo $etude ?>&p=<?php echo $plage ?>'>Retour</a>
+
+
 
 

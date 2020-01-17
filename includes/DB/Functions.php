@@ -314,6 +314,10 @@ function updateZone($number, $Point1, $Point2, $Point3, $Point4, $id)
 }
 
 
+
+
+
+
 function createNewZone($id_plage, $nombrePersonne)
 {
     global $pdo;
@@ -432,6 +436,27 @@ function getNombrePartitip($etudeId)
 }
 
 
+function userList(){
+    global $pdo;
+    $query = $pdo->prepare("SELECT * FROM `personnes` where `admin`=0");
+    $query->execute();
+    $row = $query->fetchAll();
+    return $row;
+}
+
+
+function userUprankAdmin($id_personnes){
+    global $pdo;
+    $rq = $pdo->prepare("UPDATE `personnes` SET `admin`=1 WHERE `id_personnes`=:id_personnes ");
+    $rq->execute(['id_personnes' => $id_personnes]);
+}
+
+
+function userDeleteAccount($id_personnes){
+    global $pdo;
+    $rq = $pdo->prepare("DELETE FROM `personnes` WHERE id_personnes=:id_personnes ");
+    $rq->execute(['id_personnes' => $id_personnes]);
+}
 
 
 

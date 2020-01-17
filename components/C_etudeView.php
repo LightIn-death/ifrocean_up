@@ -2,6 +2,10 @@
 $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 require_once "../includes/DB/Functions.php";
 
+session_start();
+include_once "../includes/sessionFonctions.php";
+Security("A");
+
 if (isset($_POST["Supprimer"])) {
     supprimeEtude($_GET["id"]);
     header('Location: etudeListe.php');
@@ -56,7 +60,7 @@ $plagesInstance = getPlageInstance($_GET["id"]);
         $plageDepartement = $plageI["departement"];
         if ($data["dateFin"] == null) {
             echo "<li> $plageNom / $plageCommune / $plageDepartement ||<form method='post' style='display: inline;'>
-        <input class='del' type='submit' name='supprimePlage' value='supprimer'><input type='hidden' name='supprPlageId' value='$InstanceId'></form></li>";
+        <input class='del' type='submit' name='supprimePlage' value='supprimer' onclick=\"return confirm('Etes-vous sûr de vouloir supprimer la plage ?')\"><input type='hidden' name='supprPlageId' value='$InstanceId'></form></li>";
         } else
             echo "<li> $plageNom / $plageCommune / $plageDepartement ||<form method='post' style='display: inline;'>
         <input type='submit' name='VoirPlage' value='Voir'><input type='hidden' name='PlageId' value='$InstanceId'></form></li>";
@@ -124,7 +128,7 @@ if ($data["dateFin"] == null) {
 
 
 <form method="post">
-    <button class="del" type="submit" name="Supprimer">Supprimer</button>
+    <button class="del" type="submit" name="Supprimer" onclick="return confirm('Etes-vous sûr de vouloir supprimer l étude en cours ?')" >Supprimer</button>
 </form>
 
 

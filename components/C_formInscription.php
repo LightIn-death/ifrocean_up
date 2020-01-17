@@ -2,6 +2,9 @@
 $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 require_once "../includes/DB/Functions.php";
 
+
+
+
 if (isset($_POST["nom"])) {
 
     $nom = filter_input(INPUT_POST, "nom");
@@ -32,7 +35,7 @@ if (isset($_POST["nom"])) {
         </div>
         <div><label for="tel">Telephone : <input type="tel" name="tel" id="tel" maxlength="14" pattern="^0[1-9]([-. ]?[0-9]{2}){4}$"
                                                  placeholder="ex : 07 83 53 07 65" required></label></div>
-        <div><label for="password">Mot De Passe : <input type="password" name="password" id="password" pattern=".{8}"
+        <div><label for="password">Mot De Passe : <input type="password" name="password" id="password" pattern=".{8,}"
                                                          placeholder="Votre mot de passe" required></label></div>
         <div>
             <button type="submit">Enregistrer</button>

@@ -5,6 +5,7 @@
     margin: 0;
     box-sizing: border-box;
     font-family: 'Montserrat', sans-serif;
+    transition: all 0.2s ease-in-out ;
 }
 
 body {
@@ -13,6 +14,10 @@ body {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
+    background-image: url("/ressources/images/bg.png");
+    /*background-position: ;*/
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 #content {
@@ -218,9 +223,9 @@ ul > li > form > input {
 
 .zone {
     padding: 20px;
-    border: solid 1px rgba(84, 152, 222, 0.3);
+    border: solid 1px rgba(84, 152, 222, 0.33);
     border-radius: 4px;
-    background-color: rgba(84, 152, 222, 0.3);
+    background-color: rgba(84, 152, 222, 0.37);
 
 
 }
@@ -232,6 +237,11 @@ ul > li > form > input {
     justify-content: center;
     flex-wrap: nowrap;
 
+
+}
+
+a:hover , input:hover, button:hover {
+    background-color: rgb(126, 201, 223);
 
 }
 

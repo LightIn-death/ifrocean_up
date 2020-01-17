@@ -11,6 +11,7 @@ echo "<img id='logo' src='/ressources/images/ifroceanLogo.png' alt='logo'>";
 echo "<h1>Ifrocean</h1>";
 echo "<br><a href='../includes/LogOut.php'>deconexion</a>";
 echo " </div > ";
+//var_dump($_SESSION);
 if ($_SESSION["personne"]["admin"]) {
 
     echo "\n tu est admin \n";
@@ -28,7 +29,7 @@ if ($_SESSION["personne"]["admin"]) {
 //
 //
 //
-//²
+//
 //
 //
 //

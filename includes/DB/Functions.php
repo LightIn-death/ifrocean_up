@@ -459,6 +459,12 @@ function userDeleteAccount($id_personnes){
 }
 
 
+function userSelectAccount($id_personnes){
+    global $pdo;
+    $rq = $pdo->prepare("SELECT `id_personnes`, `nom`, `prenom`, `email`, `tel`, `password`, `admin` FROM `personnes` WHERE `id_personnes`=:id_personnes ");
+    $rq->execute(['id_personnes' => $id_personnes]);
+}
+
 
 
 

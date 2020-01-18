@@ -27,10 +27,23 @@ if (isset($_POST["userDeleteAccount"])) {
 
 <form method="Post">
 
-    <label> Votre nom <input type="text" value="<?php echo $user_nom ?>"></label>
-    <label> Votre prénom <input type="text" value="<?php echo $user_prenom ?>"></label>
-    <label> Votre email <input type="text" value="<?php echo $user_email ?>"></label>
-    <label> Votre mot de passe <input type="text" value="<?php echo $user_password ?>"></label>
+    <label> Votre nom <input type="submit" value="<?php echo $user_nom ?>"></label>
+    <label> Votre prénom <input type="submit" value="<?php echo $user_prenom ?>"></label>
+    <label> Votre email <input type="submit" value="<?php echo $user_email ?>"></label>
+    <label> Votre mot de passe <input type="submit" value="<?php echo $user_password ?>"></label>
+
+    <?php
+    if ($user_admin == 1){
+        ?>
+        <label>Votre role<input type="submit" value="Vous êtes Admin"></label>
+        <?php
+    }
+    if ($user_admin == 0) {
+        ?>
+        <label>Votre role<input type="submit" value="Vous êtes Bénévol"></label>
+        <?php
+    }
+    ?>
 
     <input type="hidden" value="<?php echo $user_id ?>" name="id_personnes">
         <button class="del" name="userDeleteAccount" id="id_personnes" type="submit"
@@ -39,19 +52,6 @@ if (isset($_POST["userDeleteAccount"])) {
         </button>
 
 </form>
-
-<?php
-    if ($user_admin == 1){
-        ?>
-        <label>Votre role<input type="text" value="Vous êtes Admin"></label>
-    <?php
-    }
-    if ($user_admin == 0) {
-        ?>
-        <label>Votre role<input type="text" value="Vous êtes Bénévol"></label>
-        <?php
-    }
-    ?>
 
 <a href="../pages/home.php">Retour</a>
 

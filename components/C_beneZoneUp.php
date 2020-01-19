@@ -58,22 +58,22 @@ $plageName = getPlageInfo(intval($data["FK_instance_plages"]))["nom"];
 
         <label for="point1">Point1
             <input type="text" name="point1" value="<?php echo $data["point1"] ? $data["point1"] : "0;0" ?>"
-                   pattern="^\d+([.,]\d+)?;\d+([.,]\d+)?$">
+                   pattern="^\d+([.,]\d+)?;[-]?\d+([.,]\d+)?$">
         </label>
 
         <label for="point2">Point2
             <input type="text" name="point2" value="<?php echo $data["point2"] ? $data["point2"] : "0;0" ?>"
-                   pattern="^\d+([.,]\d+)?;\d+([.,]\d+)?$">
+                   pattern="^\d+([.,]\d+)?;[-]?\d+([.,]\d+)?$">
         </label>
 
         <label for="point3">Point3
             <input type="text" name="point3" value="<?php echo $data["point3"] ? $data["point3"] : "0;0" ?>"
-                   pattern="^\d+([.,]\d+)?;\d+([.,]\d+)?$">
+                   pattern="^\d+([.,]\d+)?;[-]?\d+([.,]\d+)?$">
         </label>
 
         <label for="point4">Point4
             <input type="text" name="point4" value="<?php echo $data["point4"] ? $data["point4"] : "0;0" ?>"
-                   pattern="^\d+([.,]\d+)?;\d+([.,]\d+)?$">
+                   pattern="^\d+([.,]\d+)?;[-]?\d+([.,]\d+)?$">
         </label>
 
         <img src="/ressources/images/Shema.png" alt="shema">

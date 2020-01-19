@@ -147,6 +147,15 @@ if ($data["dateFin"] == null) {
 ?>
 
 
+<form method="post" action="/components/C_kmlDownload">
+    <input type="hidden" value="<?php echo $_GET["id"] ?>" name="id">
+    <button type="submit" name="kml"
+            onclick="return ">Download KML File
+    </button>
+</form>
+
+
+
 <form method="post">
     <button class="del" type="submit" name="Supprimer"
             onclick="return confirm('Etes-vous sûr de vouloir supprimer l étude en cours ?')">Supprimer

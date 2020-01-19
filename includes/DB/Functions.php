@@ -467,6 +467,15 @@ function userSelectAccount($id_personnes){
 
 
 
+function getKml($id_etude){
+    global $pdo;
+    $rq = $pdo->prepare("SELECT point1,point2,point3,point4,nombrePersonne FROM `zones` join instanceplages on FK_instance_plages=id_instancePlages join etudes on FK_id_etudes=id_etudes WHERE id_etudes = :id");
+    $rq->execute(['id' => $id_etude]);
+    $row = $rq->fetchAll();
+    return $row;
+}
+
+
 
 
 

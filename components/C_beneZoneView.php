@@ -18,7 +18,7 @@ $plageName = getPlageInfo(intval($data["FK_instance_plages"]))["nom"];
 
 <h1>Details de la zone n° <?php echo $number; ?> </h1>
 
-<h2>plage associer : <b><?php echo $plageName; ?></b></h2>
+<h2>plage associée : <b><?php echo $plageName; ?></b></h2>
 
 
 <table>
@@ -48,8 +48,8 @@ $plageName = getPlageInfo(intval($data["FK_instance_plages"]))["nom"];
     </tr>
 </table>
 
-<h3>Nombre de personne participants dans la zone : <?php echo $data["nombrePersonne"]; ?></h3>
-<a href='/pages/beneZoneUp.php?z=<?php echo $id_zone?>&n=<?php echo $number?>&e=<?php echo $etude?>&p=<?php echo $plage?>'>Modifier</a>
+<h3>Nombre de personnes participants dans la zone : <?php echo $data["nombrePersonne"]; ?></h3>
+<a href='/pages/beneZoneUp.php?z=<?php echo $id_zone ?>&n=<?php echo $number ?>&e=<?php echo $etude ?>&p=<?php echo $plage ?>'>Modifier</a>
 
 <?php
 
@@ -73,7 +73,7 @@ $data = getInstEspece($id_zone);
 
 <table>
     <tr>
-        <th>Espece</th>
+        <th>Espèce</th>
         <th>Nombre</th>
         <th>Actions</th>
     </tr>

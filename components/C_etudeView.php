@@ -45,13 +45,13 @@ $plagesInstance = getPlageInstance($_GET["id"]);
 <h1>Etude n° <?php echo $data["id_etudes"] ?></h1>
 <div class="zone"><h2>Nom : <?php echo $data["nom"] ?></h2>
     <h2>Reference : <?php echo $data["reference"] ?></h2>
-    <h3>date de creation (Annee / Mois / Jour) : <?php echo $data["dateDebut"] ?></h3>
+    <h3>date de creation (Année / Mois / Jour) : <?php echo $data["dateDebut"] ?></h3>
 </div>
 <h2>Liste des plages de l'etudes :</h2>
 <ul>
 
 
-    <li>Nom / Commune / Departement || Actions</li>
+    <li>Nom / Commune / Département || Actions</li>
     <?php
     foreach ($plagesInstance as $plageI) {
         $InstanceId = $plageI["id_instancePlages"];
@@ -74,9 +74,9 @@ $plagesInstance = getPlageInstance($_GET["id"]);
             }
 //            var_dump($zon);
             if (!$tru) {
-                echo "<p class='del'>(Attention ! Cordonnee gps des zone non ou partielement remplie sur cette plages, les donnees risque detre errone)</p>";
+                echo "<p class='del'>(Attention ! Cordonnées gps des zones non ou partiellement remplie sur cette plage, les données risque d'etre erroné)</p>";
             } elseif (empty($zon)) {
-                echo "<p class='del'>(Attention ! Auccune zone na ete mise en place sur cette plage)</p>";
+                echo "<p class='del'>(Attention ! Aucune zone na ete mise en place sur cette plage)</p>";
             } else {
                 echo "✅";
             }
@@ -98,7 +98,7 @@ if ($data["dateFin"] == null) {
     ?>
     <div class="zone">
         <form method="post">
-            <label>Ajouter une plage a l'etude :
+            <label>Ajouter une plage à l'etude :
                 <select name="plage">
                     <?php
                     foreach ($plages as $plage) {
@@ -113,17 +113,19 @@ if ($data["dateFin"] == null) {
             </label>
 
 
-            <label for="superficie">Superficie de la plage dans la periode de l'etude (M²) </label>
+            <label for="superficie">Superficie de la plage dans la période de l'etude (M²) </label>
             <input type="number" name="superficie">
 
             <button type="submit" name="addPlage"> + Ajouter</button>
         </form>
     </div>
 
-    <h3>Etude en cours... (les resultats aparaiterons a la fin de l'etude)</h3>
+    <h3>Etude en cours... (les résultats apparaîtrons à la fin de l'etude)</h3>
 
     <form method="post">
-        <button class="del" type="submit" name="cloture" onclick="return confirm('Etes-vous sûr de vouloir cloturé l\'étude ?')">Cloturer</button>
+        <button class="del" type="submit" name="cloture"
+                onclick="return confirm('Etes-vous sûr de vouloir cloturé l\'étude ?')">Cloturer
+        </button>
     </form>
     <?php
 
@@ -136,24 +138,25 @@ if ($data["dateFin"] == null) {
 
     ?>
     <div class="zone">
-        <h3>Date de fin (Annee / Mois / Jour) : <?php echo $data["dateFin"] ?></h3>
-        <h3>Densite Global : <?php echo $densiteGlobal ?> Vers / M²</h3>
+        <h3>Date de fin (Année / Mois / Jour) : <?php echo $data["dateFin"] ?></h3>
+        <h3>Densité Globale : <?php echo $densiteGlobal ?> Vers / M²</h3>
         <h3>Nombre de vers estime : <?php echo $estimGlobal ?> vers sur l'ensemble des plages de l'etude</h3>
 
-        <h3>Nombre de participation sur l'etude complete : <?php echo $nombrePartitip ?></h3>
+        <h3>Nombre de participations sur l'etude complete : <?php echo $nombrePartitip ?></h3>
     </div>
+
+
+    <form method="post" action="/components/C_kmlDownload">
+        <input type="hidden" value="<?php echo $_GET["id"] ?>" name="id">
+        <button type="submit" name="kml"
+                onclick="return ">Télécharger le fichier KML
+        </button>
+    </form>
     <?php
+
+
 }
 ?>
-
-
-<form method="post" action="/components/C_kmlDownload">
-    <input type="hidden" value="<?php echo $_GET["id"] ?>" name="id">
-    <button type="submit" name="kml"
-            onclick="return ">Download KML File
-    </button>
-</form>
-
 
 
 <form method="post">

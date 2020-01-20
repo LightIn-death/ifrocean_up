@@ -33,7 +33,7 @@ if (isset($_POST["email"])) {
         <input id="password" type="password" name="password" pattern=".{8,}">
 
 
-        <button type="submit" name="action">Submit</button>
+        <button type="submit" name="action">Envoyer</button>
 
     </form>
 </div>

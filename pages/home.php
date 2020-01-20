@@ -9,7 +9,7 @@ pageHeader("Home");
 echo "<div class='nav'>";
 echo "<img id='logo' src='/ressources/images/ifroceanLogo.png' alt='logo'>";
 echo "<h1>Ifrocean</h1>";
-echo "<br><a href='../includes/LogOut.php'>deconexion</a>";
+echo "<br><a href='../includes/LogOut.php'>déconnexion</a>";
 echo "<br ><a href = 'userAccount.php' > Compte </a > ";
 echo " </div > ";
 //var_dump($_SESSION);
@@ -19,28 +19,17 @@ if ($_SESSION["personne"]["admin"]) {
 
 
     echo "<a href = 'etudeListe.php' > Liste des etudes </a > ";
-    echo "<br ><a href = 'etudeAdd.php' > Creer une nouvelle etude </a > ";
-    echo "<br ><a href = 'especeListe.php' > Gerer la liste des especes </a > ";
-    echo "<br ><a href = 'plageListe.php' > Gerer la liste des Plages </a > ";
-    echo "<br ><a href = 'userList.php' > Gerer la liste des utilisateurs </a > ";
+    echo "<br ><a href = 'etudeAdd.php' > Créer une nouvelle etude </a > ";
+    echo "<br ><a href = 'especeListe.php' > Gérer la liste des espèces </a > ";
+    echo "<br ><a href = 'plageListe.php' > Gérer la liste des Plages </a > ";
+    echo "<br ><a href = 'userList.php' > Gérer la liste des utilisateurs </a > ";
 
 
+//
+//
+//
+//
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 } else if (!$_SESSION["personne"]["admin"]) {
 
@@ -48,16 +37,6 @@ if ($_SESSION["personne"]["admin"]) {
 
     echo " <a href ='/pages/beneEtudes.php'> Liste des Etudes Ouvertes </a>";
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //

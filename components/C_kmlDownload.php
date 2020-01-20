@@ -90,8 +90,8 @@ foreach ($data as $row) {
 
 
     $kml[] = ' <Placemark id="POLYGONE' . $i . '">';
-    $kml[] = ' <name>' . htmlentities('Zone numero '.$i) . '</name>';
-    $kml[] = ' <description>' . htmlentities("nombre de presonne present dans la zone : ".$row['nombrePersonne']) . '</description>';
+    $kml[] = ' <name>' . htmlentities('Zone numero ' . $i) . '</name>';
+    $kml[] = ' <description>' . htmlentities("nombre de personne present dans la zone : " . $row['nombrePersonne']) . '</description>';
     $kml[] = '<styleUrl>#__managed_style_09F20CD56410F5308AAD</styleUrl>';
     $kml[] = ' <Polygon>';
     $kml[] = ' <outerBoundaryIs>';

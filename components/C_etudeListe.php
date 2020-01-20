@@ -14,7 +14,7 @@ Security("A");
 
     <tr>
 
-        <th>Nom de L'etude</th>
+        <th>Nom de L'étude</th>
         <th>Date de creation</th>
         <th>Date de cloture</th>
         <th>Reference</th>

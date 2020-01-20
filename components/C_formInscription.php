@@ -25,7 +25,7 @@ if (isset($_POST["nom"])) {
         <div><label for="nom">Nom : <input type="text" name="nom" id="nom"
                                            pattern="^[^;.,!?/\|<>*$%&£'€¤@~]*$"
                                            placeholder="ex : Jean" required></label></div>
-        <div><label for="prenom">Prenom : <input type="text" name="prenom" id="prenom"
+        <div><label for="prenom">Prénom : <input type="text" name="prenom" id="prenom"
                                                  pattern="^[^;.,!?/\|<>*$%&£'€¤@~]*$"
                                                  placeholder="ex : Dupont" required></label></div>
         <div><label for="email">E-Mail : <input type="email" name="email" id="email"

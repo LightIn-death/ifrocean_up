@@ -37,7 +37,7 @@ $result = selectModifyPlage($id_plages);
             <input type="text" class="form-control" id="departement" maxlength="50"
                    name="departement" value="<?php echo $result[0]["departement"] ?>">
         </div>
-        <button type="submit" name="updatePlage">Register</button>
+        <button type="submit" name="updatePlage">Enregistrer</button>
     </form>
 
     <a href="/pages/plageListe.php">retour</a>

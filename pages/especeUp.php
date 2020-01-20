@@ -1,6 +1,6 @@
 <?php
 include_once "../components/HeaderFooter.php";
-pageHeader("Modifier une espece");
+pageHeader("Modifier une espèces");
 
 
 include "../components/C_especeUp.php";

@@ -314,10 +314,6 @@ function updateZone($number, $Point1, $Point2, $Point3, $Point4, $id)
 }
 
 
-
-
-
-
 function createNewZone($id_plage, $nombrePersonne)
 {
     global $pdo;
@@ -436,7 +432,8 @@ function getNombrePartitip($etudeId)
 }
 
 
-function userList(){
+function userList()
+{
     global $pdo;
     $query = $pdo->prepare("SELECT * FROM `personnes` where `admin`=0");
     $query->execute();
@@ -445,29 +442,32 @@ function userList(){
 }
 
 
-function userUprankAdmin($id_personnes){
+function userUprankAdmin($id_personnes)
+{
     global $pdo;
     $rq = $pdo->prepare("UPDATE `personnes` SET `admin`=1 WHERE `id_personnes`=:id_personnes ");
     $rq->execute(['id_personnes' => $id_personnes]);
 }
 
 
-function userDeleteAccount($id_personnes){
+function userDeleteAccount($id_personnes)
+{
     global $pdo;
     $rq = $pdo->prepare("DELETE FROM `personnes` WHERE id_personnes=:id_personnes ");
     $rq->execute(['id_personnes' => $id_personnes]);
 }
 
 
-function userSelectAccount($id_personnes){
+function userSelectAccount($id_personnes)
+{
     global $pdo;
     $rq = $pdo->prepare("SELECT `id_personnes`, `nom`, `prenom`, `email`, `tel`, `password`, `admin` FROM `personnes` WHERE `id_personnes`=:id_personnes ");
     $rq->execute(['id_personnes' => $id_personnes]);
 }
 
 
-
-function getKml($id_etude){
+function getKml($id_etude)
+{
     global $pdo;
     $rq = $pdo->prepare("SELECT point1,point2,point3,point4,nombrePersonne FROM `zones` join instanceplages on FK_instance_plages=id_instancePlages join etudes on FK_id_etudes=id_etudes WHERE id_etudes = :id");
     $rq->execute(['id' => $id_etude]);

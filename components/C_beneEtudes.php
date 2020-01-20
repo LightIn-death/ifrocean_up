@@ -10,7 +10,7 @@ $data = getOpenEtudes();
 
 ?>
 
-<h1>veuillez selectionner une etude : </h1>
+<h1>veuillez sélectionner une étude : </h1>
 
 
 <table>
@@ -28,7 +28,7 @@ $data = getOpenEtudes();
             $etudeName = $d['nom'];
             $etudeId = $d['id_etudes'];
             echo "<td>$etudeName</td>";
-            echo "<td><a href='/pages/beneEtudeView.php?id=$etudeId'>Selectioner</a></td></tr>";
+            echo "<td><a href='/pages/beneEtudeView.php?id=$etudeId'>Sélectionner</a></td></tr>";
         }
         ?>
 

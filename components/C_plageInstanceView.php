@@ -17,10 +17,10 @@ $nombreWorm = getTotalWorms($id_plages);
 
 ?>
 
-<h3>Densite de vers sur la plage : <?php echo $densiteGlobal ?> Vers / M²</h3>
+<h3>Densité de vers sur la plage : <?php echo $densiteGlobal ?> Vers / M²</h3>
 <h3>Nombre de vers estime de vers sur la plage : <?php echo $estimGlobal ?></h3>
 
-<h3>Nombre de participation vers sur la plage : <?php echo $nombrePartitip ?></h3>
+<h3>Nombre de participations vers sur la plage : <?php echo $nombrePartitip ?></h3>
 <h3>Nombre de vers trouvé sur la plage : <?php echo $nombreWorm ?></h3>
 
 

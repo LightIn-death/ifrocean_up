@@ -48,7 +48,7 @@ if (isset($_POST["userDeleteAccount"])) {
     <input type="hidden" value="<?php echo $user_id ?>" name="id_personnes">
         <button class="del" name="userDeleteAccount" id="id_personnes" type="submit"
                 onclick="return confirm('Etes-vous sûr de vouloir supprimer votre compte ??')">
-            DeleteAccount
+            Supprimer le compte
         </button>
 
 </form>

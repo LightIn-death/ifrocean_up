@@ -150,7 +150,7 @@ if ($data["dateFin"] == null) {
     <table>
         <?php
         $stEsp = getStatPerEspeceGlob($_GET["id"]);
-        var_dump($stEsp);
+        //        var_dump($stEsp);
         ?>
 
         <tr>
@@ -159,24 +159,21 @@ if ($data["dateFin"] == null) {
             <th>densitée</th>
             <th>nombre estimé</th>
         </tr>
-        <tr>
-            <td>vericae emicalle</td>
-            <td>158</td>
-            <td>8.58 M²</td>
-            <td>95.584</td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
+
+        <?php
+        foreach ($stEsp as $st) {
+            ?>
+            <tr>
+                <td><?php echo $st["nom"] ?></td>
+                <td><?php echo $st["nombre"] ?></td>
+                <td><?php echo $st["dens"] ?></td>
+                <td><?php echo $st["est"] ?></td>
+
+            </tr>
+            <?php
+        }
+        ?>
+
     </table>
 
 

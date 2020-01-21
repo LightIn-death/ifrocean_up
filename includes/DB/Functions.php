@@ -492,7 +492,21 @@ function getStatEspPlage($id_plages)
     }
 
     $i = 0;
+
+
+    foreach ($WormsZone as $wr) {
+        $data[$i]["nom"] = $wr["nom"];
+        $data[$i]["nombre"] = intval($wr["SUM(nombre)"]);
+        $data[$i]["dens"] = intval($wr["SUM(nombre)"]) / $recheZone;
+        $data[$i]["est"] = (intval($wr["SUM(nombre)"]) / $recheZone) * getPlageSurface($id_plages);
+        $i++;
+    }
+
+
+    return $data;
 }
+
+
 function getStatPerEspeceGlob($etudeId)
 {
 
@@ -543,21 +557,7 @@ function getStatPerEspeceGlob($etudeId)
 }
 
 
-    foreach ($WormsZone as $wr) {
-        $data[$i]["nom"] = $wr["nom"];
-        $data[$i]["nombre"] = intval($wr["SUM(nombre)"]);
-        $data[$i]["dens"] = intval($wr["SUM(nombre)"]) / $recheZone;
-        $data[$i]["est"] = (intval($wr["SUM(nombre)"]) / $recheZone) * getPlageSurface($id_plages);
-        $i++;
-    }
 
-
-    return $data;
-}
-
-
-
-}
 
 
 

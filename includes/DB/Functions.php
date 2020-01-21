@@ -483,26 +483,35 @@ function getStatEspPlage($id_plages)
     $query->execute(['id' => $id_plages]);
     $WormsZone = $query->fetchAll();
 //    return $WormsZone;
+    if (empty($WormsZone)) {
+
+        $data[0]["nom"] = "Donnee Corompu ou imcoplete";
+        $data[0]["nombre"] = "\"Donnee Corompu ou imcoplete\"";
+        $data[0]["dens"] = "\"Donnee Corompu ou imcoplete\"";
+        $data[0]["est"] = "\"Donnee Corompu ou imcoplete\"";
 
 
-    if (getSumZoneReshe($id_plages) != 0) {
-        $recheZone = getSumZoneReshe($id_plages);
     } else {
-        $recheZone = 1;
+
+
+        if (getSumZoneReshe($id_plages) != 0) {
+            $recheZone = getSumZoneReshe($id_plages);
+        } else {
+            $recheZone = 1;
+        }
+
+        $i = 0;
+
+
+        foreach ($WormsZone as $wr) {
+            $data[$i]["nom"] = $wr["nom"];
+            $data[$i]["nombre"] = intval($wr["SUM(nombre)"]);
+            $data[$i]["dens"] = intval($wr["SUM(nombre)"]) / $recheZone;
+            $data[$i]["est"] = (intval($wr["SUM(nombre)"]) / $recheZone) * getPlageSurface($id_plages);
+            $i++;
+        }
+
     }
-
-    $i = 0;
-
-
-    foreach ($WormsZone as $wr) {
-        $data[$i]["nom"] = $wr["nom"];
-        $data[$i]["nombre"] = intval($wr["SUM(nombre)"]);
-        $data[$i]["dens"] = intval($wr["SUM(nombre)"]) / $recheZone;
-        $data[$i]["est"] = (intval($wr["SUM(nombre)"]) / $recheZone) * getPlageSurface($id_plages);
-        $i++;
-    }
-
-
     return $data;
 }
 

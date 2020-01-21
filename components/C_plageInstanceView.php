@@ -14,7 +14,12 @@ $densiteGlobal = getDensite($id_plages);
 $estimGlobal = getEstim($id_plages);
 $nombrePartitip = getNombrePartitip($id_plages);
 $nombreWorm = getTotalWorms($id_plages);
-$densité = getTotalWorms($id_plages) / getSumZoneReshe($id_plages);
+if (getSumZoneReshe($id_plages) == 0) {
+    $zonR = 1;
+} else {
+    $zonR = getSumZoneReshe($id_plages);
+}
+$densité = getTotalWorms($id_plages) / $zonR;
 
 ?>
 

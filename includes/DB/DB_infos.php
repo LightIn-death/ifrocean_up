@@ -4,10 +4,10 @@
 class DB_INFOS
 {
 
-    const servername = 'mysql:host=localhost:3306;dbname=ifrocean';
+    const servername = 'mysql:host=localhost:3307;dbname=ifrocean';
 
-    const username = "root";
-    const password = "";
+    const username = "Ifrocean";
+    const password = "IfroceanPassword";
 }
 
 function pass()

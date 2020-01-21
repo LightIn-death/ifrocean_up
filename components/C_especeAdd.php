@@ -15,13 +15,13 @@ if (isset($_POST["nom"])) {
 }
 
 ?>
-<h1>Ajout Espece </h1>
+<h1>Ajout Espèce </h1>
 
-<form method="post" >
+<form method="post">
     <input type="text" name="nom" id="nom"
-              placeholder="ex : Thon" required>
+           placeholder="ex : Thon" required>
     <button type="submit">Enregistrer</button>
 </form>
 
-<a href="/pages/especeListe.php">Espece</a>
+<a href="/pages/especeListe.php">Espèce</a>
 

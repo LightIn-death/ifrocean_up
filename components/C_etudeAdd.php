@@ -18,7 +18,7 @@ if (isset($_POST["nom"])) {
 }
 
 ?>
-<h1>Creer une etude</h1>
+<h1>Créer une etude</h1>
 <div class="zone">
     <form method="post">
 
@@ -29,7 +29,7 @@ if (isset($_POST["nom"])) {
                placeholder="Nom de L'etude ..." required>
 
 
-        <label for="reference">reference de l'etude</label>
+        <label for="reference">référence de l'étude</label>
         <input id="reference"
                name="reference"
                placeholder="reference de l'etude...">

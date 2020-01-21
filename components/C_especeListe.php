@@ -55,17 +55,18 @@ if (isset($_POST["delEspece"])) {
 
     foreach ($resultat as $ligne) {
         ?>
-            <td><?php echo $ligne["nom"]?></td>
-            <td class="fix_action">
-            <a  href="/pages/especeUp.php?id_especes=<?php echo $ligne['id_especes']?>">Modifier
+        <td><?php echo $ligne["nom"] ?></td>
+        <td class="fix_action">
+            <a href="/pages/especeUp.php?id_especes=<?php echo $ligne['id_especes'] ?>">Modifier
             </a>
-                <form method="post">
-                    <input type="hidden" value="<?php echo $ligne['id_especes']?>" name="id_especes">
-                    <button class="del" name="delEspece" id="id_especes" type="submit"
-                            onclick="return confirm('Etes-vous sûr de vouloir supprimer la plage <?php
-                            echo $ligne["nom"]; ?>\nSi oui confirmer !')">supprimer</button>
-                </form>
-            </td>
+            <form method="post">
+                <input type="hidden" value="<?php echo $ligne['id_especes'] ?>" name="id_especes">
+                <button class="del" name="delEspece" id="id_especes" type="submit"
+                        onclick="return confirm('Etes-vous sûr de vouloir supprimer la plage <?php
+                        echo $ligne["nom"]; ?>\nSi oui confirmer !')">supprimer
+                </button>
+            </form>
+        </td>
         </tr>
         <?php
     }

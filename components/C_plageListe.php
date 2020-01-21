@@ -23,23 +23,23 @@ if (isset($_POST["delPlage"])) {
     <tr>
         <th>Nom</th>
         <th>Ville</th>
-        <th>Departement</th>
+        <th>Département</th>
         <th>Actions</th>
     </tr>
 
-        <?php
+    <?php
 
-        $resultat = listePlage();
-        foreach ($resultat
+    $resultat = listePlage();
+    foreach ($resultat
 
-        as $ligne){
+             as $ligne) {
         ?>
         <td><?php echo $ligne["nom"] ?></td>
         <td><?php echo $ligne["commune"] ?></td>
         <td><?php echo $ligne["departement"] . "\n" ?></td>
         <td>
             <div class="fix_action">
-                <a href="../pages/plageUp.php?id_plages=<?php echo $ligne['id_plages']?>">Edit</a>
+                <a href="../pages/plageUp.php?id_plages=<?php echo $ligne['id_plages'] ?>">Edit</a>
 
                 <form method="post">
                     <input type="hidden" value="<?php echo $ligne['id_plages'] ?>" name="id_plages">
@@ -51,13 +51,13 @@ if (isset($_POST["delPlage"])) {
                 </form>
             </div>
         </td>
-    </tr>
-    <?php
+        </tr>
+        <?php
     }
 
     ?>
 </table>
-<a href="/pages/plageAdd.php">addPlage</a>
+<a href="/pages/plageAdd.php">Ajouter une plage</a>
 <a href="../pages/home.php">Retour</a>
 
 </body>

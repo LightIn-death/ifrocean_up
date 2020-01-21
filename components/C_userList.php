@@ -30,7 +30,7 @@ if (isset($_POST["userDeleteAccount"])) {
     <?php
 
     $resultat = userList();
-    foreach ($resultat as $ligne){
+    foreach ($resultat as $ligne) {
         ?>
         <td><?php echo $ligne["nom"] ?></td>
         <td><?php echo $ligne["prenom"] ?></td>
@@ -43,15 +43,15 @@ if (isset($_POST["userDeleteAccount"])) {
                 <form method="post">
                     <input type="hidden" value="<?php echo $ligne['id_personnes'] ?>" name="id_personnes">
                     <button class="del" name="UprankAdmin" id="id_personnes" type="submit"
-                            onclick="return confirm('Etes-vous sûr de vouloir donner les droits administrateurs à <?php echo $ligne["nom"].' '.$ligne["prenom"] ?> ?\nSi oui confirmer !')">
+                            onclick="return confirm('Etes-vous sûr de vouloir donner les droits administrateurs à <?php echo $ligne["nom"] . ' ' . $ligne["prenom"] ?> ?\nSi oui confirmer !')">
                         -> admin
                     </button>
                 </form>
                 <form method="post">
                     <input type="hidden" value="<?php echo $ligne['id_personnes'] ?>" name="id_personnes">
                     <button class="del" name="userDeleteAccount" id="id_personnes" type="submit"
-                            onclick="return confirm('Etes-vous sûr de vouloir supprimer le compte de <?php echo $ligne["nom"].' '.$ligne["prenom"] ?> ?\nSi oui confirmer !')">
-                        DeleteAccount
+                            onclick="return confirm('Etes-vous sûr de vouloir supprimer le compte de <?php echo $ligne["nom"] . ' ' . $ligne["prenom"] ?> ?\nSi oui confirmer !')">
+                        Supprimer le compte
                     </button>
                 </form>
             </div>

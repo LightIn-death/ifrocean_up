@@ -12,7 +12,7 @@ $data = getPlageInstance($id_etude);
 
 ?>
 
-<h1>veuillez selectionner une Plage : </h1>
+<h1>veuillez sélectionner une Plage : </h1>
 
 
 <table>
@@ -31,7 +31,7 @@ $data = getPlageInstance($id_etude);
             $plageName = $d['nom'];
             $plageId = $d['id_instancePlages'];
             echo "<td>$plageName</td>";
-            echo "<td><a href='/pages/beneZoneListe.php?e=$id_etude&p=$plageId'>Selectioner</a></td></tr>";
+            echo "<td><a href='/pages/beneZoneListe.php?e=$id_etude&p=$plageId'>Sélectionner</a></td></tr>";
 
         }
         ?>

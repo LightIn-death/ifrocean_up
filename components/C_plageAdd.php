@@ -19,15 +19,15 @@ if (isset($_POST["submit"])) {
 ?>
 <h1>Ajout Plage </h1>
 <div class="zone">
-<form method="post">
-    <label for="nom">Nom de la plage</label><input type="text" name="nom" id="nom"
-                                    placeholder="ex : plage de kerzine" required>
-    <label for="commune">Nom de la Ville</label><input type="text" name="commune" id="commune"
-                                        placeholder="ex : Lorient" required>
-    <label for="departement">Departement</label><input type="text" name="departement" id="departement"
-                                            placeholder="ex : vendée  ou 85" required>
-    <button type="submit" name="submit">Enregistrer</button>
-</form>
+    <form method="post">
+        <label for="nom">Nom de la plage</label><input type="text" name="nom" id="nom"
+                                                       placeholder="ex : plage de kerzine" required>
+        <label for="commune">Nom de la Ville</label><input type="text" name="commune" id="commune"
+                                                           placeholder="ex : Lorient" required>
+        <label for="departement">Département</label><input type="text" name="departement" id="departement"
+                                                           placeholder="ex : vendée  ou 85" required>
+        <button type="submit" name="submit">Enregistrer</button>
+    </form>
 
 </div>
 <?php

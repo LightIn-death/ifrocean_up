@@ -15,7 +15,7 @@ echo " </div > ";
 //var_dump($_SESSION);
 if ($_SESSION["personne"]["admin"]) {
 
-    echo "\n tu est admin \n";
+    echo "\n tu es admin \n";
 
 
     echo "<a href = 'etudeListe.php' > Liste des etudes </a > ";
@@ -33,7 +33,7 @@ if ($_SESSION["personne"]["admin"]) {
 
 } else if (!$_SESSION["personne"]["admin"]) {
 
-    echo "\ntu est un benevole \n";
+    echo "\ntu es un benevole \n";
 
     echo " <a href ='/pages/beneEtudes.php'> Liste des Etudes Ouvertes </a>";
 

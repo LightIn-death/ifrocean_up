@@ -143,7 +143,41 @@ if ($data["dateFin"] == null) {
         <h3>Nombre de vers estime : <?php echo $estimGlobal ?> vers sur l'ensemble des plages de l'etude</h3>
 
         <h3>Nombre de participations sur l'etude complete : <?php echo $nombrePartitip ?></h3>
+
+
     </div>
+
+    <table>
+        <?php
+        $stEsp = getStatPerEspeceGlob($_GET["id"]);
+        var_dump($stEsp);
+        ?>
+
+        <tr>
+            <th>Espece</th>
+            <th>Nombre</th>
+            <th>densitée</th>
+            <th>nombre estimé</th>
+        </tr>
+        <tr>
+            <td>vericae emicalle</td>
+            <td>158</td>
+            <td>8.58 M²</td>
+            <td>95.584</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
 
 
     <form method="post" action="/components/C_kmlDownload">

@@ -492,6 +492,56 @@ function getStatEspPlage($id_plages)
     }
 
     $i = 0;
+}
+function getStatPerEspeceGlob($etudeId)
+{
+
+    // Get toute les espece de toute les plages de l'etudes et leurs nombres
+    // get les surface garce a l'id des plage + surface ZONE
+    // get densiter  = nombre / surface ZONE
+    // get nombre estime =   densité * surface GLOBALE
+
+    //GET NOM + NOMBRE + ID PLAGE
+    global $pdo;
+    $rq = $pdo->prepare("SELECT nom, SUM(nombre),id_especes, FK_id_especes,FK_zone,id_zones,FK_instance_plages,id_instancePlages,FK_id_etudes FROM `instanceespeces` join zones on FK_zone = id_zones join instanceplages on FK_instance_plages= id_instancePlages join especes on FK_id_especes=id_especes WHERE FK_id_etudes = :id GROUP BY id_especes");
+    $rq->execute(['id' => $etudeId]);
+    $row = $rq->fetchAll();
+//    return $row;
+
+// Calculer
+    // SURFRECHERCHE
+
+    $recheZone = 1;
+    foreach (getIdPlageInEtude($etudeId) as $id) {
+        $TEMPrecheZone = getSumZoneReshe($id);
+        $recheZone += $TEMPrecheZone;
+    }
+
+
+    $surf = 0;
+
+    foreach (getIdPlageInEtude($etudeId) as $id) {
+        $surf += getPlageSurface($id);
+    }
+
+
+//
+    $i = 0;
+    foreach ($row as $ro) {
+        $data[$i]["nom"] = $ro["nom"];
+        $data[$i]["nombre"] = $ro["SUM(nombre)"];
+        $densite = $ro["SUM(nombre)"] / $recheZone;
+        $data[$i]["dens"] = $densite;
+        $data[$i]["est"] = $densite * $surf;
+        $i++;
+    }
+
+
+    // Return : Espece + Nombre + Densité + estimé
+    return $data;
+
+}
+
 
     foreach ($WormsZone as $wr) {
         $data[$i]["nom"] = $wr["nom"];
@@ -507,7 +557,7 @@ function getStatEspPlage($id_plages)
 
 
 
-
+}
 
 
 

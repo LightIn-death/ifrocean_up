@@ -475,9 +475,15 @@ function getKml($id_etude)
     return $row;
 }
 
+function getEspecesDensite($id_plages)
+{
 
-
-
+    global $pdo;
+    $query = $pdo->prepare("SELECT * FROM `instanceespeces` WHERE id_plages=:id_plages");
+    $query->execute(['id_plages' => $id_plages]);
+    $liste = $query->fetchAll();
+    return $liste;
+}
 
 
 

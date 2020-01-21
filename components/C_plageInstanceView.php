@@ -14,7 +14,7 @@ $densiteGlobal = getDensite($id_plages);
 $estimGlobal = getEstim($id_plages);
 $nombrePartitip = getNombrePartitip($id_plages);
 $nombreWorm = getTotalWorms($id_plages);
-$densité = getTotalWorms($id_plages)/getSumZoneReshe($id_plages);
+$densité = getTotalWorms($id_plages) / getSumZoneReshe($id_plages);
 
 ?>
 
@@ -31,16 +31,22 @@ $densité = getTotalWorms($id_plages)/getSumZoneReshe($id_plages);
     <tr>
         <th>Nom</th>
         <th>Nombre</th>
+        <th>Densité</th>
+        <th>nombre estimé</th>
     </tr>
     <?php
 
-//Affiche les especes
-    $resultat = getEspecesDensite($id_plages);
+    //Affiche les especes
+    $resultat = getStatEspPlage($id_plages);
+    //    var_dump($resultat);
 
     foreach ($resultat as $ligne) {
         ?>
-        <td><?php echo $ligne["FK_id_especes"] ?></td>
-        <td><?php echo $ligne["nombre"] ?></td>
+        <tr>
+            <td><?php echo $ligne["nom"] ?></td>
+            <td><?php echo $ligne["nombre"] ?></td>
+            <td><?php echo $ligne["dens"] ?></td>
+            <td><?php echo $ligne["est"] ?></td>
         </tr>
         <?php
     }

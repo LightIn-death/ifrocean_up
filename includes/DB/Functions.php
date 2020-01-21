@@ -475,14 +475,33 @@ function getKml($id_etude)
     return $row;
 }
 
-function getEspecesDensite($id_plages)
+function getStatEspPlage($id_plages)
 {
-
     global $pdo;
-    $query = $pdo->prepare("SELECT * FROM `instanceespeces` JOIN `instanceplages` on id_instancePlages=id_plages WHERE id_plages=:id_plages");
-    $query->execute(['id_plages' => $id_plages]);
-    $liste = $query->fetchAll();
-    return $liste;
+    $query = $pdo->prepare("SELECT nom, SUM(nombre) FROM zones join instanceespeces on FK_zone=id_zones join especes on id_especes=FK_id_especes WHERE FK_instance_plages= :id GROUP by id_especes");
+    $query->execute(['id' => $id_plages]);
+    $WormsZone = $query->fetchAll();
+//    return $WormsZone;
+
+
+    if (getSumZoneReshe($id_plages) != 0) {
+        $recheZone = getSumZoneReshe($id_plages);
+    } else {
+        $recheZone = 1;
+    }
+
+    $i = 0;
+
+    foreach ($WormsZone as $wr) {
+        $data[$i]["nom"] = $wr["nom"];
+        $data[$i]["nombre"] = intval($wr["SUM(nombre)"]);
+        $data[$i]["dens"] = intval($wr["SUM(nombre)"]) / $recheZone;
+        $data[$i]["est"] = (intval($wr["SUM(nombre)"]) / $recheZone) * getPlageSurface($id_plages);
+        $i++;
+    }
+
+
+    return $data;
 }
 
 

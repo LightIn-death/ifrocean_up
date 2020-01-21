@@ -479,7 +479,7 @@ function getEspecesDensite($id_plages)
 {
 
     global $pdo;
-    $query = $pdo->prepare("SELECT * FROM `instanceespeces` WHERE id_plages=:id_plages");
+    $query = $pdo->prepare("SELECT * FROM `instanceespeces` JOIN `instanceplages` on id_instancePlages=id_plages WHERE id_plages=:id_plages");
     $query->execute(['id_plages' => $id_plages]);
     $liste = $query->fetchAll();
     return $liste;

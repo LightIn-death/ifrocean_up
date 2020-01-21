@@ -475,6 +475,7 @@ function getKml($id_etude)
     return $row;
 }
 
+
 function getStatEspPlage($id_plages)
 {
     global $pdo;

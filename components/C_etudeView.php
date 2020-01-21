@@ -147,7 +147,7 @@ if ($data["dateFin"] == null) {
 
     </div>
 
-    <table>
+    <table class="stG">
         <?php
         $stEsp = getStatPerEspeceGlob($_GET["id"]);
         //        var_dump($stEsp);

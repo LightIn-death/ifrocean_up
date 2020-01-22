@@ -547,7 +547,7 @@ function getStatPerEspeceGlob($etudeId)
         $surf += getPlageSurface($id);
     }
 
-
+    $data = []; 
 //
     $i = 0;
     foreach ($row as $ro) {
